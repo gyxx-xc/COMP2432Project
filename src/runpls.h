@@ -1,6 +1,6 @@
 #include "tools.h"
 
-void runPLS(int alg, Process* process, DayArrange* day);
+void runPLS(int alg);
 
 // void algPR(...)
 // void algFCFS(...)

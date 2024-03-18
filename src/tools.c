@@ -22,3 +22,7 @@ char* intToTime(int i) {
   str[1] = 0;
   return str;
 }
+
+void printMenu(){
+
+}

@@ -12,6 +12,7 @@ int peiod[2];
 
 int main() {
   while(1) {
+    printMenu();
     char str[100];
     fgets(str, 100, stdin);
     switch(command(str)) {
@@ -25,18 +26,18 @@ int main() {
       addBATCH(str);
       break;
     case 3:
-      runPLS(commandAlg(str), processes, day);
+      runPLS(commandAlg(str));
       int fd[2];
       int p = createChild(fd);
-      if (p != 0) {
-        if (hasFile(str)){
+      if (p == 0) { // child
+        if (hasFile(str)) {
           FILE* file = fopen(str, "w");
           printREPORT(fd, file);
         } else {
           printREPORT(fd, stdout);
         }
-      } else {
-        wait(0);
+      } else { // parent
+        sendData(p, fd);
       }
       break;
     case 4:

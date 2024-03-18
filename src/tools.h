@@ -21,6 +21,8 @@ extern Process processes[10000];
 extern DayArrange day[10000];
 extern int peiod[2];
 
+void printMenu();
+
 int command(char* str);
 int commandAlg(char* str);
 int hasFile(char* str);
