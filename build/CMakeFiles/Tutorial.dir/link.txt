@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/Tutorial.dir/src/input.c.o CMakeFiles/Tutorial.dir/src/main.c.o CMakeFiles/Tutorial.dir/src/output.c.o CMakeFiles/Tutorial.dir/src/runpls.c.o CMakeFiles/Tutorial.dir/src/tools.c.o -o Tutorial 

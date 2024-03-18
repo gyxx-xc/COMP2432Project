@@ -1,3 +1,8 @@
+#ifndef TOOLS_H
+#define TOOLS_H
+
+#include <stdlib.h>
+
 typedef struct proc {
   char orderNumber[100];
   int durDate;
@@ -12,9 +17,9 @@ typedef struct dayArrange {
   int producedQuantity;
 } DayArrange;
 
-Process processes[10000];
-DayArrange day[10000];
-int peiod[2];
+extern Process processes[10000];
+extern DayArrange day[10000];
+extern int peiod[2];
 
 int command(char* str);
 int commandAlg(char* str);
@@ -22,3 +27,5 @@ int hasFile(char* str);
 
 int timeToInt(char* str);
 char* intToTime(int i);
+
+#endif

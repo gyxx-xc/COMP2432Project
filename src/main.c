@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <sys/wait.h>
 
-#ifndef TOOLS_H
-#define TOOLS_H
 #include "tools.h"
-#endif
-
 #include "input.h"
 #include "output.h"
 #include "runpls.h"
+
+Process processes[10000];
+DayArrange day[10000];
+int peiod[2];
 
 int main() {
   while(1) {
@@ -32,8 +32,9 @@ int main() {
         if (hasFile(str)){
           FILE* file = fopen(str, "w");
           printREPORT(fd, file);
-        }else
+        } else {
           printREPORT(fd, stdout);
+        }
       } else {
         wait(0);
       }
