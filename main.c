@@ -10,9 +10,6 @@
 #include "output.h"
 #include "runpls.h"
 
-Process processes[10000];
-DayArrange day[10000];
-
 int main() {
   while(1) {
     char str[100];

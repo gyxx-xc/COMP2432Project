@@ -12,6 +12,10 @@ typedef struct dayArrange {
   int producedQuantity;
 } DayArrange;
 
+Process processes[10000];
+DayArrange day[10000];
+int peiod[2];
+
 int command(char* str);
 int commandAlg(char* str);
 int hasFile(char* str);
