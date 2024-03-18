@@ -8,7 +8,12 @@
 
 Process processes[10000];
 DayArrange day[10000];
-int peiod[2];
+int endPeiod;
+
+// do not use this varible
+// only used by utils of time
+// the usage of time function refer to tools.h
+time_t startPeiod;
 
 int main() {
   while(1) {

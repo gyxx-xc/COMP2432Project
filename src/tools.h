@@ -2,6 +2,9 @@
 #define TOOLS_H
 
 #include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
+#include <string.h>
 
 typedef struct proc {
   char orderNumber[100];
@@ -19,7 +22,8 @@ typedef struct dayArrange {
 
 extern Process processes[10000];
 extern DayArrange day[10000];
-extern int peiod[2];
+extern time_t startPeiod;
+extern int endPeiod;
 
 void printMenu();
 
@@ -27,6 +31,8 @@ int command(char* str);
 int commandAlg(char* str);
 int hasFile(char* str);
 
+// the int is the day since startpeiod
+// startpeiod is 0, and so on
 int timeToInt(char* str);
 char* intToTime(int i);
 
