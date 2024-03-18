@@ -1,1 +1,0 @@
-/usr/bin/cc CMakeFiles/PLS.dir/src/input.c.o CMakeFiles/PLS.dir/src/main.c.o CMakeFiles/PLS.dir/src/output.c.o CMakeFiles/PLS.dir/src/runpls.c.o CMakeFiles/PLS.dir/src/tools.c.o -o PLS 

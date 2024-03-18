@@ -1,3 +1,0 @@
-/home/gyxx/myProject/c/os/project/build/CMakeFiles/PLS.dir
-/home/gyxx/myProject/c/os/project/build/CMakeFiles/edit_cache.dir
-/home/gyxx/myProject/c/os/project/build/CMakeFiles/rebuild_cache.dir
