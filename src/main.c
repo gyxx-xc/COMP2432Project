@@ -39,6 +39,8 @@ int main() {
 
       runPLS(algTemp);
 
+
+
       int fd[2];
       int p = createChild(fd);
       if (p == 0) { // child

@@ -11,16 +11,20 @@ int main(){
 }
 #endif
 
+int streq(char* a, const char* b) {
+  return !memcmp(a, b, sizeof(char) * strlen(b));
+}
+
 int command(char* str) {
-  if (!memcmp(str, "addPEIOD", sizeof("addPEIOD")))
+  if (streq(str, "addPEIOD"))
     return 0;
-  if (!memcmp(str, "addORDER", sizeof("addORDER")))
+  if (streq(str, "addORDER"))
     return 1;
-  if (!memcmp(str, "addBATCH", sizeof("addBATCH")))
+  if (streq(str, "addBATCH"))
     return 2;
-  if (!memcmp(str, "runPLS", sizeof("runPLS")))
+  if (streq(str, "runPLS"))
     return 3;
-  if (!memcmp(str, "exitPLS", sizeof("exitPLS")))
+  if (streq(str, "exitPLS"))
     return 4;
   return -1;
 }
@@ -28,6 +32,11 @@ int command(char* str) {
 int commandAlg(char* str) {
   char alg[10];
   sscanf(str, "%s%s", 0, alg);
+  if (streq(alg, "FCFS"))
+    return 0;
+  if (streq(alg, "PR"))
+    return 1;
+  return -1;
 }
 
 int hasFile(char* str) {

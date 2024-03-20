@@ -20,25 +20,13 @@ typedef struct dayArrange {
   int producedQuantity;
 } DayArrange;
 
-extern Process processes[10000];
-extern DayArrange day[10000];
-extern time_t startPeiod;
-extern int endPeiod;
-
+global varible
+Process processes[10000];
+DayArrange day[10000];
+int endPeiod;
 */
 
 //待解决问题: 如何获得当日的各种杂七杂八订单，以及对他们进行"in place"的排序，事后又该如何记录
-
-void runPLS(int alg) {
-  switch (alg) {
-    //注: int alg 已经在上游被处理好了，我们这里只需要指定 int 和 不同算法实现的函数() 进行映射即可
-    //如 0-->FCFS, 1-->SJF, 2-->RR, 3-->HRRN, 4-->SRTN 等等等等
-  case 0:
-    break;
-  case 1:
-    break;
-  }
-}
 
 void priorityScheduling() {
   //查看传入订单的"种类"，共分为三类
@@ -55,4 +43,17 @@ void FCFS(){
   //最基础的，判断订单的时间，先来先服务(不抢断，来了就一口气给订单干完)
   //注意判断订单的时间是否在"开工时间"内，看情况拒单
 
+}
+
+void runPLS(int alg) {
+  switch (alg) {
+    //注: int alg 已经在上游被处理好了，我们这里只需要指定 int 和 不同算法实现的函数() 进行映射即可
+    //如 0-->FCFS, 1-->SJF, 2-->RR, 3-->HRRN, 4-->SRTN 等等等等
+  case 0:
+    FCFS();
+    break;
+  case 1:
+    priorityScheduling();
+    break;
+  }
 }
