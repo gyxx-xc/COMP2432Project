@@ -7,7 +7,9 @@
 #include "runpls.h"
 
 Process processes[10000];
+int processesCount;
 DayArrange day[10000];
+int dayCount;
 int endPeiod;
 
 // do not use this varible
@@ -19,20 +21,20 @@ int main() {
   printf("\t~~WELCOME TO PLS~~\n\n");
   while(1) {
     printMenu();
-    char str[200];
-    fgets(str, 200, stdin);
+    char str[100];
+    fgets(str, 100, stdin);
     int commandLen;
     char** command = genCommand(str, &commandLen);
     if (commandLen == 0) continue; // why?
     switch(checkCommand(command[0])) {
     case 0:
-      addPEIOD(command);
+      addPEIOD(command, commandLen);
       break;
     case 1:
-      addORDER(command);
+      addORDER(command, commandLen);
       break;
     case 2:
-      addBATCH(command);
+      addBATCH(command, commandLen);
       break;
     case 3:
       if (!checkRunUsage(command, commandLen)){

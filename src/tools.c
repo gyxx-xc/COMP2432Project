@@ -12,6 +12,7 @@ int main(){
 #endif
 
 int streq(const char* a, const char* b) {
+  if (strlen(a) != strlen(b)) return 0;
   return !memcmp(a, b, sizeof(char) * strlen(b));
 }
 
@@ -19,7 +20,9 @@ char** genCommand(char* str, int* len) {
   char** result = malloc(10*sizeof(char *));
   int l = 0;
 
-  str[strlen(str) - 1] = 0; // remove the \n
+  if (str[strlen(str) - 1] == '\n' ||
+      str[strlen(str) - 1] == '\r')
+    str[strlen(str) - 1] = 0; // remove the \r
   char *token = strtok(str, " ");
   while( token != NULL ) {
     result[l++] = token;
@@ -51,16 +54,17 @@ int commandAlg(char* alg) {
   return -1;
 }
 
-int hasFile(char* str) {
-  return 0;
+void initTime(char* startTime) {
+  struct tm tm;
+  memset(&tm, 0, sizeof(tm));
+  strptime(startTime, "%Y-%m-%d", &tm);
+  startPeiod = mktime(&tm);
 }
 
 int timeToInt(char* str) {
   struct tm tm;
   memset(&tm, 0, sizeof(tm));
-  sscanf(str, "%4d-%2d-%2d", &tm.tm_year, &tm.tm_mon, &tm.tm_mday);
-  tm.tm_year -= 1900;
-  tm.tm_mon -= 1;
+  strptime(str, "%Y-%m-%d", &tm);
   return (int)(difftime(mktime(&tm), startPeiod)/86400 + 0.5);
 }
 
@@ -69,7 +73,7 @@ char* intToTime(int i) {
   struct tm tm = *(localtime(&startPeiod));
   tm.tm_mday += i;
   mktime(&tm);
-  sprintf(str, "%04d-%02d-%02d", tm.tm_year+1900, tm.tm_mon+1, tm.tm_mday);
+  strftime(str, 20, "%Y-%m-%d", &tm);
   return str;
 }
 
@@ -87,9 +91,18 @@ void errorCommand(char* str) {
 
 void errorUsage(int c) {
   switch (c) {
+  case 0:
+    printf("Usage: addPERIOD start_date end_date\n");
+    printf("specify the period for scheduling the production\n");
+  case 1:
+    printf("Usage: addORDER order_number due_date quantity product_name\n");
+    printf("add an order and the details to the scheduler.\n");
+  case 2:
+    printf("Usage: addBATCH filename\n");
+    printf("input multiple orders in one batch file.\n");
   case 3:
-    printf("Usage: runPLS ALGORITHM [| printREPORT [> FILENAME]]\n");
-    printf("generate a schedule with the specified ALGORITHM.\n\n");
+    printf("Usage: runPLS algorithm [| printREPORT [> filename]]\n");
+    printf("generate a schedule with the specified algorithm.\n");
   }
 }
 

@@ -23,7 +23,7 @@ int createChild(int* fd) {
 
 // child process
 // read the `day` from pipe here
-// the function intToTime may useful
+// the function intToTime in `tools.h` may useful
 void printREPORT(int* fd, FILE* file) {
   fprintf(file, "123123123\n");
 }
