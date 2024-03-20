@@ -26,6 +26,8 @@ extern time_t startPeiod;
 extern int endPeiod;
 
 void printMenu();
+void errorCommand(char* str);
+void errorAlg(char* str);
 
 int command(char* str);
 int commandAlg(char* str);

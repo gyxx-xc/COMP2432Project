@@ -1,5 +1,5 @@
 #include "tools.h"
 
-void addPEIOD();
+void addPEIOD(char* str);
 void addORDER(char* str);
 void addBATCH(char* str);

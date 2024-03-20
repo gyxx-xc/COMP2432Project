@@ -22,7 +22,7 @@ int main() {
     fgets(str, 100, stdin);
     switch(command(str)) {
     case 0:
-      addPEIOD();
+      addPEIOD(str);
       break;
     case 1:
       addORDER(str);
@@ -31,7 +31,14 @@ int main() {
       addBATCH(str);
       break;
     case 3:
-      runPLS(commandAlg(str));
+      ;int algTemp = commandAlg(str);
+      if (!~algTemp) {
+        errorAlg(str);
+        break;
+      }
+
+      runPLS(algTemp);
+
       int fd[2];
       int p = createChild(fd);
       if (p == 0) { // child
@@ -41,12 +48,16 @@ int main() {
         } else {
           printREPORT(fd, stdout);
         }
+
       } else { // parent
         sendData(p, fd);
       }
       break;
     case 4:
       return 0; // exitPLS
+    case -1:
+      errorCommand(str);
+      break;
     }
   }
 }

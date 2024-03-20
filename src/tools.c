@@ -8,24 +8,26 @@ int endPeiod;
 time_t startPeiod;
 
 int main(){
-  struct tm tm;
-  memset(&tm, 0, sizeof(tm));
-  tm.tm_year = 2003 - 1900;
-  tm.tm_mon = 2 - 1;
-  tm.tm_mday = 29;
-  startPeiod = mktime(&tm);
-  char i[100];
-  scanf("%s", i);
-  printf("%s\n", intToTime(timeToInt(i)));
 }
 #endif
 
 int command(char* str) {
-  return 1;
+  if (!memcmp(str, "addPEIOD", sizeof("addPEIOD")))
+    return 0;
+  if (!memcmp(str, "addORDER", sizeof("addORDER")))
+    return 1;
+  if (!memcmp(str, "addBATCH", sizeof("addBATCH")))
+    return 2;
+  if (!memcmp(str, "runPLS", sizeof("runPLS")))
+    return 3;
+  if (!memcmp(str, "exitPLS", sizeof("exitPLS")))
+    return 4;
+  return -1;
 }
 
 int commandAlg(char* str) {
-  return 1;
+  char alg[10];
+  sscanf(str, "%s%s", 0, alg);
 }
 
 int hasFile(char* str) {

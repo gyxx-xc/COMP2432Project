@@ -1,6 +1,6 @@
 #include "input.h"
 
-void addPEIOD(){
+void addPEIOD(char* str){
 
 }
 
