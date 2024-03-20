@@ -3,3 +3,4 @@ auto
 *.fdb_latexmk
 *.fls
 *.log
+.emacs.*
