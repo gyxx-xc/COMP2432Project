@@ -4,3 +4,4 @@ auto
 *.fls
 *.log
 .emacs.*
+a.out

@@ -1,5 +1,20 @@
 #include "output.h"
 
+//#define _DEBUG_ // to debug uncomment this line and run `gcc output.c`
+#ifdef _DEBUG_
+Process processes[10000];
+DayArrange day[10000];
+int endPeiod;
+time_t startPeiod;
+
+int main(){
+  // set day...
+  // call algrothm
+  // print some debug output
+}
+#endif
+
+
 // create children and pipe
 // the pid is the return value and the pipe store to fd
 int createChild(int* fd) {
