@@ -16,9 +16,10 @@ int streq(const char* a, const char* b) {
 }
 
 char** genCommand(char* str, int* len) {
-  char** result = malloc(10*sizeof(char));
+  char** result = malloc(10*sizeof(char *));
   int l = 0;
 
+  str[strlen(str) - 1] = 0; // remove the \n
   char *token = strtok(str, " ");
   while( token != NULL ) {
     result[l++] = token;
@@ -73,7 +74,7 @@ char* intToTime(int i) {
 }
 
 void printMenu(){
-
+  printf("Please enter:\n> ");
 }
 
 void errorAlg(char* str) {
@@ -88,6 +89,14 @@ void errorUsage(int c) {
   switch (c) {
   case 3:
     printf("Usage: runPLS ALGORITHM [| printREPORT [> FILENAME]]\n");
-    printf("generate a schedule with the specified ALGORITHM.\n");
+    printf("generate a schedule with the specified ALGORITHM.\n\n");
   }
+}
+
+int checkRunUsage (char** c, int l) {
+  if (l < 4) return l == 2;
+  if (!streq(c[2], "|") || !streq(c[3], "printREPORT")) return 0;
+  if (l < 6) return l == 4;
+  if (!streq(c[4], ">")) return 0;
+  return l == 6;
 }

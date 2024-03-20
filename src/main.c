@@ -16,6 +16,7 @@ int endPeiod;
 time_t startPeiod;
 
 int main() {
+  printf("\t~~WELCOME TO PLS~~\n\n");
   while(1) {
     printMenu();
     char str[200];
@@ -34,13 +35,16 @@ int main() {
       addBATCH(command);
       break;
     case 3:
-      if (checkRunUsage(command, commandLen)) errorUsage(3);
+      if (!checkRunUsage(command, commandLen)){
+        errorUsage(3);
+        break;
+      }
+
       int algTemp = commandAlg(command[1]);
       if (!~algTemp) {
         errorAlg(command[1]);
         break;
       }
-
       runPLS(algTemp);
 
       if (commandLen < 3) break; // why?
@@ -59,10 +63,12 @@ int main() {
       }
       break;
     case 4:
+      printf("Bye-bye!\n");
       return 0; // exitPLS
     case -1:
       errorCommand(command[0]);
       break;
     }
+    free(command);
   }
 }

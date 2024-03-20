@@ -68,7 +68,7 @@ clean:
 
 # Build rule for target.
 PLS:
-	gcc $(wildcard $(SOURCE_DIR)/*.c) -o PLS
+	gcc $(wildcard $(SOURCE_DIR)/*.c) -o PLS -g
 .PHONY : PLS
 
 # Help Target
