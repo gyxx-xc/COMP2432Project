@@ -3,7 +3,9 @@
 //#define _DEBUG_ // to debug uncomment this line and run `gcc output.c`
 #ifdef _DEBUG_
 Process processes[10000];
+int processesCount;
 DayArrange day[10000];
+int dayCount;
 int endPeiod;
 time_t startPeiod;
 

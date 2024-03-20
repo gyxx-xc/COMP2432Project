@@ -68,8 +68,12 @@ clean:
 
 # Build rule for target.
 PLS:
-	gcc $(wildcard $(SOURCE_DIR)/*.c) -o PLS -g
+	gcc $(wildcard $(SOURCE_DIR)/*.c) -o PLS
 .PHONY : PLS
+
+debug:
+	gcc $(wildcard $(SOURCE_DIR)/*.c) -o PLS -g
+.PHONY : debug
 
 # Help Target
 help:
@@ -77,4 +81,5 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... PLS"
+	@echo "... debug"
 .PHONY : help
