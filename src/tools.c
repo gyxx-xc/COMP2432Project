@@ -11,11 +11,24 @@ int main(){
 }
 #endif
 
-int streq(char* a, const char* b) {
+int streq(const char* a, const char* b) {
   return !memcmp(a, b, sizeof(char) * strlen(b));
 }
 
-int command(char* str) {
+char** genCommand(char* str, int* len) {
+  char** result = malloc(10*sizeof(char));
+  int l = 0;
+
+  char *token = strtok(str, " ");
+  while( token != NULL ) {
+    result[l++] = token;
+    token = strtok(NULL, " ");
+  }
+  *len = l;
+  return result;
+}
+
+int checkCommand(char* str) {
   if (streq(str, "addPEIOD"))
     return 0;
   if (streq(str, "addORDER"))
@@ -29,9 +42,7 @@ int command(char* str) {
   return -1;
 }
 
-int commandAlg(char* str) {
-  char alg[10];
-  sscanf(str, "%s%s", 0, alg);
+int commandAlg(char* alg) {
   if (streq(alg, "FCFS"))
     return 0;
   if (streq(alg, "PR"))
@@ -63,4 +74,20 @@ char* intToTime(int i) {
 
 void printMenu(){
 
+}
+
+void errorAlg(char* str) {
+  printf("runPLS: %s: algorithm not found\n", str);
+}
+
+void errorCommand(char* str) {
+  printf("%s: command not found\n", str);
+}
+
+void errorUsage(int c) {
+  switch (c) {
+  case 3:
+    printf("Usage: runPLS ALGORITHM [| printREPORT [> FILENAME]]\n");
+    printf("generate a schedule with the specified ALGORITHM.\n");
+  }
 }

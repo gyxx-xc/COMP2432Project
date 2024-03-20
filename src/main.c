@@ -18,34 +18,37 @@ time_t startPeiod;
 int main() {
   while(1) {
     printMenu();
-    char str[100];
-    fgets(str, 100, stdin);
-    switch(command(str)) {
+    char str[200];
+    fgets(str, 200, stdin);
+    int commandLen;
+    char** command = genCommand(str, &commandLen);
+    if (commandLen == 0) continue; // why?
+    switch(checkCommand(command[0])) {
     case 0:
-      addPEIOD(str);
+      addPEIOD(command);
       break;
     case 1:
-      addORDER(str);
+      addORDER(command);
       break;
     case 2:
-      addBATCH(str);
+      addBATCH(command);
       break;
     case 3:
-      ;int algTemp = commandAlg(str);
+      if (checkRunUsage(command, commandLen)) errorUsage(3);
+      int algTemp = commandAlg(command[1]);
       if (!~algTemp) {
-        errorAlg(str);
+        errorAlg(command[1]);
         break;
       }
 
       runPLS(algTemp);
 
-
-
+      if (commandLen < 3) break; // why?
       int fd[2];
       int p = createChild(fd);
       if (p == 0) { // child
-        if (hasFile(str)) {
-          FILE* file = fopen(str, "w");
+        if (commandLen >= 6) {
+          FILE* file = fopen(command[5], "w");
           printREPORT(fd, file);
         } else {
           printREPORT(fd, stdout);
@@ -58,7 +61,7 @@ int main() {
     case 4:
       return 0; // exitPLS
     case -1:
-      errorCommand(str);
+      errorCommand(command[0]);
       break;
     }
   }

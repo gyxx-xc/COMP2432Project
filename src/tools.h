@@ -28,10 +28,13 @@ extern int endPeiod;
 void printMenu();
 void errorCommand(char* str);
 void errorAlg(char* str);
+void errorUsage(int c);
 
-int command(char* str);
+char** genCommand(char* str, int* len);
+
+int checkCommand(char* str);
 int commandAlg(char* str);
-int hasFile(char* str);
+int checkRunUsage(char** command, int len);
 
 // the int is the day since startpeiod
 // startpeiod is 0, and so on
