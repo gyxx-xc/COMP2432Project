@@ -1,7 +1,7 @@
 #include "runpls.h"
 
 // seperate the alg from here
-// after decided which alg you are going to use write it in readme
+// after decided which alg you are going to use, write it in readme
 // read the process from `processes`(globle)
 // and write the result into `day`(globle)
 
