@@ -7,14 +7,15 @@
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
-\history{Especialização em Computação Científica para a Indústria}
-\doi{Trabalho de Conclusão de Curso. Turma 2022.}
-\dataDaDefesa{xx{\slash}xx{\slash}2023}
-\title{Título xxxx xxxxx xxxxx xxxxx xxxxx }
+\history{Date of publication xxxx 00, 0000, date of current version xxxx 00, 0000.}
+\doi{10.1109/ACCESS.2023.0322000}
+
+\title{Preparation of Papers for IEEE ACCESS}
 \author{\uppercase{First A. Author}\authorrefmark{1}, \IEEEmembership{Fellow, IEEE},
-\uppercase{Second B. Author\authorrefmark{2}, and Third C. Author,
-Jr}.\authorrefmark{3},
+\uppercase{Second B. Author}\authorrefmark{2}, and Third C. Author,
+Jr.\authorrefmark{3},
 \IEEEmembership{Member, IEEE}}
+
 \address[1]{National Institute of Standards and
 Technology, Boulder, CO 80305 USA (e-mail: author@boulder.nist.gov)}
 \address[2]{Department of Physics, Colorado State University, Fort Collins,
@@ -27,10 +28,11 @@ example, ``This work was supported in part by the U.S. Department of
 Commerce under Grant BS123456.''}
 
 \markboth
-{Especialização de Computação Científica para a Indústria. 2023-2}
-{Especialização de Computação Científica para a Indústria. 2023-2}
+{Author \headeretal: Preparation of Papers for IEEE TRANSACTIONS and JOURNALS}
+{Author \headeretal: Preparation of Papers for IEEE TRANSACTIONS and JOURNALS}
 
 \corresp{Corresponding author: First A. Author (e-mail: author@ boulder.nist.gov).}
+
 
 \begin{abstract}
 These instructions give you guidelines for preparing papers for
@@ -57,29 +59,22 @@ Ensure that your abstract reads well and is grammatically correct.
 
 \begin{keywords}
 Enter key words or phrases in alphabetical
-order, separated by commas. For a list of suggested keywords, send a blank
-e-mail to keywords@ieee.org or visit \underline
-{http://www.ieee.org/organizations/pubs/ani\_prod/keywrd98.txt}
+order, separated by commas. Autocorrelation, beamforming, communications technology, dictionary learning, feedback, fMRI, mmWave, multipath, system design, multipath, slight fault, underlubrication fault.
 \end{keywords}
 
-\titlepgskip=-15pt
+\titlepgskip=-21pt
 
 \maketitle
 
-\section{Introdução}
+\section{Introduction}
 \label{sec:introduction}
-\PARstart{T}{his} document is a template for \LaTeX. If you are
-reading a paper or PDF version of this document, please download the
-electronic file, trans\_jour.tex, from the IEEE Web site at \underline
-{http://ieeeauthorcenter.ieee.org/create-your-ieee-article/}\break\underline{use-authoring-tools-and-ieee-article-templates/ieee-article-}\break\underline{templates/} so you can use it to prepare your manuscript. If
-you would prefer to use LaTeX, download IEEE's LaTeX style and sample files
+\PARstart{T}{his} document is a template for \LaTeX. If you are reading a paper or PDF version of this document, please download the LaTeX template or the MS Word
+template of your preferred publication from the IEEE Website at \underline
+{https://template-selector.ieee.org/secure/templateSelec}\break\underline{tor/publicationType} so you can use it to prepare your manuscript. 
+If you would prefer to use LaTeX, download IEEE's LaTeX style and sample files
 from the same Web page. You can also explore using the Overleaf editor at
 \underline
 {https://www.overleaf.com/blog/278-how-to-use-overleaf-}\break\underline{with-ieee-collabratec-your-quick-guide-to-getting-started}\break\underline{\#.xsVp6tpPkrKM9}
-
-If your paper is intended for a conference, please contact your conference
-editor concerning acceptable word processor formats for your particular
-conference.
 
 IEEE will do the final formatting of your paper. If your paper is intended
 for a conference, please observe the conference page limits.
@@ -120,8 +115,7 @@ instead of ``It was observed that $\ldots$''). Remember to check spelling. If
 your native language is not English, please get a native English-speaking
 colleague to carefully proofread your paper.
 
-Try not to use too many typefaces in the same article. You're writing
-scholarly papers, not ransom notes. Also please remember that MathJax
+Try not to use too many typefaces in the same article. Also please remember that MathJax
 can't handle really weird typefaces.
 
 \subsection{Equations}
@@ -132,13 +126,21 @@ exponents. Use parentheses to avoid ambiguities in denominators. Punctuate
 equations when they are part of a sentence, as in
 \begin{equation}E=mc^2.\label{eq}\end{equation}
 
+The following 2 equations are used to test 
+your LaTeX compiler's math output. Equation (2) is your LaTeX compiler' output. Equation (3) is an image of what (2) should look like.
+Please make sure that your equation (2) matches (3) in terms of symbols and characters' font style (Ex: italic/roman).
+
+\begin{align*} \frac{47i+89jk\times 10rym \pm 2npz }{(6XYZ\pi Ku) Aoq \sum _{i=1}^{r} Q(t)} {\int\limits_0^\infty \! f(g)\mathrm{d}x}  \sqrt[3]{\frac{abcdelqh^2}{ (svw) \cos^3\theta }} . \tag{2}\end{align*}
+
+$\hskip-7pt$\includegraphics[scale=0.52]{equation3.png}
+
 Be sure that the symbols in your equation have been defined before the
 equation appears or immediately following. Italicize symbols ($T$ might refer
 to temperature, but T is the unit tesla). Refer to ``\eqref{eq},'' not ``Eq. \eqref{eq}''
 or ``equation \eqref{eq},'' except at the beginning of a sentence: ``Equation \eqref{eq}
 is $\ldots$ .''
 
-\subsection{\LaTeX-Specific Advice}
+\subsection{LaTeX-Specific Advice}
 
 Please use ``soft'' (e.g., \verb|\eqref{Eq}|) cross references instead
 of ``hard'' references (e.g., \verb|(1)|). That will make it possible
@@ -180,7 +182,7 @@ Use either SI (MKS) or CGS as primary units. (SI units are strongly
 encouraged.) English units may be used as secondary units (in parentheses).
 This applies to papers in data storage. For example, write ``15
 Gb/cm$^{2}$ (100 Gb/in$^{2})$.'' An exception is when
-English units are used as identifiers in trade, such as ``3\textonehalf-in
+English units are used as identifiers in trade, such as ``3$^{1\!/\!2}$-in
 disk drive.'' Avoid combining SI and CGS units, such as current in amperes
 and magnetic field in oersteds. This often leads to confusion because
 equations do not balance dimensionally. If you must use mixed units, clearly
@@ -190,6 +192,11 @@ The SI unit for magnetic field strength $H$ is A/m. However, if you wish to use
 units of T, either refer to magnetic flux density $B$ or magnetic field
 strength symbolized as $\mu _{0}H$. Use the center dot to separate
 compound units, e.g., ``A$\cdot $m$^{2}$.''
+
+
+\Figure[t!](topskip=0pt, botskip=0pt, midskip=0pt){fig1.png}
+{ \textbf{Magnetization as a function of applied field.
+It is good practice to explain the significance of the figure in the caption.}\label{fig1}}
 
 \section{Some Common Mistakes}
 The word ``data'' is plural, not singular. The subscript for the
@@ -208,10 +215,6 @@ intermetallic compound Ni$_{0.5}$Mn$_{0.5}$ whereas
 ``Ni--Mn'' indicates an alloy of some composition
 Ni$_{x}$Mn$_{1-x}$.
 
-\Figure[t!](topskip=0pt, botskip=0pt, midskip=0pt){fig1.png}
-{Magnetization as a function of applied field.
-It is good practice to explain the significance of the figure in the caption.\label{fig1}}
-
 Be aware of the different meanings of the homophones ``affect'' (usually a
 verb) and ``effect'' (usually a noun), ``complement'' and ``compliment,''
 ``discreet'' and ``discrete,'' ``principal'' (e.g., ``principal
@@ -225,7 +228,8 @@ abbreviation ``\emph{et al.}'' (it is also italicized). The abbreviation ``i.e.,
 ``that is,'' and the abbreviation ``e.g.,'' means ``for example'' (these
 abbreviations are not italicized).
 
-A general IEEE styleguide is available at \underline{http://www.ieee.org/}\break\underline{authortools}.
+A general IEEE styleguide is available at \break
+\underline{http://www.ieee.org/authortools}.
 
 \section{Guidelines for Graphics Preparation and Submission}
 \label{sec:guidelines}
@@ -238,21 +242,21 @@ color/shades of gray:
 \subsubsection{Color/Grayscale figures}
 {Figures that are meant to appear in color, or shades of black/gray. Such
 figures may include photographs, illustrations, multicolor graphs, and
-flowcharts.}
+flowcharts. For multicolor graphs, please avoid any gray backgrounds or shading, as well as screenshots, instead export the graph from the program used to collect the data.}
 
 \subsubsection{Line Art figures}
 {Figures that are composed of only black lines and shapes. These figures
 should have no shades or half-tones of gray, only black and white.}
 
 \subsubsection{Author photos}
-{Head and shoulders shots of authors that appear at the end of our papers. }
+{Author photographs should be included with the author biographies located at the end of the article underneath References. }
 
 \subsubsection{Tables}
 {Data charts which are typically black and white, but sometimes include
 color.}
 
 \begin{table}
-\caption{Units for Magnetic Properties}
+\caption{\textbf{Units for Magnetic Properties}}
 \label{table}
 \setlength{\tabcolsep}{3pt}
 \begin{tabular}{|p{25pt}|p{75pt}|p{115pt}|}
@@ -325,7 +329,7 @@ should meet the stricter guidelines.
 
 \subsection{File Formats For Graphics}\label{formats}
 Format and save your graphics using a suitable graphics processing program
-that will allow you to create the images as PostScript (PS), Encapsulated
+that will allow you to create the images as PostScript (.PS), Encapsulated
 PostScript (.EPS), Tagged Image File Format (.TIFF), Portable Document
 Format (.PDF), Portable Network Graphics (.PNG), or Metapost (.MPS), sizes them, and adjusts
 the resolution settings. When
@@ -434,25 +438,8 @@ oppmo.eps.
 
 \subsection{Referencing a Figure or Table Within Your Paper}
 When referencing your figures and tables within your paper, use the
-abbreviation ``Fig.'' even at the beginning of a sentence. Do not abbreviate
-``Table.'' Tables should be numbered with Roman Numerals.
-
-\subsection{Checking Your Figures: The IEEE Graphics Analyzer}
-The IEEE Graphics Analyzer enables authors to pre-screen their graphics for
-compliance with IEEE Access standards before submission.
-The online tool, located at
-\underline{http://graphicsqc.ieee.org/}, allows authors to
-upload their graphics in order to check that each file is the correct file
-format, resolution, size and colorspace; that no fonts are missing or
-corrupt; that figures are not compiled in layers or have transparency, and
-that they are named according to the IEEE Access naming
-convention. At the end of this automated process, authors are provided with
-a detailed report on each graphic within the web applet, as well as by
-email.
-
-For more information on using the Graphics Analyzer or any other graphics
-related topic, contact the IEEE Graphics Help Desk by e-mail at
-graphics@ieee.org.
+abbreviation ``Fig.'' even at the beginning of a sentence. Figures should be numbered with Arabic Numerals.
+Do not abbreviate ``Table.'' Tables should be numbered with Roman Numerals.
 
 \subsection{Submitting Your Graphics}
 Because IEEE will do the final formatting of your paper,
@@ -468,7 +455,7 @@ around the outside of your figures.
 
 \subsection{Color Processing/Printing in IEEE Journals}
 All IEEE Transactions, Journals, and Letters allow an author to publish
-color figures on IEEE Xplore\textregistered\ at no charge, and automatically
+color figures on IEEE {\it Xplore}$\circledR$\ at no charge, and automatically
 convert them to grayscale for print versions. In most journals, figures and
 tables may alternatively be printed in color if an author chooses to do so.
 Please note that this service comes at an extra expense to the author. If
@@ -477,59 +464,15 @@ paper indicating which figures or tables you would like to be handled that
 way, and stating that you are willing to pay the additional fee.
 
 \section{Conclusion}
-A conclusion section is not required. Although a conclusion may review the
-main points of the paper, do not replicate the abstract as the conclusion. A
+Although a conclusion may review the  main points of the paper, do not replicate the abstract as the conclusion. A
 conclusion might elaborate on the importance of the work or suggest
 applications and extensions.
 
+If you have multiple appendices, use the $\backslash$appendices command below. If you have only one appendix, use
+$\backslash$appendix[Appendix Title]
+
 \appendices
-
-Appendixes, if needed, appear before the acknowledgment.
-
-\section*{Acknowledgment}
-
-The preferred spelling of the word ``acknowledgment'' in American English is
-without an ``e'' after the ``g.'' Use the singular heading even if you have
-many acknowledgments. Avoid expressions such as ``One of us (S.B.A.) would
-like to thank $\ldots$ .'' Instead, write ``F. A. Author thanks $\ldots$ .'' In most
-cases, sponsor and financial support acknowledgments are placed in the
-unnumbered footnote on the first page, not here.
-
-\section*{References and Footnotes}
-
-\subsection{References}
-References need not be cited in text. When they are, they appear on the
-line, in square brackets, inside the punctuation. Multiple references are
-each numbered with separate brackets. When citing a section in a book,
-please give the relevant page numbers. In text, refer simply to the
-reference number. Do not use ``Ref.'' or ``reference'' except at the
-beginning of a sentence: ``Reference \cite{b3} shows $\ldots$ .'' Please do not use
-automatic endnotes in \emph{Word}, rather, type the reference list at the end of the
-paper using the ``References'' style.
-
-Reference numbers are set flush left and form a column of their own, hanging
-out beyond the body of the reference. The reference numbers are on the line,
-enclosed in square brackets. In all references, the given name of the author
-or editor is abbreviated to the initial only and precedes the last name. Use
-them all; use \emph{et al.} only if names are not given. Use commas around Jr.,
-Sr., and III in names. Abbreviate conference titles. When citing IEEE
-transactions, provide the issue number, page range, volume number, year,
-and/or month if available. When referencing a patent, provide the day and
-the month of issue, or application. References may not include all
-information; please obtain and include relevant information. Do not combine
-references. There must be only one reference with each number. If there is a
-URL included with the print reference, it can be included at the end of the
-reference.
-
-Other than books, capitalize only the first word in a paper title, except
-for proper nouns and element symbols. For papers published in translation
-journals, please give the English citation first, followed by the original
-foreign-language citation See the end of this document for formats and
-examples of common references. For a complete discussion of references and
-their formats, see the IEEE style manual at
-\underline{http://www.ieee.org/authortools}.
-
-\subsection{Footnotes}
+\section{\break Footnotes}
 Number footnotes separately in superscript numbers.\footnote{It is recommended that footnotes be avoided (except for
 the unnumbered footnote with the receipt date on the first page). Instead,
 try to integrate the footnote information into the text.} Place the actual
@@ -537,69 +480,36 @@ footnote at the bottom of the column in which it is cited; do not put
 footnotes in the reference list (endnotes). Use letters for table footnotes
 (see Table \ref{table}).
 
-\section{Submitting Your Paper for Review}
+\section{\break Submitting Your Paper for Review}
 
 \subsection{Final Stage}
-When you submit your final version (after your paper has been accepted),
-print it in two-column format, including figures and tables. You must also
-send your final manuscript on a disk, via e-mail, or through a Web
-manuscript submission system as directed by the society contact. You may use
-\emph{Zip} for large files, or compress files using \emph{Compress, Pkzip, Stuffit,} or \emph{Gzip.}
+When your article is accepted, you can submit the final files, including figures, tables, and photos, per the journal's guidelines through the submission system used to submit the articlle.
+ You may use \emph{Zip} for large files, or compress files using \emph{Compress, Pkzip, Stuffit,} or \emph{Gzip.}
 
-Also, send a sheet of paper or PDF with complete contact information for all
-authors. Include full mailing addresses, telephone numbers, fax numbers, and
-e-mail addresses. This information will be used to send each author a
-complimentary copy of the journal in which the paper appears. In addition,
-designate one author as the ``corresponding author.'' This is the author to
+In addition, designate one author as the ``corresponding author.'' This is the author to
 whom proofs of the paper will be sent. Proofs are sent to the corresponding
 author only.
 
-\subsection{Review Stage Using ScholarOne\textregistered\ Manuscripts}
-Contributions to the Transactions, Journals, and Letters may be submitted
-electronically on IEEE's on-line manuscript submission and peer-review
-system, ScholarOne\textregistered\ Manuscripts. You can get a listing of the
-publications that participate in ScholarOne at
-\underline{http://www.ieee.org/publications\_standards/publications/}\break\underline{authors/authors\_submission.html}.
-First check if you have an existing account. If there is none, please create
-a new account. After logging in, go to your Author Center and click ``Submit
-First Draft of a New Manuscript.''
+\subsection{Review Stage Using IEEE Author Portal}
+Article contributions to IEEE Access should be submitted electronically on the IEEE Author Portal. For more information, please visit
+\underline{https://ieeeaccess.ieee.org/}.
 
 Along with other information, you will be asked to select the subject from a
-pull-down list. Depending on the journal, there are various steps to the
+pull-down list. There are various steps to the
 submission process; you must complete all steps for a complete submission.
 At the end of each step you must click ``Save and Continue''; just uploading
 the paper is not sufficient. After the last step, you should see a
 confirmation that the submission is complete. You should also receive an
-e-mail confirmation. For inquiries regarding the submission of your paper on
-ScholarOne Manuscripts, please contact oprs-support@ieee.org or call +1 732
-465 5861.
+e-mail confirmation. For inquiries regarding the submission of your article, please contact ieeeaccess@ieee.org.
 
-ScholarOne Manuscripts will accept files for review in various formats.
-Please check the guidelines of the specific journal for which you plan to
-submit.
+The manuscript should be prepared in a double column, single-spaced format using a required IEEE Access template.
+A Word or LaTeX file and a PDF file are both required upon submission in the IEEE Author Portal.
 
-You will be asked to file an electronic copyright form immediately upon
-completing the submission process (authors are responsible for obtaining any
-security clearances). Failure to submit the electronic copyright could
-result in publishing delays later. You will also have the opportunity to
-designate your article as ``open access'' if you agree to pay the IEEE open
-access fee.
-
-\subsection{Final Stage Using ScholarOne Manuscripts}
+\subsection{Final Stage Using IEEE Author Portal}
 Upon acceptance, you will receive an email with specific instructions
-regarding the submission of your final files. To avoid any delays in
-publication, please be sure to follow these instructions. Most journals
-require that final submissions be uploaded through ScholarOne Manuscripts,
-although some may still accept final submissions via email. Final
-submissions should include source files of your accepted manuscript, high
-quality graphic files, and a formatted pdf file. If you have any questions
-regarding the final submission process, please contact the administrative
-contact for the journal.
 
-In addition to this, upload a file with complete contact information for all
-authors. Include full mailing addresses, telephone numbers, fax numbers, and
-e-mail addresses. Designate the author who submitted the manuscript on
-ScholarOne Manuscripts as the ``corresponding author.'' This is the only
+Designate the author who submitted the manuscript on
+IEEE Author Portal as the ``corresponding author.'' This is the only
 author to whom proofs of the paper will be sent.
 
 \subsection{Copyright Form}
@@ -611,29 +521,26 @@ clearances. For additional information on intellectual property rights,
 visit the IEEE Intellectual Property Rights department web page at
 \underline{http://www.ieee.org/publications\_standards/publications/}\break\underline{rights/index.html}.
 
-\section{IEEE Publishing Policy}
+\section{\break IEEE Publishing Policy}
 The general IEEE policy requires that authors should only submit original
 work that has neither appeared elsewhere for publication, nor is under
 review for another refereed publication. The submitting author must disclose
 all prior publication(s) and current submissions when submitting a
-manuscript. Do not publish ``preliminary'' data or results. The submitting
+manuscript. Do not publish ``preliminary'' data or results. To avoid any delays in
+publication, please be sure to follow these instructions.  Final
+submissions should include source files of your accepted manuscript, high
+quality graphic files, and a formatted pdf file. If you have any questions
+regarding the final submission process, please contact the administrative
+contact for the journal.
 author is responsible for obtaining agreement of all coauthors and any
 consent required from employers or sponsors before submitting an article.
-The IEEE Access Department strongly discourages courtesy
-authorship; it is the obligation of the authors to cite only relevant prior
-work.
 
-The IEEE Access Department does not publish conference
+The IEEE Access Editorial Office does not publish conference
 records or proceedings, but can publish articles related to conferences that
 have undergone rigorous peer review. Minimally, two reviews are required for
 every article submitted for peer review.
 
-\section{Publication Principles}
-The two types of contents of that are published are; 1) peer-reviewed and 2)
-archival. The Access Department publishes scholarly
-articles of archival value as well as tutorial expositions and critical
-reviews of classical subjects and topics of current interest.
-
+\section{\break Publication Principles}
 Authors should consider the following points:
 
 \begin{enumerate}
@@ -650,7 +557,9 @@ data and critical details.
 \item Papers that describe ongoing work or announce the latest technical achievement, which are suitable for presentation at a professional conference, may not be appropriate for publication.
 \end{enumerate}
 
-\section{Reference Examples}
+
+
+\section{\break Reference Examples}
 
 \begin{itemize}
 
@@ -691,7 +600,6 @@ See \cite{b18,b19}.
 
 \item \emph{Basic format for computer programs and electronic documents (when available online): }\\
 Legislative body. Number of Congress, Session. (year, month day). \emph{Number of bill or resolution}, \emph{Title}. [Type of medium]. Available: site/path/file\\
-\textbf{\emph{NOTE: }ISO recommends that capitalization follow the accepted practice for the language or script in which the information is given.}\\
 See \cite{b20}.
 
 \item \emph{Basic format for patents (when available online):}\\
@@ -739,6 +647,16 @@ See \cite{b34}.
 
 \end{itemize}
 
+
+\section*{Acknowledgment}
+The preferred spelling of the word ``acknowledgment'' in American English is
+without an ``e'' after the ``g.'' Use the singular heading even if you have
+many acknowledgments. Avoid expressions such as ``One of us (S.B.A.) would
+like to thank $\ldots$ .'' Instead, write ``F. A. Author thanks $\ldots$ .'' In most
+cases, sponsor and financial support acknowledgments are placed in the
+unnumbered footnote on the first page, not here.
+
+
 \begin{thebibliography}{00}
 
 \bibitem{b1} G. O. Young, ``Synthetic structure of industrial plastics,'' in \emph{Plastics,} 2\textsuperscript{nd} ed., vol. 3, J. Peters, Ed. New York, NY, USA: McGraw-Hill, 1964, pp. 15--64.
@@ -771,7 +689,7 @@ and Ralph Lerner, eds., Chicago, IL, USA: Univ. Chicago Press, 1987.
 
 \bibitem{b12} The Terahertz Wave eBook. ZOmega Terahertz Corp., 2014.
 [Online]. Available:
-\underline{http://dl.z-thz.com/eBook/zomega\_ebook\_pdf\_1206\_sr.pdf}. Accessed on: May 19, 2014.
+\underline{http://dl.z-thz.com/eBook/zomegaebookpdf\_1206\_sr.pdf}. Accessed on: May 19, 2014.
 
 \bibitem{b13} Philip B. Kurland and Ralph Lerner, eds., \emph{The
 Founders' Constitution.} Chicago, IL, USA: Univ. of Chicago Press,
@@ -793,7 +711,7 @@ Available: \underline{http://home.process.com/Intranets/wp2.htp}
 
 \bibitem{b19} Teralyzer. Lytera UG, Kirchhain, Germany [Online].
 Available:
-\underline{http://www.lytera.de/Terahertz\_THz\_Spectroscopy.php?id=home}, Accessed on: Jun. 5, 2014
+\underline{http://www.lytera.de/Terahertz\_THz\_Spectroscopy.php?id=home}, Accessed on: Jun. 5, 2014.
 
 \bibitem{b20} U.S. House. 102\textsuperscript{nd} Congress, 1\textsuperscript{st} Session. (1991, Jan. 11). \emph{H. Con. Res. 1, Sense of the Congress on Approval of}  \emph{Military Action}. [Online]. Available: LEXIS Library: GENFED File: BILLS
 
@@ -827,34 +745,7 @@ Available:
 
 \end{thebibliography}
 
-\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{a1.png}}]{First A. Author} (M'76--SM'81--F'87) and all authors may include
-biographies. Biographies are often not included in conference-related
-papers. This author became a Member (M) of IEEE in 1976, a Senior
-Member (SM) in 1981, and a Fellow (F) in 1987. The first paragraph may
-contain a place and/or date of birth (list place, then date). Next,
-the author's educational background is listed. The degrees should be
-listed with type of degree in what field, which institution, city,
-state, and country, and year the degree was earned. The author's major
-field of study should be lower-cased.
-
-The second paragraph uses the pronoun of the person (he or she) and not the
-author's last name. It lists military and work experience, including summer
-and fellowship jobs. Job titles are capitalized. The current job must have a
-location; previous positions may be listed
-without one. Information concerning previous publications may be included.
-Try not to list more than three books or published articles. The format for
-listing publishers of a book within the biography is: title of book
-(publisher name, year) similar to a reference. Current and previous research
-interests end the paragraph. The third paragraph begins with the author's
-title and last name (e.g., Dr.\ Smith, Prof.\ Jones, Mr.\ Kajor, Ms.\ Hunter).
-List any memberships in professional societies other than the IEEE. Finally,
-list any awards and work for IEEE committees and publications. If a
-photograph is provided, it should be of good quality, and
-professional-looking. Following are two examples of an author's biography.
-\end{IEEEbiography}
-
-\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{a2.png}}]{Second B. Author} was born in Greenwich Village, New York, NY, USA in
-1977. He received the B.S. and M.S. degrees in aerospace engineering from
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{author1.png}}]{First A. Author} received the B.S. and M.S. degrees in aerospace engineering from
 the University of Virginia, Charlottesville, in 2001 and the Ph.D. degree in
 mechanical engineering from Drexel University, Philadelphia, PA, in 2008.
 
@@ -873,7 +764,38 @@ and Aeronomy Young Scientist Award for Excellence in 2008, and the IEEE
 Electromagnetic Compatibility Society Best Symposium Paper Award in 2011.
 \end{IEEEbiography}
 
-\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{a3.png}}]{Third C. Author, Jr.} (M'87) received the B.S. degree in mechanical
+
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{author2.png}}]{Second B. Author} (M'76--SM'81--F'87) and all authors may include
+biographies. Biographies are often not included in conference-related
+papers. This author became a Member (M) of IEEE in 1976, a Senior
+Member (SM) in 1981, and a Fellow (F) in 1987. The first paragraph may
+contain a place and/or date of birth (list place, then date). Next,
+the author's educational background is listed. The degrees should be
+listed with type of degree in what field, which institution, city,
+state, and country, and year the degree was earned. The author's major
+field of study should be lower-cased.
+
+The second paragraph uses the pronoun of the person (he or she) and not the
+author's last name. It lists military and work experience, including summer
+and fellowship jobs. Job titles are capitalized. The current job must have a
+location; previous positions may be listed
+without one. Information concerning previous publications may be included.
+Try not to list more than three books or published articles. The format for
+listing publishers of a book within the biography is: title of book
+(publisher name, year) similar to a reference. Current and previous research
+interests end the paragraph.
+
+The third paragraph begins with the author's
+title and last name (e.g., Dr.\ Smith, Prof.\ Jones, Mr.\ Kajor, Ms.\ Hunter).
+List any memberships in professional societies other than the IEEE. Finally,
+list any awards and work for IEEE committees and publications. If a
+photograph is provided, it should be of good quality, and
+professional-looking. Following are two examples of an author's biography.
+\end{IEEEbiography}
+
+
+
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{author3.png}}]{Third C. Author, Jr.} (M'87) received the B.S. degree in mechanical
 engineering from National Chung Cheng University, Chiayi, Taiwan, in 2004
 and the M.S. degree in mechanical engineering from National Tsing Hua
 University, Hsinchu, Taiwan, in 2006. He is currently pursuing the Ph.D.
@@ -895,3 +817,8 @@ Award and the Adolph Lomb Medal (OSA).
 \EOD
 
 \end{document}
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: t
+%%% End:

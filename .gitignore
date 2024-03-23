@@ -5,3 +5,4 @@ auto
 *.log
 .emacs.*
 a.out
+/report/
