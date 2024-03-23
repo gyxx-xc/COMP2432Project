@@ -63,6 +63,8 @@ int main() {
       } else { // parent
         sendData(p, fd);
       }
+      memset(day, 0, sizeof(day));
+      dayCount = 0;
       break;
     case 4:
       printf("Bye-bye!\n");

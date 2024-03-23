@@ -13,6 +13,7 @@ typedef struct proc {
   int quantity;
   int products;
   int categorie;
+  int accepted; // modify by runpls
 } Process;
 
 

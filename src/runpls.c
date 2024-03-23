@@ -12,6 +12,7 @@ typedef struct proc {
   int quantity;
   int categorie;
   int priority;
+  int accepted; // modify by runpls
 } Process;
 
 注意以"天"为单位，每天的订单都会被记录在day[]中

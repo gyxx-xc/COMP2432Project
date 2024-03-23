@@ -37,11 +37,14 @@ debug:
 	$(CC) -o PLS $(CFLAGS) $(DEBUGFLAG) $(OBJ)
 .PHONY : debug
 
-$(OBJ_DIR)/%.o : %.c
+$(OBJ_DIR)/%.o : %.c $(OBJ_DIR)
 	$(CC) -c $(CFLAGS) $< -o $@
 
 $(OBJ_DIR)/$(OBJ): tools.h
 $(OBJ_DIR)/main.o: input.h output.h runpls.h
+
+$(OBJ_DIR):
+	mkdir $@
 
 # Help Target
 help:
