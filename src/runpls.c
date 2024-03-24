@@ -44,18 +44,18 @@ int main(){
   // print some debug output
   initTime("2022-01-01"); //
   endPeiod = timeToInt("2022-01-30");
-  processes[processesCount ++] = (Process) {"P0000", 3, 1, 0, 1};
-  processes[processesCount ++] = (Process) {"P0001", 4, 1, 2, 1};
-  processes[processesCount ++] = (Process) {"P0002", 5, 1, 1, 2};
-  processes[processesCount ++] = (Process) {"P0003", 6, 1, 2, 0};
-  processes[processesCount ++] = (Process) {"P0004", 7, 1, 1, 2};
-  processes[processesCount ++] = (Process) {"P0005", 2, 1, 1, 0};
-  processes[processesCount ++] = (Process) {"P0006", 3, 1, 0, 1};
-  processes[processesCount ++] = (Process) {"P0007", 1, 1, 2, 1};
-  processes[processesCount ++] = (Process) {"P0008", 5, 1, 2, 2};
-  processes[processesCount ++] = (Process) {"P0009", 6, 1, 1, 0};
-  processes[processesCount ++] = (Process) {"P0010", 7, 1, 0, 2};
-  processes[processesCount ++] = (Process) {"P0011", 8, 1, 0, 0};
+  processes[processesCount ++] = (Process) {"P0000", 3, 1, 300, 1};
+  processes[processesCount ++] = (Process) {"P0001", 4, 1, 200, 1};
+  processes[processesCount ++] = (Process) {"P0002", 5, 1, 100, 2};
+  processes[processesCount ++] = (Process) {"P0003", 6, 1, 500, 0};
+  processes[processesCount ++] = (Process) {"P0004", 7, 1, 1000, 2};
+  processes[processesCount ++] = (Process) {"P0005", 2, 1, 2000, 0};
+  processes[processesCount ++] = (Process) {"P0006", 3, 1, 120, 1};
+  processes[processesCount ++] = (Process) {"P0007", 1, 1, 2332, 1};
+  processes[processesCount ++] = (Process) {"P0008", 5, 1, 413342, 2};
+  processes[processesCount ++] = (Process) {"P0009", 6, 1, 1231, 0};
+  processes[processesCount ++] = (Process) {"P0010", 7, 1, 235230, 2};
+  processes[processesCount ++] = (Process) {"P0011", 8, 1, 1230, 0};
   runPLS(1);
 }
 #endif
@@ -165,7 +165,19 @@ void priorityScheduling() {
   }
  }
 
-//然后直接用FCFS就好了
+ int day1row=0,day2row=0,day3row=0;
+
+ // 存入二维数组
+
+ for (i=0;i<dayCounting;i++){
+  if (rawDay[i].quantity<=300){
+    day[0][day1row++].Product = rawDay[i];
+  } else if (rawDay[i].quantity>300 && rawDay[i].quantity <= 500){
+    day[1][day2row++].Product = rawDay[i];
+  } else {
+    day[2][day3row++].Product = rawDay[i];
+  }
+ }
 
 }
 void runPLS(int alg) {
