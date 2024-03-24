@@ -57,7 +57,7 @@ int main() {
         printREPORT(stdout, algTemp);
       }
       memset(day, 0, sizeof(day));
-      dayCount = 0;
+      memset(dayCount, 0, sizeof(dayCount));
       break;
     case 4:
       printf("Bye-bye!\n");
