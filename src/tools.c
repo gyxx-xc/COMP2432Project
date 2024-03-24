@@ -101,7 +101,7 @@ void errorUsage(int c) {
     printf("Usage: addBATCH filename\n");
     printf("input multiple orders in one batch file.\n");
   case 3:
-    printf("Usage: runPLS algorithm [| printREPORT [> filename]]\n");
+    printf("Usage: runPLS algorithm | printREPORT [> filename]\n");
     printf("generate a schedule with the specified algorithm.\n");
   }
 }
