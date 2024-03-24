@@ -23,8 +23,10 @@ int main()
     a[4]++;
   }
 
-  for (int i = 0; i < 3; i ++) {
-    for (int j = 0; j < dayCount[i%3]; j ++) {
+  for (int i = 0; i < 3; i++)
+  {
+    for (int j = 0; j < dayCount[i % 3]; j++)
+    {
       printf("%s ", day[i][j].Product.orderNumber);
     }
     printf("\n");
@@ -109,7 +111,6 @@ void printREPORT(FILE *file, int alg)
       read(parent_to_child[i][0], start, sizeof(int));
       char a[3] = {'X', 'Y', 'Z'};
       fprintf(file, "Plant_%c:\n", a[i]);
-
       memcpy(c, day[i][0].Product.orderNumber, sizeof(c));
       for (int j = 0; j < dayCount[i]; j++)
       {
@@ -132,8 +133,10 @@ void printREPORT(FILE *file, int alg)
 
   for (int i = 0; i < 3; i++)
   {
-    int start[0];
+    int start[1];
     write(parent_to_child[i][1], start, sizeof(int));
-    read(child_to_parent[i][0], start, sizeof(int));
+
+    int end[1];
+    read(child_to_parent[i][0], end, sizeof(int));
   }
 }
