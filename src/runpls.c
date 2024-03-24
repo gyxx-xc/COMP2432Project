@@ -43,9 +43,9 @@ int main(){
   // call algrothm
   // print some debug output
   initTime("2022-01-01"); //
-  endPeiod = timeToInt("2022-01-30");
+  endPeiod = timeToInt("2022-01-03");
   //"订单号" 需要生产天数 需要生产数量 种类 是否接受%
-  processes[processesCount ++] = (Process) {"P1000", 3, 1000, 0, 1};
+  processes[processesCount ++] = (Process) {"P1000", 3, 1000, 0, 1}; //B (3)
   processes[processesCount ++] = (Process) {"P1001", 3, 700, 2, 1};
   processes[processesCount ++] = (Process) {"P1002", 3, 1200, 1, 2};
   processes[processesCount ++] = (Process) {"P1003", 3, 1300, 2, 0};
@@ -56,7 +56,7 @@ int main(){
   processes[processesCount ++] = (Process) {"P1008", 4, 2400, 2, 2};
   processes[processesCount ++] = (Process) {"P1009", 4, 2600, 1, 0};
   processes[processesCount ++] = (Process) {"P1010", 4, 2800, 0, 2};
-  processes[processesCount ++] = (Process) {"P1011", 4, 3000, 0, 2};
+  processes[processesCount ++] = (Process) {"P1011", 6, 3000, 0, 2};
   runPLS(0);
   int i,j;
   // for (m=0;m<dayCount;m++){
@@ -84,7 +84,7 @@ int main(){
   int m;
   printf("工厂x\n");
   for (m=0;m<dayCount[0];m++){
-     printf("订单号:%s 截止日期:%d 数量:%d 种类:%d 是否接受%d\n",
+     printf("订单号:%s 要求天数:%d 数量:%d 种类:%d 是否接受%d\n",
      day[0][m].Product.orderNumber,
      day[0][m].Product.dueDate,
      day[0][m].Product.quantity,
@@ -93,7 +93,7 @@ int main(){
    }
    printf("工厂y\n");
    for (m=0;m<dayCount[1];m++){
-     printf("订单号:%s 截止日期:%d 数量:%d 种类:%d 是否接受%d\n",
+     printf("订单号:%s 要求天数:%d 数量:%d 种类:%d 是否接受%d\n",
      day[1][m].Product.orderNumber,
      day[1][m].Product.dueDate,
      day[1][m].Product.quantity,
@@ -102,7 +102,7 @@ int main(){
    }
    printf("工厂z\n");
    for (m=0;m<dayCount[2];m++){
-     printf("订单号:%s 截止日期:%d 数量:%d 种类:%d 是否接受%d\n",
+     printf("订单号:%s 要求天数:%d 数量:%d 种类:%d 是否接受%d\n",
      day[2][m].Product.orderNumber,
      day[2][m].Product.dueDate,
      day[2][m].Product.quantity,
@@ -156,7 +156,8 @@ void FCFS(){
             day[k][dayCount[k]].Product=processes[i];
             day[k][dayCount[k]].producedQuantity=processes[i].quantity;
             dayCount[k]++;
-            
+            break;
+
           }else{
             processes[i].accepted=0; //生产天数需求 大于 X厂剩余可开工时间-->拒绝接单
           }
@@ -179,9 +180,10 @@ void FCFS(){
             day[k][dayCount[k]].Product=processes[i];
             day[k][dayCount[k]].producedQuantity=processes[i].quantity;
             dayCount[k]++;
+            break;
 
           }else{
-            processes[i].accepted=0; //生产天数需求 大于 Y厂剩余可开工时间-->拒绝接单
+            processes[i].accepted=0;  //生产天数需求 大于 Y厂剩余可开工时间-->拒绝接单
           }
 
         }else if(k==2){ //Z工厂当前闲置，可"尝试"接单
@@ -202,6 +204,7 @@ void FCFS(){
             day[k][dayCount[k]].Product=processes[i];
             day[k][dayCount[k]].producedQuantity=processes[i].quantity;
             dayCount[k]++;
+              break;
 
           }else{
             processes[i].accepted=0; //生产天数需求 大于 Z厂剩余可开工时间-->拒绝接单
