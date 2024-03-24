@@ -12,61 +12,23 @@ time_t startPeiod;
 
 int main()
 {
+<<<<<<< HEAD
   day[0][0] = (DayArrange) {
     (Process){"P0001",0,0,0,0},
     300
   };
   dayCount[0]++;
   printREPORT(stdout,0);
+=======
+  printREPORT(stdout, 0);
+>>>>>>> 268d80c960656e16d0cda6a120c2a9ee1646cda7
 }
 #endif
 
-// create children and pipe
-// the pid is the return value and the pipe store to fd
-/*
-int createChild(int *fd)
-{
-  int pipefd[2];
-  if (pipe(pipefd) == -1)
-  {
-    perror("pipe");
-    return -1;
-  }
-
-  pid_t pid = fork();
-  if (pid == -1)
-  {
-    perror("fork");
-    close(pipefd[0]);
-    close(pipefd[1]);
-    return -1;
-  }
-  else if (pid == 0)
-  {
-    int fd[2];
-    int p = createChild(fd);
-    fprintf("%d\n", p);
-    // set day...
-    // call algrothm
-    // print some debug output
-    fd[0] = pipefd[0]; // 将管道的读取端传递给父进程
-    fprintf("childprocess\n");
-    return pid;
-  }
-  else
-  {
-    // 父进程
-    close(pipefd[0]);  // 关闭父进程中的读取端
-    fd[1] = pipefd[1]; // 将管道的写入端传递给子进程
-    fprintf("parentprocess\n");
-    return pid;
-  }
-}
-*/
 // child process
 // read the `day` from pipe here
 // the function intToTime in `tools.h` may useful
-void printREPORT(FILE *file ,int alg)
+void printREPORT(FILE *file, int alg)
 {
   Process rejectedProcesses[10000];
   char Algorithm[2][10] = {"FCFS", "PR"};
@@ -74,29 +36,43 @@ void printREPORT(FILE *file ,int alg)
   char c[100];
   int startTime = 0;
   int endTime;
-  char plant[3][10] = {"PLANT_X","PLANT_Y","PLANT_Z"};
-  for(int i = 0;i < processesCount;i++){
-    if(processes[i].accepted == 0){
+  char plant[3][10] = {"PLANT_X", "PLANT_Y", "PLANT_Z"};
+  for (int i = 0; i < processesCount; i++)
+  {
+    if (processes[i].accepted == 0)
+    {
       rejectedProcesses[i] = processes[i];
     }
   }
-  
-  fprintf(file, "Algorithm used: %s\n",Algorithm[alg]);
-  fprintf(file, "There are %d Orders ACCEPTED.", dayCount[0]+dayCount[1]+dayCount[2]);
+
+  fprintf(file, "Algorithm used: %s\n", Algorithm[alg]);
+  fprintf(file, "There are %d Orders ACCEPTED.", dayCount[0] + dayCount[1] + dayCount[2]);
   fprintf(file, " Details are as follows: \n");
   fprintf(file, "ORDER NUMBER   START        END         DAYS    QUANTITY    PLANT\n");
+<<<<<<< HEAD
   for(int i = 0 ;i < 3; i++){
     memcpy(c,day[i][0].Product.orderNumber,sizeof(c));
     for(int j = 0;j < dayCount[i];j++){
       int check = memcmp(c,day[i][j].Product.orderNumber,sizeof(c));
       if(check == 0){
         
+=======
+  for (int i = 0; i < 3; i++)
+  {
+    memcpy(c, day[i][0].Product.orderNumber, sizeof(c));
+    for (int j = 0; i < dayCount[i]; i++)
+    {
+      int check = memcmp(c, day[i][j].Product.orderNumber, sizeof(c));
+      if (check == 0)
+      {
+>>>>>>> 268d80c960656e16d0cda6a120c2a9ee1646cda7
       }
-      else{
-        memcpy(c, day[i][j].Product.orderNumber,sizeof(c));
-        endTime = j-1;
+      else
+      {
+        memcpy(c, day[i][j].Product.orderNumber, sizeof(c));
+        endTime = j - 1;
         int days = endTime - startTime;
-        fprintf(file, "%s %s %s %d %d %s\n",day[i][j].Product.orderNumber,intToTime(startTime),intToTime(endTime),days,day[i][j].producedQuantity,plant[i]);
+        fprintf(file, "%s %s %s %d %d %s\n", day[i][j].Product.orderNumber, intToTime(startTime), intToTime(endTime), days, day[i][j].producedQuantity, plant[i]);
       }
     }
     fprintf(file, "%s %s %s %d %d %s\n",
@@ -105,22 +81,25 @@ void printREPORT(FILE *file ,int alg)
     2,day[0][0].producedQuantity,plant[i]);
   }
   fprintf(file, "- END -\n");
-  fprintf(file, "There are %d Orders REJECTED.",rejectedCount);
-  fprintf(file, " Details are as follows: \n");
+  fprintf(file, "There are %d Orders REJECTED.", rejectedCount);
+  fprintf(file, " Details are as follows: ");
   fprintf(file, "ORDER NUMBER   PRODUCT NAME Due Date QUANTITY\n");
-  for(int i = 0;i < rejectedCount;i++){
-    fprintf(file, "%s %c %s %d\n",rejectedProcesses[i].orderNumber,'A' + rejectedProcesses[i].products,intToTime(rejectedProcesses[i].dueDate),rejectedProcesses[i].quantity);
+  for (int i = 0; i < rejectedCount; i++)
+  {
+    fprintf(file, "%s %c %s %d\n", rejectedProcesses[i].orderNumber, 'A' + rejectedProcesses[i].products, intToTime(rejectedProcesses[i].dueDate), rejectedProcesses[i].quantity);
   }
-  fprintf(file,"- END -\n");
+  fprintf(file, "- END -\n");
 
-
+  // here for parent to analyse.
   // here for parent to analyse.
   int parent_to_child[3][2];
   int child_to_parent[3][2];
+  printf("%s\n", "***PERFORMANCE");
   for (int i = 0; i < 3; i++)
   {
     pid_t pid = fork();
-
+    close(parent_to_child[i][1]); // Close write end of parent_to_child pipe
+    close(child_to_parent[i][0]); // Close read end of child_to_parent pipe
     if (pid < 0)
     {
       printf("Fork failed\n");
@@ -128,10 +107,11 @@ void printREPORT(FILE *file ,int alg)
     }
     else if (pid == 0) // Child process
     {
+      char a[3] = {'X', 'Y', 'Z'};
+      fprintf(file, "Plant_%c:\n", a[i]);
+      exit(0);
     }
   }
-  fprintf(file, "123123123\n");
-  
 }
 
 // parent process
