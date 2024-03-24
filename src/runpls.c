@@ -45,18 +45,18 @@ int main(){
   initTime("2022-01-01"); //
   endPeiod = timeToInt("2022-01-30");
   //"订单号" 需要生产天数 需要生产数量 种类 是否接受%
-  processes[processesCount ++] = (Process) {"P0000", 3, 1000, 0, 1};
-  processes[processesCount ++] = (Process) {"P0001", 3, 1100, 2, 1};
-  processes[processesCount ++] = (Process) {"P0002", 3, 1200, 1, 2};
-  processes[processesCount ++] = (Process) {"P0003", 3, 1300, 2, 0};
-  processes[processesCount ++] = (Process) {"P0004", 3, 1400, 1, 2};
-  processes[processesCount ++] = (Process) {"P0005", 3, 1500, 1, 0};
-  processes[processesCount ++] = (Process) {"P0006", 4, 1500, 0, 1};
-  processes[processesCount ++] = (Process) {"P0007", 4, 1600, 2, 1};
-  processes[processesCount ++] = (Process) {"P0008", 4, 1700, 2, 2};
-  processes[processesCount ++] = (Process) {"P0009", 4, 1800, 1, 0};
-  processes[processesCount ++] = (Process) {"P0010", 4, 1900, 0, 2};
-  processes[processesCount ++] = (Process) {"P0011", 4, 2000, 0, 0};
+  processes[processesCount ++] = (Process) {"P1000", 3, 1000, 0, 1};
+  processes[processesCount ++] = (Process) {"P1001", 3, 1100, 2, 1};
+  processes[processesCount ++] = (Process) {"P1002", 3, 1200, 1, 2};
+  processes[processesCount ++] = (Process) {"P1003", 3, 1300, 2, 0};
+  processes[processesCount ++] = (Process) {"P1004", 3, 1400, 1, 2};
+  processes[processesCount ++] = (Process) {"P1005", 3, 1500, 1, 0};
+  processes[processesCount ++] = (Process) {"P1006", 4, 1500, 0, 1};
+  processes[processesCount ++] = (Process) {"P1007", 4, 1600, 2, 1};
+  processes[processesCount ++] = (Process) {"P1008", 4, 1700, 2, 2};
+  processes[processesCount ++] = (Process) {"P1009", 4, 1800, 1, 0};
+  processes[processesCount ++] = (Process) {"P1010", 4, 1900, 0, 2};
+  processes[processesCount ++] = (Process) {"P1011", 4, 2000, 0, 0};
   runPLS(0);
   int i,j;
   // for (m=0;m<dayCount;m++){
