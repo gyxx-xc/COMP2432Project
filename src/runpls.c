@@ -44,20 +44,20 @@ int main(){
   // print some debug output
   initTime("2022-01-01"); //
   endPeiod = timeToInt("2022-01-30");
-  //订单号 需要生产天数 需要生产数量 种类 是否接受%
-  processes[processesCount ++] = (Process) {"P0000", 3, 1, 0, 1};
-  processes[processesCount ++] = (Process) {"P0001", 4, 1, 2, 1};
-  processes[processesCount ++] = (Process) {"P0002", 5, 1, 1, 2};
-  processes[processesCount ++] = (Process) {"P0003", 6, 1, 2, 0};
-  processes[processesCount ++] = (Process) {"P0004", 7, 1, 1, 2};
-  processes[processesCount ++] = (Process) {"P0005", 2, 1, 1, 0};
-  processes[processesCount ++] = (Process) {"P0006", 3, 1, 0, 1};
-  processes[processesCount ++] = (Process) {"P0007", 1, 1, 2, 1};
-  processes[processesCount ++] = (Process) {"P0008", 5, 1, 2, 2};
-  processes[processesCount ++] = (Process) {"P0009", 6, 1, 1, 0};
-  processes[processesCount ++] = (Process) {"P0010", 7, 1, 0, 2};
-  processes[processesCount ++] = (Process) {"P0011", 8, 1, 0, 0};
-  runPLS(1);
+  //"订单号" 需要生产天数 需要生产数量 种类 是否接受%
+  processes[processesCount ++] = (Process) {"P0000", 3, 1000, 0, 1};
+  processes[processesCount ++] = (Process) {"P0001", 3, 1100, 2, 1};
+  processes[processesCount ++] = (Process) {"P0002", 3, 1200, 1, 2};
+  processes[processesCount ++] = (Process) {"P0003", 3, 1300, 2, 0};
+  processes[processesCount ++] = (Process) {"P0004", 3, 1400, 1, 2};
+  processes[processesCount ++] = (Process) {"P0005", 3, 1500, 1, 0};
+  processes[processesCount ++] = (Process) {"P0006", 4, 1500, 0, 1};
+  processes[processesCount ++] = (Process) {"P0007", 4, 1600, 2, 1};
+  processes[processesCount ++] = (Process) {"P0008", 4, 1700, 2, 2};
+  processes[processesCount ++] = (Process) {"P0009", 4, 1800, 1, 0};
+  processes[processesCount ++] = (Process) {"P0010", 4, 1900, 0, 2};
+  processes[processesCount ++] = (Process) {"P0011", 4, 2000, 0, 0};
+  runPLS(0);
   int i,j;
   // for (m=0;m<dayCount;m++){
   //   printf("订单号:%s 截止日期:%d 数量:%d 种类:%d 是否接受%d\n",
@@ -68,13 +68,17 @@ int main(){
   //   day[m].Product.accepted);
   // }
 
-  /*for(i=0;i<3;i++){
+  for(i=0;i<3;i++){
     for(j=0;j<dayCount[i];j++){
-      printf("订单号:%s 截止日期:%d 数量:%d 种类:%d 是否接受%d\n",
-      day[i][j].Product.)
+      printf("订单号:%s 要求生产天数:%d 数量:%d 种类:%d 是否接受%d\n",
+      day[i][j].Product.orderNumber,
+      day[i][j].Product.dueDate,
+      day[i][j].Product.quantity,
+      day[i][j].Product.categorie,
+      day[i][j].Product.accepted);
     }
 
-  }*/
+  }
 } 
 #endif
 
@@ -96,11 +100,11 @@ void FCFS(){
           //X工厂产能=300
           productivity=300;
           int needDays=processes[i].quantity/productivity;
-          if(needDays>processes[i].dueDate){
+          if(needDays>processes[i].dueDate){//实际天数>需求天数，不切实际
             processes[i].accepted=0;
           }
-          else if(needDays<=XDays){
-            XYZStatus[k]=needDays;
+          else if(processes[i].dueDate>=needDays&&needDays<=XDays){
+            XYZStatus[k]=processes[i].dueDate;
             XDays-=needDays;
             processes[i].accepted=1;
             day[k][dayCount[k]].Product=processes[i];
@@ -118,8 +122,8 @@ void FCFS(){
           if(needDays>processes[i].dueDate){
             processes[i].accepted=0;
           }
-          if(needDays<=YDays){
-            XYZStatus[k]=needDays;
+          if(processes[i].dueDate>=needDays&&needDays<=YDays){
+            XYZStatus[k]=processes[i].dueDate;
             YDays-=needDays;
             processes[i].accepted=1;
             day[k][dayCount[k]].Product=processes[i];
@@ -137,8 +141,8 @@ void FCFS(){
           if(needDays>processes[i].dueDate){
             processes[i].accepted=0;
           }
-          else if(needDays<=ZDays){
-            XYZStatus[k]=needDays;
+          else if(processes[i].dueDate>=needDays&&needDays<=ZDays){
+            XYZStatus[k]=processes[i].dueDate;
             ZDays-=needDays;
             processes[i].accepted=1;
             day[k][dayCount[k]].Product=processes[i];
