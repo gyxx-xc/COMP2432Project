@@ -243,10 +243,11 @@ void priorityScheduling() {
   for(i=0;i<processesCount;i++){
    if (processes[i].categorie == 0){
      rawDay[dayCounting++] = processes[i];
+
    }
   }
 
-  for(i=0;i<processesCount;i++){
+  for(i=0;i<processesCount;i++){ //400
    if (processes[i].categorie == 1){
      rawDay[dayCounting++] = processes[i];
    }
@@ -265,13 +266,22 @@ void priorityScheduling() {
  dayCount[0] = 0;
  dayCount[1] = 0;
  dayCount[2] = 0;
+ int acc = 1;
+ int request;
+ int dtime;
  for (i=0;i<dayCounting;i++){
-  if (rawDay[i].quantity<=300){
-    day[0][dayCount[0]++].Product = rawDay[i];
-  } else if (rawDay[i].quantity>300 && rawDay[i].quantity <= 500){
-    day[1][dayCount[1]++].Product = rawDay[i];
+  if ((rawDay[i].quantity) > 300*rawDay[i].dueDate){
+    if ((rawDay[i].quantity) > 400*rawDay[i].dueDate){
+      if ((rawDay[i].quantity) > 500*rawDay[i].dueDate){
+        printf("订单号%s不被需要了\n", rawDay[i].orderNumber);
+      } else {
+        day[2][dayCount[2]++].Product = rawDay[i];
+      }
+    } else {
+      day[1][dayCount[1]++].Product = rawDay[i];
+    }
   } else {
-    day[2][dayCount[2]++].Product = rawDay[i];
+    day[0][dayCount[0]++].Product = rawDay[i];
   }
  }
 
