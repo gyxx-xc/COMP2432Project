@@ -61,8 +61,22 @@ int createChild(int *fd)
 // child process
 // read the `day` from pipe here
 // the function intToTime in `tools.h` may useful
-void printREPORT(FILE *file, int alg)
+void printREPORT(FILE *file)
 {
+  Process acceptedProcesses[10000];
+  Process rejectedProcesses[10000];
+  int acceptedCount,rejectedCount = 0;
+  for (int i = 0; i < processesCount; i++){
+    if(processes[i].accepted == 1){
+      acceptedProcesses[i] = processes[i];
+      acceptedCount++;
+    }
+    else {
+      rejectedProcesses[i] = processes[i];
+      rejectedCount++;
+    }
+  }
+  printf("%s/n","Algorithm used: " );
   // here for parent to analyse.
   int parent_to_child[3][2];
   int child_to_parent[3][2];
