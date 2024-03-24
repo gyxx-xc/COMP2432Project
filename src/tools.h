@@ -15,6 +15,9 @@ typedef struct proc {
   int products;
   int categorie;
   int accepted; // modify by runpls
+  int plantX; // the days of each plant used
+  int plantY;
+  int plantZ;
 } Process;
 
 
@@ -25,8 +28,8 @@ typedef struct dayArrange {
 
 extern Process processes[10000];
 extern int processesCount;
-extern DayArrange day[10000];
-extern int dayCount;
+extern DayArrange day[3][10000];
+extern int dayCount[3];
 extern time_t startPeiod;
 extern int endPeiod;
 
