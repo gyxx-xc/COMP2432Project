@@ -12,6 +12,14 @@ time_t startPeiod;
 
 int main()
 {
+  char a[10] = "P0000";
+  for (int i = 0; i < 10; i ++){
+    a[4] ++;
+    day[i%3][dayCount[i%3] ++] = (DayArrange) {
+      (Process) {a, i, 100*i^3, i%9, 0, 1},
+      100
+    };
+  }
   printREPORT(stdout, 0);
 }
 #endif
