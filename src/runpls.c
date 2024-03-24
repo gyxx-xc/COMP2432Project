@@ -8,7 +8,7 @@
 /*以下为"订单 (Process)"的结构体参考
 typedef struct proc {
   char orderNumber[100]; //订单号
-  int durDate; //持续时间
+  int dueDate; //持续时间
   int quantity; //生产数量
   int categorie; //(0,1,2) -->第三优先 ; (3,4,5)-->第二优先 ; (6,7,8)-->第三优先
   int accepted; // modify by runpls
@@ -44,6 +44,7 @@ int main(){
   // print some debug output
   initTime("2022-01-01"); //
   endPeiod = timeToInt("2022-01-30");
+  //订单号 需要生产天数 需要生产数量 种类 是否接受%
   processes[processesCount ++] = (Process) {"P0000", 3, 1, 0, 1};
   processes[processesCount ++] = (Process) {"P0001", 4, 1, 2, 1};
   processes[processesCount ++] = (Process) {"P0002", 5, 1, 1, 2};
@@ -57,7 +58,24 @@ int main(){
   processes[processesCount ++] = (Process) {"P0010", 7, 1, 0, 2};
   processes[processesCount ++] = (Process) {"P0011", 8, 1, 0, 0};
   runPLS(1);
-}
+  int i,j;
+  // for (m=0;m<dayCount;m++){
+  //   printf("订单号:%s 截止日期:%d 数量:%d 种类:%d 是否接受%d\n",
+  //   day[].Product.orderNumber,
+  //   day[m].Product.dueDate,
+  //   day[m].Product.quantity,
+  //   day[m].Product.categorie,
+  //   day[m].Product.accepted);
+  // }
+
+  /*for(i=0;i<3;i++){
+    for(j=0;j<dayCount[i];j++){
+      printf("订单号:%s 截止日期:%d 数量:%d 种类:%d 是否接受%d\n",
+      day[i][j].Product.)
+    }
+
+  }*/
+} 
 #endif
 
 
@@ -78,12 +96,16 @@ void FCFS(){
           //X工厂产能=300
           productivity=300;
           int needDays=processes[i].quantity/productivity;
-          if(needDays<=XDays){
+          if(needDays>processes[i].dueDate){
+            processes[i].accepted=0;
+          }
+          else if(needDays<=XDays){
             XYZStatus[k]=needDays;
             XDays-=needDays;
             processes[i].accepted=1;
             day[k][dayCount[k]].Product=processes[i];
             day[k][dayCount[k]].producedQuantity=processes[i].quantity;
+            dayCount[k]++;
             
           }else{
             processes[i].accepted=0; //生产天数需求 大于 X厂剩余可开工时间-->拒绝接单
@@ -93,12 +115,17 @@ void FCFS(){
           //Y工厂产能=400
           productivity=400;
           int needDays=processes[i].quantity/productivity;
+          if(needDays>processes[i].dueDate){
+            processes[i].accepted=0;
+          }
           if(needDays<=YDays){
             XYZStatus[k]=needDays;
             YDays-=needDays;
             processes[i].accepted=1;
             day[k][dayCount[k]].Product=processes[i];
             day[k][dayCount[k]].producedQuantity=processes[i].quantity;
+            dayCount[k]++;
+
           }else{
             processes[i].accepted=0; //生产天数需求 大于 Y厂剩余可开工时间-->拒绝接单
           }
@@ -107,12 +134,17 @@ void FCFS(){
           //Z工厂产能=500
           productivity=500;
           int needDays=processes[i].quantity/productivity;
-          if(needDays<=ZDays){
+          if(needDays>processes[i].dueDate){
+            processes[i].accepted=0;
+          }
+          else if(needDays<=ZDays){
             XYZStatus[k]=needDays;
             ZDays-=needDays;
             processes[i].accepted=1;
             day[k][dayCount[k]].Product=processes[i];
             day[k][dayCount[k]].producedQuantity=processes[i].quantity;
+            dayCount[k]++;
+
           }else{
             processes[i].accepted=0; //生产天数需求 大于 Z厂剩余可开工时间-->拒绝接单
           }
@@ -143,21 +175,21 @@ void priorityScheduling() {
   Product_G, H and I 属于 Category_3
   其中，优先级Category_1 > Category_2 > Category_3
   */
- int dayCounting = 0;
- Process rawDay[10000];
- int i;
+  int dayCounting = 0;
+  Process rawDay[10000];
+  int i;
 
- for(i=0;i<processesCount;i++){
-  if (processes[i].categorie == 0){
-    rawDay[dayCounting++] = processes[i];
+  for(i=0;i<processesCount;i++){
+   if (processes[i].categorie == 0){
+     rawDay[dayCounting++] = processes[i];
+   }
   }
- }
 
- for(i=0;i<processesCount;i++){
-  if (processes[i].categorie == 1){
-    rawDay[dayCounting++] = processes[i];
+  for(i=0;i<processesCount;i++){
+   if (processes[i].categorie == 1){
+     rawDay[dayCounting++] = processes[i];
+   }
   }
- }
   
  for(i=0;i<processesCount;i++){
   if (processes[i].categorie == 2){
@@ -165,7 +197,19 @@ void priorityScheduling() {
   }
  }
 
-//然后直接用FCFS就好了
+ int day1row=0,day2row=0,day3row=0;
+
+ // 存入二维数组
+
+ for (i=0;i<dayCounting;i++){
+  if (rawDay[i].quantity<=300){
+    day[0][day1row++].Product = rawDay[i];
+  } else if (rawDay[i].quantity>300 && rawDay[i].quantity <= 500){
+    day[1][day2row++].Product = rawDay[i];
+  } else {
+    day[2][day3row++].Product = rawDay[i];
+  }
+ }
 
 }
 void runPLS(int alg) {
