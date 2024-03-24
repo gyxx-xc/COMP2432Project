@@ -52,23 +52,29 @@ void printREPORT(FILE *file, int alg)
   fprintf(file, "ORDER NUMBER   START        END         DAYS    QUANTITY    PLANT\n");
   for(int i = 0 ;i < 3; i++){
     memcpy(c,day[i][0].Product.orderNumber,sizeof(c));
+    startTime = 0;
     for(int j = 0;j < dayCount[i];j++){
       int check = memcmp(c,day[i][j].Product.orderNumber,sizeof(c));
       if(check == 0){
-        
       }
       else
       {
         memcpy(c, day[i][j].Product.orderNumber, sizeof(c));
         endTime = j - 1;
         int days = endTime - startTime + 1;
-        fprintf(file, "%s %s %s %d %d %s\n", day[i][j].Product.orderNumber, intToTime(startTime), intToTime(endTime), days, day[i][j].producedQuantity, plant[i]);
+        fprintf(file, "%s %s %s %d %d %s\n",
+        day[i][j-1].Product.orderNumber, 
+        intToTime(startTime), intToTime(endTime),
+        days, day[i][j-1].producedQuantity, plant[i]);
+        startTime = j;
       }
     }
+    endTime = dayCount[i] - 1;
+    int days = endTime - startTime + 1;
     fprintf(file, "%s %s %s %d %d %s\n",
-    day[0][0].Product.orderNumber
-    ,intToTime(startTime),intToTime(endTime),
-    2,day[0][0].producedQuantity,plant[i]);
+        day[i][dayCount[i]-1].Product.orderNumber, 
+        intToTime(startTime), intToTime(endTime),
+        days, day[i][dayCount[i]-1].producedQuantity, plant[i]);
   }
   fprintf(file, "- END -\n");
   fprintf(file, "There are %d Orders REJECTED.", rejectedCount);
