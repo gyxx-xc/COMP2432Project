@@ -30,7 +30,7 @@ int endPeiod;
 
 //待解决问题: 如何获得当日的各种杂七杂八订单，以及对他们进行"in place"的排序，事后又该如何记录
 
-//#define _DEBUG_ // to debug uncomment this line and run `gcc runpls.c`
+#define _DEBUG_ // to debug uncomment this line and run `gcc runpls.c`
 #ifdef _DEBUG_
 Process processes[10000]; //要处理的对象
 int processesCount;
@@ -43,6 +43,8 @@ int main(){
   // set process...
   // call algrothm
   // print some debug output
+  
+
 }
 #endif
 
@@ -54,12 +56,17 @@ void priorityScheduling() {
   Product_G, H and I 属于 Category_3
   其中，优先级Category_1 > Category_2 > Category_3
   */
+ int i;
+ for(i=0;i<processesCount;i++){
+  day[dayCount].Product=processes[i];
+ }
 
 }
 
 void FCFS(){
   //最基础的，判断订单的时间，先来先服务(不抢断，来了就一口气给订单干完)
   //注意判断订单的时间是否在"开工时间"内，看情况拒单
+  
 
 }
 

@@ -29,6 +29,7 @@ extern int dayCount;
 extern time_t startPeiod;
 extern int endPeiod;
 
+
 int streq(const char* a, const char* b);
 
 void printMenu();
