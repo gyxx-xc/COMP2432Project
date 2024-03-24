@@ -79,7 +79,7 @@ from the same Web page. You can also explore using the Overleaf editor at
 IEEE will do the final formatting of your paper. If your paper is intended
 for a conference, please observe the conference page limits.
 
-\subsection{Abbreviations and Acronyms}
+\subsection{Related work}
 Define abbreviations and acronyms the first time they are used in the text,
 even after they have already been defined in the abstract. Abbreviations
 such as IEEE, SI, ac, and dc do not have to be defined. Abbreviations that
@@ -87,7 +87,7 @@ incorporate periods should not have spaces: write ``C.N.R.S.,'' not ``C. N.
 R. S.'' Do not use abbreviations in the title unless they are unavoidable
 (for example, ``IEEE'' in the title of this article).
 
-\subsection{Other Recommendations}
+\subsection{Concept}
 Use one space after periods and colons. Hyphenate complex modifiers:
 ``zero-field-cooled magnetization.'' Avoid dangling participles, such as,
 ``Using \eqref{eq}, the potential was calculated.'' [It is not clear who or what
@@ -118,7 +118,7 @@ colleague to carefully proofread your paper.
 Try not to use too many typefaces in the same article. Also please remember that MathJax
 can't handle really weird typefaces.
 
-\subsection{Equations}
+\subsection{Your own scheduling algorithm}
 Number equations consecutively with equation numbers in parentheses flush
 with the right margin, as in \eqref{eq}. To make your equations more
 compact, you may use the solidus (~/~), the exp function, or appropriate
@@ -139,8 +139,6 @@ equation appears or immediately following. Italicize symbols ($T$ might refer
 to temperature, but T is the unit tesla). Refer to ``\eqref{eq},'' not ``Eq. \eqref{eq}''
 or ``equation \eqref{eq},'' except at the beginning of a sentence: ``Equation \eqref{eq}
 is $\ldots$ .''
-
-\subsection{LaTeX-Specific Advice}
 
 Please use ``soft'' (e.g., \verb|\eqref{Eq}|) cross references instead
 of ``hard'' references (e.g., \verb|(1)|). That will make it possible
@@ -177,7 +175,10 @@ will not stop equation numbers inside \verb|{array}| (there won't be
 any anyway) and it might stop a wanted equation number in the
 surrounding equation.
 
-\section{Units}
+\section{Methodology}
+
+\subsection{Software structure of your system}
+
 Use either SI (MKS) or CGS as primary units. (SI units are strongly
 encouraged.) English units may be used as secondary units (in parentheses).
 This applies to papers in data storage. For example, write ``15
@@ -198,7 +199,7 @@ compound units, e.g., ``A$\cdot $m$^{2}$.''
 { \textbf{Magnetization as a function of applied field.
 It is good practice to explain the significance of the figure in the caption.}\label{fig1}}
 
-\section{Some Common Mistakes}
+\section{Testing cases/Assumptions}
 The word ``data'' is plural, not singular. The subscript for the
 permeability of vacuum $\mu _{0}$ is zero, not a lowercase letter
 ``o.'' The term for residual magnetization is ``remanence''; the adjective
@@ -231,7 +232,10 @@ abbreviations are not italicized).
 A general IEEE styleguide is available at \break
 \underline{http://www.ieee.org/authortools}.
 
-\section{Guidelines for Graphics Preparation and Submission}
+\subsection{Performance analysis}
+
+
+\section{Results/graphs/figures discussion}
 \label{sec:guidelines}
 
 \subsection{Types of Graphics}

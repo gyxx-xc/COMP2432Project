@@ -43,6 +43,10 @@ int main(){
   // set process...
   // call algrothm
   // print some debug output
+  initTime("2022-01-01");
+  endPeiod = timeToInt("2022-01-30");
+  processes[processesCount ++] = (Process) {"P0000", 3, 1, 0, 0, 0};
+  runPLS(1);
 }
 #endif
 
