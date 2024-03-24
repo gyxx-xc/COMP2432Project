@@ -28,8 +28,8 @@ typedef struct dayArrange {
 
 extern Process processes[10000];
 extern int processesCount;
-extern DayArrange day[10000];
-extern int dayCount;
+extern DayArrange day[3][10000];
+extern int dayCount[3];
 extern time_t startPeiod;
 extern int endPeiod;
 
