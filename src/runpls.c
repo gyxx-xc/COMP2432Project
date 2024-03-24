@@ -175,21 +175,21 @@ void priorityScheduling() {
   Product_G, H and I 属于 Category_3
   其中，优先级Category_1 > Category_2 > Category_3
   */
-//  dayCount = 0;
+  int dayCounting = 0;
+  Process rawDay[10000];
+  int i;
 
-//  int i;
+  for(i=0;i<processesCount;i++){
+   if (processes[i].categorie == 0){
+     rawDay[dayCounting++] = processes[i];
+   }
+  }
 
-//  for(i=0;i<processesCount;i++){
-//   if (processes[i].categorie == 0){
-//     day[dayCount++].Product = processes[i];
-//   }
-//  }
-
-//  for(i=0;i<processesCount;i++){
-//   if (processes[i].categorie == 1){
-//     day[dayCount++].Product = processes[i];
-//   }
-//  }
+  for(i=0;i<processesCount;i++){
+   if (processes[i].categorie == 1){
+     rawDay[dayCounting++] = processes[i];
+   }
+  }
   
  for(i=0;i<processesCount;i++){
   if (processes[i].categorie == 2){
