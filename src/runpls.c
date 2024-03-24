@@ -7,11 +7,10 @@
 
 /*以下为"订单 (Process)"的结构体参考
 typedef struct proc {
-  char orderNumber[100];
-  int durDate;
-  int quantity;
-  int categorie;
-  int priority;
+  char orderNumber[100]; //订单号
+  int durDate; //持续时间
+  int quantity; //生产数量
+  int categorie; //(0,1,2) -->第三优先 ; (3,4,5)-->第二优先 ; (6,7,8)-->第三优先
   int accepted; // modify by runpls
   //0表示拒绝，1表示接受
 } Process;
@@ -43,10 +42,27 @@ int main(){
   // set process...
   // call algrothm
   // print some debug output
+  initTime("2022-01-01");
+  endPeiod = timeToInt("2022-01-30");
+  processes[processesCount ++] = (Process) {"P0000", 3, 1, 0, 0, 0};
+  runPLS(1);
+  printf("当前days[]里面有:\n");
+  printf("订单号:%s 截止日期:%d 数量:%d 种类:%d 是否接受%d\n",
+  day[0].Product.orderNumber,
+  day[0].Product.dueDate,
+  day[0].Product.quantity,
+  day[0].Product.categorie,
+  day[0].Product.accepted);
+}
+#endif
+
+
+void FCFS(){
+  //最基础的，判断订单的时间，先来先服务(不抢断，来了就一口气给订单干完)
+  //注意判断订单的时间是否在"开工时间"内，看情况拒单
   
 
 }
-#endif
 
 void priorityScheduling() {
   //查看传入订单的"种类"，共分为三类
@@ -60,16 +76,8 @@ void priorityScheduling() {
  for(i=0;i<processesCount;i++){
   day[dayCount].Product=processes[i];
  }
-
-}
-
-void FCFS(){
-  //最基础的，判断订单的时间，先来先服务(不抢断，来了就一口气给订单干完)
-  //注意判断订单的时间是否在"开工时间"内，看情况拒单
   
-
 }
-
 void runPLS(int alg) {
   switch (alg) {
     //注: int alg 已经在上游被处理好了，我们这里只需要指定 int 和 不同算法实现的函数() 进行映射即可
