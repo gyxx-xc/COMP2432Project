@@ -57,7 +57,6 @@ int main(){
   processes[processesCount ++] = (Process) {"P1009", 4, 1800, 1, 0};
   processes[processesCount ++] = (Process) {"P1010", 4, 1900, 0, 2};
   processes[processesCount ++] = (Process) {"P1011", 4, 2000, 0, 0};
-  runPLS(0);
   int i,j;
   // for (m=0;m<dayCount;m++){
   //   printf("订单号:%s 截止日期:%d 数量:%d 种类:%d 是否接受%d\n",
@@ -109,18 +108,6 @@ int main(){
      day[2][m].Product.categorie,
      day[2][m].Product.accepted);
    }
-
-  for(i=0;i<3;i++){
-    for(j=0;j<dayCount[i];j++){
-      printf("订单号:%s 要求生产天数:%d 数量:%d 种类:%d 是否接受%d\n",
-      day[i][j].Product.orderNumber,
-      day[i][j].Product.dueDate,
-      day[i][j].Product.quantity,
-      day[i][j].Product.categorie,
-      day[i][j].Product.accepted);
-    }
-
-  }
 } 
 #endif
 
@@ -228,10 +215,11 @@ void priorityScheduling() {
   for(i=0;i<processesCount;i++){
    if (processes[i].categorie == 0){
      rawDay[dayCounting++] = processes[i];
+
    }
   }
 
-  for(i=0;i<processesCount;i++){
+  for(i=0;i<processesCount;i++){ //400
    if (processes[i].categorie == 1){
      rawDay[dayCounting++] = processes[i];
    }
@@ -250,13 +238,22 @@ void priorityScheduling() {
  dayCount[0] = 0;
  dayCount[1] = 0;
  dayCount[2] = 0;
+ int acc = 1;
+ int request;
+ int dtime;
  for (i=0;i<dayCounting;i++){
-  if (rawDay[i].quantity<=300){
-    day[0][dayCount[0]++].Product = rawDay[i];
-  } else if (rawDay[i].quantity>300 && rawDay[i].quantity <= 500){
-    day[1][dayCount[1]++].Product = rawDay[i];
+  if ((rawDay[i].quantity) > 300*rawDay[i].dueDate){
+    if ((rawDay[i].quantity) > 400*rawDay[i].dueDate){
+      if ((rawDay[i].quantity) > 500*rawDay[i].dueDate){
+        printf("订单号%s不被需要了\n", rawDay[i].orderNumber);
+      } else {
+        day[2][dayCount[2]++].Product = rawDay[i];
+      }
+    } else {
+      day[1][dayCount[1]++].Product = rawDay[i];
+    }
   } else {
-    day[2][dayCount[2]++].Product = rawDay[i];
+    day[0][dayCount[0]++].Product = rawDay[i];
   }
  }
 
