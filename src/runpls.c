@@ -58,18 +58,64 @@ int main(){
 
 
 void FCFS(){
-  //最基础的，判断订单的时间，先来先服务(不抢断，来了就一口气给订单干完)
-  //注意判断订单的时间是否在"开工时间"内，看情况拒单
-  int i;
+  //最基础的，判断订单的时间，先来先服务(不抢断，对于单个厂来说，来了就一口气给订单干完)
+  //注意判断订单的时间是否在"开工时间"内，"看情况"拒单
+  int i,k;
   int avaliableDays=endPeiod;
+  int XDays=endPeiod; //X工厂剩余可开工日期，产能300/天
+  int YDays=endPeiod; //Y工厂剩余可开工日期，产能400/天
+  int ZDays=endPeiod; //Z工厂剩余可开工日期，产能500/天
+  int XYZStatus[3]={0,0,0}; // X(0) Y(1) Z(2) 三厂的状态，0表示可以接单，便把生产天数写到对应的状态上
   for(i=0;i<processesCount;i++){
+    int productivity=0;
+    for(k=0;k<3;k++){
+      if (XYZStatus[k]==0){
+        if(k==0){ //X工厂当前闲置，可"尝试"接单
+          //X工厂产能=300
+          productivity=300;
+          int needDays=processes[i].quantity/productivity;
+          if(needDays<=XDays){
+            XYZStatus[k]=needDays;
+            XDays-=needDays;
+            
+          }else{
+            processes[i].accepted=0; //生产天数需求 大于 X厂剩余可开工时间-->拒绝接单
+          }
 
-    if(processes[i].dueDate>avaliableDays){
-      processes[i].accepted=0; //时间不够生产，拒接接单
+        }else if(k==1){ //Y工厂当前闲置，可"尝试"接单
+          //Y工厂产能=400
+          productivity=400;
+          int needDays=processes[i].quantity/productivity;
+          if(needDays<=YDays){
+            XYZStatus[k]=needDays;
+            YDays-=needDays;
+          }else{
+            processes[i].accepted=0; //生产天数需求 大于 Y厂剩余可开工时间-->拒绝接单
+          }
+
+        }else if(k==2){ //Z工厂当前闲置，可"尝试"接单
+          //Z工厂产能=500
+          productivity=500;
+          int needDays=processes[i].quantity/productivity;
+          if(needDays<=ZDays){
+            XYZStatus[k]=needDays;
+            ZDays-=needDays;
+          }else{
+            processes[i].accepted=0; //生产天数需求 大于 Z厂剩余可开工时间-->拒绝接单
+          }
+
+        }
+      }
+      
     }
-    int 
     day[i].Product=processes[i];
-    day[i].producedQuantity=;
+    day[i].producedQuantity=productivity;
+    for(k=0;k<3;k++){//开工，生产剩余天数-1;
+      if(XYZStatus[k]!=0){
+        XYZStatus[k]-=1;
+      }
+    }
+
 
   }
 
