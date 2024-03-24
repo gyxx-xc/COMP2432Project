@@ -22,6 +22,13 @@ int main()
     memcpy(day[i % 3][dayCount[i % 3] - 1].Product.orderNumber, a, sizeof(a));
     a[4]++;
   }
+
+  for (int i = 0; i < 3; i ++) {
+    for (int j = 0; j < dayCount[i%3]; j ++) {
+      printf("%s ", day[i][j].Product.orderNumber);
+    }
+    printf("\n");
+  }
   printREPORT(stdout, 0);
 }
 #endif
