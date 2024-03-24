@@ -12,16 +12,12 @@ time_t startPeiod;
 
 int main()
 {
-<<<<<<< HEAD
   day[0][0] = (DayArrange) {
     (Process){"P0001",0,0,0,0},
     300
   };
   dayCount[0]++;
   printREPORT(stdout,0);
-=======
-  printREPORT(stdout, 0);
->>>>>>> 268d80c960656e16d0cda6a120c2a9ee1646cda7
 }
 #endif
 
@@ -49,23 +45,12 @@ void printREPORT(FILE *file, int alg)
   fprintf(file, "There are %d Orders ACCEPTED.", dayCount[0] + dayCount[1] + dayCount[2]);
   fprintf(file, " Details are as follows: \n");
   fprintf(file, "ORDER NUMBER   START        END         DAYS    QUANTITY    PLANT\n");
-<<<<<<< HEAD
   for(int i = 0 ;i < 3; i++){
     memcpy(c,day[i][0].Product.orderNumber,sizeof(c));
     for(int j = 0;j < dayCount[i];j++){
       int check = memcmp(c,day[i][j].Product.orderNumber,sizeof(c));
       if(check == 0){
         
-=======
-  for (int i = 0; i < 3; i++)
-  {
-    memcpy(c, day[i][0].Product.orderNumber, sizeof(c));
-    for (int j = 0; i < dayCount[i]; i++)
-    {
-      int check = memcmp(c, day[i][j].Product.orderNumber, sizeof(c));
-      if (check == 0)
-      {
->>>>>>> 268d80c960656e16d0cda6a120c2a9ee1646cda7
       }
       else
       {
