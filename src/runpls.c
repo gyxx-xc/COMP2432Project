@@ -2,8 +2,8 @@
 
 // seperate the alg from here
 // after decided which alg you are going to use, write it in readme
-// read the process from `processes`(globle)
-// and write the result into `day`(globle)
+// read the process from `processes`(globle)  从processs[]中读入订单数据，然后看“怎么插入 day[]这个数组中”
+// and write the result into `day`(globle) day[]这个数组就会用来存取我们的“排好序的”订单数据，processesCount 和 dayCount分别表示两个数组的大小
 
 /*以下为"订单 (Process)"的结构体参考
 typedef struct proc {
@@ -13,6 +13,7 @@ typedef struct proc {
   int categorie;
   int priority;
   int accepted; // modify by runpls
+  //0表示拒绝，1表示接受
 } Process;
 
 注意以"天"为单位，每天的订单都会被记录在day[]中
@@ -31,7 +32,7 @@ int endPeiod;
 
 //#define _DEBUG_ // to debug uncomment this line and run `gcc runpls.c`
 #ifdef _DEBUG_
-Process processes[10000];
+Process processes[10000]; //要处理的对象
 int processesCount;
 DayArrange day[10000];
 int dayCount;
