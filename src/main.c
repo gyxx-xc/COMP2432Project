@@ -17,8 +17,7 @@ int endPeiod;
 // the usage of time function refer to tools.h
 time_t startPeiod;
 
-int main()
-{
+int main() {
   printf("\t~~WELCOME TO PLS~~\n\n");
   while (1) {
     printMenu();
@@ -54,12 +53,11 @@ int main()
       if (commandLen >= 6) {
         FILE *file = fopen(command[5], "w");
         printREPORT(file, algTemp);
-      }
-      else {
+      } else {
         printREPORT(stdout, algTemp);
       }
       memset(day, 0, sizeof(day));
-      dayCount = 0;
+      memset(dayCount, 0, sizeof(dayCount));
       break;
     case 4:
       printf("Bye-bye!\n");
