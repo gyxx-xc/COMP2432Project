@@ -51,8 +51,6 @@ int main()
       }
       runPLS(algTemp);
 
-      if (commandLen < 3)
-        break; // why?
       if (commandLen >= 6) {
         FILE *file = fopen(command[5], "w");
         printREPORT(file);
