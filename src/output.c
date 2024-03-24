@@ -102,7 +102,6 @@ void printREPORT(FILE *file, int alg)
       read(parent_to_child[i][0], start, sizeof(int));
       char a[3] = {'X', 'Y', 'Z'};
       fprintf(file, "Plant_%c:\n", a[i]);
-      write(child_to_parent[i][1], start, sizeof(int));
 
       memcpy(c, day[i][0].Product.orderNumber, sizeof(c));
       for (int j = 0; j < dayCount[i]; j++)
@@ -122,6 +121,8 @@ void printREPORT(FILE *file, int alg)
       fprintf(file, "%s %s %s %d %d %s\n",
               day[0][0].Product.orderNumber, intToTime(startTime), intToTime(endTime),
               2, day[0][0].producedQuantity, plant[i]);
+
+      write(child_to_parent[i][1], start, sizeof(int));
       exit(0);
     }
   }
