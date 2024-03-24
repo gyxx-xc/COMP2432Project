@@ -42,12 +42,12 @@ int main(){
   // set process...
   // call algrothm
   // print some debug output
-  initTime("2022-01-01");
+  initTime("2022-01-01"); //
   endPeiod = timeToInt("2022-01-30");
   processes[processesCount ++] = (Process) {"P0000", 3, 1, 0, 0, 0};
   runPLS(1);
   printf("当前days[]里面有:\n");
-  printf("订单号:%s 截止日期:%d 数量:%d 种类:%d 是否接受%d\n",
+  printf("订单号:%s 生产天数:%d 数量:%d 种类:%d 是否接受%d\n",
   day[0].Product.orderNumber,
   day[0].Product.dueDate,
   day[0].Product.quantity,
@@ -60,7 +60,18 @@ int main(){
 void FCFS(){
   //最基础的，判断订单的时间，先来先服务(不抢断，来了就一口气给订单干完)
   //注意判断订单的时间是否在"开工时间"内，看情况拒单
-  
+  int i;
+  int avaliableDays=endPeiod;
+  for(i=0;i<processesCount;i++){
+
+    if(processes[i].dueDate>avaliableDays){
+      processes[i].accepted=0; //时间不够生产，拒接接单
+    }
+    int 
+    day[i].Product=processes[i];
+    day[i].producedQuantity=;
+
+  }
 
 }
 
