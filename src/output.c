@@ -12,8 +12,12 @@ time_t startPeiod;
 
 int main()
 {
+  day[0][0] = (DayArrange) {
+    (Process){"P0001",0,0,0,0},
+    300
+  };
+  dayCount[0]++;
   printREPORT(stdout,0);
-  
 }
 #endif
 
@@ -83,7 +87,7 @@ void printREPORT(FILE *file ,int alg)
   fprintf(file, "ORDER NUMBER   START        END         DAYS    QUANTITY    PLANT\n");
   for(int i = 0 ;i < 3; i++){
     memcpy(c,day[i][0].Product.orderNumber,sizeof(c));
-    for(int j = 0;i < dayCount[i];i++){
+    for(int j = 0;j < dayCount[i];j++){
       int check = memcmp(c,day[i][j].Product.orderNumber,sizeof(c));
       if(check == 0){
         
@@ -95,10 +99,14 @@ void printREPORT(FILE *file ,int alg)
         fprintf(file, "%s %s %s %d %d %s\n",day[i][j].Product.orderNumber,intToTime(startTime),intToTime(endTime),days,day[i][j].producedQuantity,plant[i]);
       }
     }
+    fprintf(file, "%s %s %s %d %d %s\n",
+    day[0][0].Product.orderNumber
+    ,intToTime(startTime),intToTime(endTime),
+    2,day[0][0].producedQuantity,plant[i]);
   }
   fprintf(file, "- END -\n");
   fprintf(file, "There are %d Orders REJECTED.",rejectedCount);
-  fprintf(file, " Details are as follows: ");
+  fprintf(file, " Details are as follows: \n");
   fprintf(file, "ORDER NUMBER   PRODUCT NAME Due Date QUANTITY\n");
   for(int i = 0;i < rejectedCount;i++){
     fprintf(file, "%s %c %s %d\n",rejectedProcesses[i].orderNumber,'A' + rejectedProcesses[i].products,intToTime(rejectedProcesses[i].dueDate),rejectedProcesses[i].quantity);
