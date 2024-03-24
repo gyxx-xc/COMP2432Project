@@ -44,15 +44,28 @@ int main(){
   // print some debug output
   initTime("2022-01-01");
   endPeiod = timeToInt("2022-01-30");
-  processes[processesCount ++] = (Process) {"P0000", 3, 1, 0, 0, 0};
+  processes[processesCount ++] = (Process) {"P0000", 3, 1, 0, 1};
+  processes[processesCount ++] = (Process) {"P0001", 4, 1, 2, 1};
+  processes[processesCount ++] = (Process) {"P0002", 5, 1, 1, 2};
+  processes[processesCount ++] = (Process) {"P0003", 6, 1, 2, 0};
+  processes[processesCount ++] = (Process) {"P0004", 7, 1, 1, 2};
+  processes[processesCount ++] = (Process) {"P0005", 2, 1, 1, 0};
+  processes[processesCount ++] = (Process) {"P0006", 3, 1, 0, 1};
+  processes[processesCount ++] = (Process) {"P0007", 1, 1, 2, 1};
+  processes[processesCount ++] = (Process) {"P0008", 5, 1, 2, 2};
+  processes[processesCount ++] = (Process) {"P0009", 6, 1, 1, 0};
+  processes[processesCount ++] = (Process) {"P0010", 7, 1, 0, 2};
+  processes[processesCount ++] = (Process) {"P0011", 8, 1, 0, 0};
   runPLS(1);
-  printf("当前days[]里面有:\n");
-  printf("订单号:%s 截止日期:%d 数量:%d 种类:%d 是否接受%d\n",
-  day[0].Product.orderNumber,
-  day[0].Product.dueDate,
-  day[0].Product.quantity,
-  day[0].Product.categorie,
-  day[0].Product.accepted);
+  int m;
+  for (m=0;m<dayCount;m++){
+    printf("订单号:%s 截止日期:%d 数量:%d 种类:%d 是否接受%d\n",
+    day[m].Product.orderNumber,
+    day[m].Product.dueDate,
+    day[m].Product.quantity,
+    day[m].Product.categorie,
+    day[m].Product.accepted);
+  }
 }
 #endif
 
@@ -72,11 +85,27 @@ void priorityScheduling() {
   Product_G, H and I 属于 Category_3
   其中，优先级Category_1 > Category_2 > Category_3
   */
+ dayCount = 0;
+
  int i;
+
  for(i=0;i<processesCount;i++){
-  day[dayCount].Product=processes[i];
+  if (processes[i].categorie == 0){
+    day[dayCount++].Product = processes[i];
+  }
  }
-  
+
+ for(i=0;i<processesCount;i++){
+  if (processes[i].categorie == 1){
+    day[dayCount++].Product = processes[i];
+  }
+ }
+
+ for(i=0;i<processesCount;i++){
+  if (processes[i].categorie == 2){
+    day[dayCount++].Product = processes[i];
+  }
+ }
 }
 void runPLS(int alg) {
   switch (alg) {
