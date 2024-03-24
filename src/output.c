@@ -91,11 +91,3 @@ void printREPORT(FILE *file, int alg)
     }
   }
 }
-
-// parent process
-// write the `day` into the pipe here
-// you can access the `day` as a globle varible
-// remember to wait the children
-void sendData(int pid, int *fd)
-{
-}
