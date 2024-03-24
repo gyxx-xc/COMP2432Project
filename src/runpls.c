@@ -57,15 +57,6 @@ int main(){
   processes[processesCount ++] = (Process) {"P0010", 7, 1, 0, 2};
   processes[processesCount ++] = (Process) {"P0011", 8, 1, 0, 0};
   runPLS(1);
-  int m;
-  for (m=0;m<dayCount;m++){
-    printf("订单号:%s 截止日期:%d 数量:%d 种类:%d 是否接受%d\n",
-    day[m].Product.orderNumber,
-    day[m].Product.dueDate,
-    day[m].Product.quantity,
-    day[m].Product.categorie,
-    day[m].Product.accepted);
-  }
 }
 #endif
 
@@ -152,27 +143,30 @@ void priorityScheduling() {
   Product_G, H and I 属于 Category_3
   其中，优先级Category_1 > Category_2 > Category_3
   */
- dayCount = 0;
-
+ int dayCounting = 0;
+ Process rawDay[10000];
  int i;
 
  for(i=0;i<processesCount;i++){
   if (processes[i].categorie == 0){
-    day[dayCount++].Product = processes[i];
+    rawDay[dayCounting++] = processes[i];
   }
  }
 
  for(i=0;i<processesCount;i++){
   if (processes[i].categorie == 1){
-    day[dayCount++].Product = processes[i];
+    rawDay[dayCounting++] = processes[i];
   }
  }
   
  for(i=0;i<processesCount;i++){
   if (processes[i].categorie == 2){
-    day[dayCount++].Product = processes[i];
+    rawDay[dayCounting++] = processes[i];
   }
  }
+
+//然后直接用FCFS就好了
+
 }
 void runPLS(int alg) {
   switch (alg) {
