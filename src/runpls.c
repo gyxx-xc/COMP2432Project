@@ -44,7 +44,7 @@ int main(){
   // print some debug output
   initTime("2022-01-01"); //
   endPeiod = timeToInt("2022-01-30");
-  processes[processesCount ++] = (Process) {"P0000", 3, 1, 0, 0};
+  processes[processesCount ++] = (Process) {"P0000", 3, 1, 0, 0, 0};
   runPLS(1);
   printf("当前days[]里面有:\n");
   printf("订单号:%s 生产天数:%d 数量:%d 种类:%d 是否接受%d\n",
