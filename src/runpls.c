@@ -179,27 +179,41 @@ void priorityScheduling() {
   Product_G, H and I 属于 Category_3
   其中，优先级Category_1 > Category_2 > Category_3
   */
-//  dayCount = 0;
+  int dayCounting = 0;
+  Process rawDay[10000];
+  int i;
 
-//  int i;
+  for(i=0;i<processesCount;i++){
+   if (processes[i].categorie == 0){
+     rawDay[dayCounting++] = processes[i];
+   }
+  }
 
-//  for(i=0;i<processesCount;i++){
-//   if (processes[i].categorie == 0){
-//     day[dayCount++].Product = processes[i];
-//   }
-//  }
-
-//  for(i=0;i<processesCount;i++){
-//   if (processes[i].categorie == 1){
-//     day[dayCount++].Product = processes[i];
-//   }
-//  }
+  for(i=0;i<processesCount;i++){
+   if (processes[i].categorie == 1){
+     rawDay[dayCounting++] = processes[i];
+   }
+  }
   
-//  for(i=0;i<processesCount;i++){
-//   if (processes[i].categorie == 2){
-//     day[dayCount++].Product = processes[i];
-//   }
-//  }
+ for(i=0;i<processesCount;i++){
+  if (processes[i].categorie == 2){
+    rawDay[dayCounting++] = processes[i];
+  }
+ }
+
+ int day1row=0,day2row=0,day3row=0;
+
+ // 存入二维数组
+
+ for (i=0;i<dayCounting;i++){
+  if (rawDay[i].quantity<=300){
+    day[0][day1row++].Product = rawDay[i];
+  } else if (rawDay[i].quantity>300 && rawDay[i].quantity <= 500){
+    day[1][day2row++].Product = rawDay[i];
+  } else {
+    day[2][day3row++].Product = rawDay[i];
+  }
+ }
 
 }
 void runPLS(int alg) {
