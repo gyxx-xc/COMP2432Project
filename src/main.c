@@ -53,10 +53,10 @@ int main()
 
       if (commandLen >= 6) {
         FILE *file = fopen(command[5], "w");
-        printREPORT(file);
+        printREPORT(file, algTemp);
       }
       else {
-        printREPORT(stdout);
+        printREPORT(stdout, algTemp);
       }
       memset(day, 0, sizeof(day));
       dayCount = 0;

@@ -1,7 +1,7 @@
 #include "output.h"
 #include <unistd.h>
 
-#define _DEBUG_ // to debug uncomment this line and run `gcc output.c`
+// #define _DEBUG_ // to debug uncomment this line and run `gcc output.c`
 #ifdef _DEBUG_
 Process processes[10000];
 int processesCount;
@@ -12,17 +12,13 @@ time_t startPeiod;
 
 int main()
 {
-  int fd[2];
-  int p = createChild(fd);
-  printf("%d\n", p);
-  // set day...
-  // call algrothm
-  // print some debug output
+  printREPORT(stdout);
 }
 #endif
 
 // create children and pipe
 // the pid is the return value and the pipe store to fd
+/*
 int createChild(int *fd)
 {
   int pipefd[2];
@@ -42,8 +38,12 @@ int createChild(int *fd)
   }
   else if (pid == 0)
   {
-    // 子进程
-    close(pipefd[1]);  // 关闭子进程中的写入端
+    int fd[2];
+    int p = createChild(fd);
+    printf("%d\n", p);
+    // set day...
+    // call algrothm
+    // print some debug output
     fd[0] = pipefd[0]; // 将管道的读取端传递给父进程
     printf("childprocess\n");
     return pid;
@@ -57,12 +57,28 @@ int createChild(int *fd)
     return pid;
   }
 }
-
+*/
 // child process
 // read the `day` from pipe here
 // the function intToTime in `tools.h` may useful
-void printREPORT(FILE *file)
+void printREPORT(FILE *file, int alg)
 {
+  // here for parent to analyse.
+  int parent_to_child[3][2];
+  int child_to_parent[3][2];
+  for (int i = 0; i < 3; i++)
+  {
+    pid_t pid = fork();
+
+    if (pid < 0)
+    {
+      printf("Fork failed\n");
+      exit(1);
+    }
+    else if (pid == 0) // Child process
+    {
+    }
+  }
   fprintf(file, "123123123\n");
 }
 

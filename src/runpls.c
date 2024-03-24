@@ -87,7 +87,7 @@ void priorityScheduling() {
  for(i=0;i<processesCount;i++){
   day[dayCount].Product=processes[i];
  }
-  
+
 }
 void runPLS(int alg) {
   switch (alg) {
