@@ -31,12 +31,12 @@ int endPeiod;
 
 #define _DEBUG_ // to debug uncomment this line and run `gcc runpls.c`
 #ifdef _DEBUG_
-Process processes[10000]; //要处理的对象
+Process processes[10000];
 int processesCount;
-DayArrange day[10000];
-int dayCount;
-int endPeiod;
+DayArrange day[3][10000];// 对应X0 Y1 Z2 工厂的接收订单数组[]
+int dayCount[3]; //对应XYZ的接收订单Count
 time_t startPeiod;
+int endPeiod;
 
 int main(){
   // set process...
@@ -47,12 +47,12 @@ int main(){
   processes[processesCount ++] = (Process) {"P0000", 3, 1, 0, 0};
   runPLS(1);
   printf("当前days[]里面有:\n");
-  printf("订单号:%s 生产天数:%d 数量:%d 种类:%d 是否接受%d\n",
-  day[0].Product.orderNumber,
-  day[0].Product.dueDate,
-  day[0].Product.quantity,
-  day[0].Product.categorie,
-  day[0].Product.accepted);
+  // printf("订单号:%s 生产天数:%d 数量:%d 种类:%d 是否接受%d\n",
+  // day[0].Product.orderNumber,
+  // day[0].Product.dueDate,
+  // day[0].Product.quantity,
+  // day[0].Product.categorie,
+  // day[0].Product.accepted);
 }
 #endif
 
@@ -77,6 +77,9 @@ void FCFS(){
           if(needDays<=XDays){
             XYZStatus[k]=needDays;
             XDays-=needDays;
+            processes[i].accepted=1;
+            day[k][dayCount[k]].Product=processes[i];
+            day[k][dayCount[k]].producedQuantity=processes[i].quantity;
             
           }else{
             processes[i].accepted=0; //生产天数需求 大于 X厂剩余可开工时间-->拒绝接单
@@ -89,6 +92,9 @@ void FCFS(){
           if(needDays<=YDays){
             XYZStatus[k]=needDays;
             YDays-=needDays;
+            processes[i].accepted=1;
+            day[k][dayCount[k]].Product=processes[i];
+            day[k][dayCount[k]].producedQuantity=processes[i].quantity;
           }else{
             processes[i].accepted=0; //生产天数需求 大于 Y厂剩余可开工时间-->拒绝接单
           }
@@ -100,6 +106,9 @@ void FCFS(){
           if(needDays<=ZDays){
             XYZStatus[k]=needDays;
             ZDays-=needDays;
+            processes[i].accepted=1;
+            day[k][dayCount[k]].Product=processes[i];
+            day[k][dayCount[k]].producedQuantity=processes[i].quantity;
           }else{
             processes[i].accepted=0; //生产天数需求 大于 Z厂剩余可开工时间-->拒绝接单
           }
@@ -108,9 +117,9 @@ void FCFS(){
       }
       
     }
-    day[dayCount].Product=processes[i];
-    day[dayCount].producedQuantity=productivity;
-    dayCount++;
+    // day[dayCount].Product=processes[i];
+    // day[dayCount].producedQuantity=productivity;
+    // dayCount++;
     for(k=0;k<3;k++){//开工，生产剩余天数-1;
       if(XYZStatus[k]!=0){
         XYZStatus[k]-=1;
@@ -130,10 +139,10 @@ void priorityScheduling() {
   Product_G, H and I 属于 Category_3
   其中，优先级Category_1 > Category_2 > Category_3
   */
- int i;
- for(i=0;i<processesCount;i++){
-  day[dayCount].Product=processes[i];
- }
+//  int i;
+//  for(i=0;i<processesCount;i++){
+//   day[dayCount].Product=processes[i];
+//  }
 
 }
 void runPLS(int alg) {
