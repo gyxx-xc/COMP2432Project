@@ -12,13 +12,15 @@ time_t startPeiod;
 
 int main()
 {
+  initTime("2023-12-30");
   char a[10] = "P0000";
   for (int i = 0; i < 10; i++)
   {
-    a[4]++;
     day[i % 3][dayCount[i % 3]++] = (DayArrange){
-        (Process){a, i, 100 * i ^ 3, i % 9, 0, 1},
+        (Process){0, i, 100 * i ^ 3, i % 9, 0, 1},
         100};
+    memcpy(day[i % 3][dayCount[i % 3] - 1].Product.orderNumber, a, sizeof(a));
+    a[4]++;
   }
   printREPORT(stdout, 0);
 }
@@ -61,7 +63,7 @@ void printREPORT(FILE *file, int alg)
       {
         memcpy(c, day[i][j].Product.orderNumber, sizeof(c));
         endTime = j - 1;
-        int days = endTime - startTime;
+        int days = endTime - startTime + 1;
         fprintf(file, "%s %s %s %d %d %s\n", day[i][j].Product.orderNumber, intToTime(startTime), intToTime(endTime), days, day[i][j].producedQuantity, plant[i]);
       }
     }
@@ -122,11 +124,5 @@ void printREPORT(FILE *file, int alg)
               2, day[0][0].producedQuantity, plant[i]);
       exit(0);
     }
-  }
-  for (int i = 0; i < 3; i++)
-  {
-    int start[1];
-    write(parent_to_child[i][1], start, sizeof(int));
-    read(child_to_parent[i][0], start, sizeof(int));
   }
 }
