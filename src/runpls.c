@@ -108,8 +108,9 @@ void FCFS(){
       }
       
     }
-    day[i].Product=processes[i];
-    day[i].producedQuantity=productivity;
+    day[dayCount].Product=processes[i];
+    day[dayCount].producedQuantity=productivity;
+    dayCount++;
     for(k=0;k<3;k++){//开工，生产剩余天数-1;
       if(XYZStatus[k]!=0){
         XYZStatus[k]-=1;
