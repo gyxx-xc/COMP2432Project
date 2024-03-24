@@ -12,13 +12,15 @@ time_t startPeiod;
 
 int main()
 {
+  initTime("2023-12-30");
   char a[10] = "P0000";
   for (int i = 0; i < 10; i ++){
-    a[4] ++;
     day[i%3][dayCount[i%3] ++] = (DayArrange) {
-      (Process) {a, i, 100*i^3, i%9, 0, 1},
+      (Process) {0, i, 100*i^3, i%9, 0, 1},
       100
     };
+    memcpy(day[i%3][dayCount[i%3] - 1].Product.orderNumber, a, sizeof(a));
+    a[4] ++;
   }
   printREPORT(stdout, 0);
 }
