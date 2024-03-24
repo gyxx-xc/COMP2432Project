@@ -12,6 +12,14 @@ time_t startPeiod;
 
 int main()
 {
+  char a[10] = "P0000";
+  for (int i = 0; i < 10; i ++){
+    a[4] ++;
+    day[i%3][dayCount[i%3] ++] = (DayArrange) {
+      (Process) {a, i, 100*i^3, i%9, 0, 1},
+      100
+    };
+  }
   printREPORT(stdout, 0);
 }
 #endif
@@ -90,12 +98,4 @@ void printREPORT(FILE *file, int alg)
       exit(0);
     }
   }
-}
-
-// parent process
-// write the `day` into the pipe here
-// you can access the `day` as a globle varible
-// remember to wait the children
-void sendData(int pid, int *fd)
-{
 }
