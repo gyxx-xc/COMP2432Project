@@ -59,7 +59,7 @@ void printREPORT(FILE *file, int alg)
       {
         memcpy(c, day[i][j].Product.orderNumber, sizeof(c));
         endTime = j - 1;
-        int days = endTime - startTime;
+        int days = endTime - startTime + 1;
         fprintf(file, "%s %s %s %d %d %s\n", day[i][j].Product.orderNumber, intToTime(startTime), intToTime(endTime), days, day[i][j].producedQuantity, plant[i]);
       }
     }
