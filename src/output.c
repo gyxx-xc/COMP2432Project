@@ -61,22 +61,61 @@ int createChild(int *fd)
 // child process
 // read the `day` from pipe here
 // the function intToTime in `tools.h` may useful
-void printREPORT(FILE *file)
+void printREPORT(FILE *file ,int alg)
 {
-  Process acceptedProcesses[10000];
   Process rejectedProcesses[10000];
-  int acceptedCount,rejectedCount = 0;
-  for (int i = 0; i < processesCount; i++){
-    if(processes[i].accepted == 1){
-      acceptedProcesses[i] = processes[i];
-      acceptedCount++;
-    }
-    else {
+  char Algorithm;
+  int rejectedCount = 0;
+  char c[100];
+  int startTime = 0;
+  int endTime;
+  char plant[7];
+  for(int i = 0;i < processesCount;i++){
+    if(processes[i].accepted == 0){
       rejectedProcesses[i] = processes[i];
-      rejectedCount++;
     }
   }
-  printf("%s/n","Algorithm used: " );
+  if(alg = 0){
+    Algorithm = "FCFS";
+  }
+  else{
+    Algorithm = "PR"
+  };
+  printf("Algorithm used: %c\n",Algorithm);
+  printf("There are %d Orders ACCEPTED.", acceptedCount);
+  printf(" Details are as follows: \n");
+  printf("ORDER NUMBER   START        END         DAYS    QUANTITY    PLANT\n");
+  for(int i = 0 ;i < 3; i++){
+    c = day[i][0].Product.orderNumber;
+    switch (i)
+    {
+    case 0:
+      plant = "PLANT_X";
+      break;
+    case 1:
+      plant = "PLANT_Y";
+      break;
+    case 2:
+      plant = "PLANT_Z";
+      break;
+    default:
+      break;
+    }
+    for(int j = 0;i < dayCount){
+      int check = memccpy(c,day[i][j].Product.orderNumber,sizeof(c));
+      if(check == 0){
+        
+      }
+      else{
+        c = day[i][j].Product.orderNumber;
+        endTime = j-1;
+        int days = endTime - startTime;
+        printf("%c %c %c %d %d %c",day[i][j].Product.orderNumber,intToTime(startTime),intToTime(endTime),days,day[i][j].producedQuantity,plant)
+      }
+    }
+  
+
+
   // here for parent to analyse.
   int parent_to_child[3][2];
   int child_to_parent[3][2];
@@ -94,6 +133,7 @@ void printREPORT(FILE *file)
     }
   }
   fprintf(file, "123123123\n");
+  }
 }
 
 // parent process
