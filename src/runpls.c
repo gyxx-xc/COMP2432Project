@@ -60,7 +60,7 @@ int main(){
 void FCFS(){
   //最基础的，判断订单的时间，先来先服务(不抢断，来了就一口气给订单干完)
   //注意判断订单的时间是否在"开工时间"内，看情况拒单
-  
+
 
 }
 
@@ -76,7 +76,7 @@ void priorityScheduling() {
  for(i=0;i<processesCount;i++){
   day[dayCount].Product=processes[i];
  }
-  
+
 }
 void runPLS(int alg) {
   switch (alg) {

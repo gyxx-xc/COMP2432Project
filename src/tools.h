@@ -15,6 +15,9 @@ typedef struct proc {
   int products;
   int categorie;
   int accepted; // modify by runpls
+  int plantX; // the days of each plant used
+  int plantY;
+  int plantZ;
 } Process;
 
 

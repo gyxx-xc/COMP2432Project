@@ -61,7 +61,7 @@ int createChild(int *fd)
 // child process
 // read the `day` from pipe here
 // the function intToTime in `tools.h` may useful
-void printREPORT(FILE *file)
+void printREPORT(FILE *file, int alg)
 {
   // here for parent to analyse.
   int parent_to_child[3][2];
