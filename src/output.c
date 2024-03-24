@@ -118,12 +118,15 @@ void printREPORT(FILE *file, int alg)
           fprintf(file, "%s %s %s %d %d %s\n", day[i][j].Product.orderNumber, intToTime(startTime), intToTime(endTime), days, day[i][j].producedQuantity, plant[i]);
         }
       }
-      fprintf(file, "%s %s %s %d %d %s\n",
-              day[0][0].Product.orderNumber, intToTime(startTime), intToTime(endTime),
-              2, day[0][0].producedQuantity, plant[i]);
-
       write(child_to_parent[i][1], start, sizeof(int));
       exit(0);
     }
+  }
+
+  for (int i = 0; i < 3; i++)
+  {
+    int start[0];
+    write(parent_to_child[i][1], start, sizeof(int));
+    read(child_to_parent[i][0], start, sizeof(int));
   }
 }
