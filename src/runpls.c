@@ -262,7 +262,10 @@ void priorityScheduling() {
  int day1row=0,day2row=0,day3row=0;
 
  // 存入二维数组
-
+  // the above is good, the rest is wrong,
+  // don't need to change, there's a simple way
+  // do the FCFS toghter and copy it
+  // it is the same for the rest
  dayCount[0] = 0;
  dayCount[1] = 0;
  dayCount[2] = 0;
