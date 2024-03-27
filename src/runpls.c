@@ -128,7 +128,7 @@ int main(){
 void FCFS(){
   //最基础的，判断订单的时间，先来先服务(不抢断，对于单个厂来说，来了就一口气给订单干完)
   //注意判断订单的时间是否在"开工时间"内，"看情况"拒单
-  int i,k;
+  int i,j,k;
   int avaliableDays=endPeiod;
   int XDays=endPeiod; //X工厂剩余可开工日期，产能300/天
   int YDays=endPeiod; //Y工厂剩余可开工日期，产能400/天
@@ -137,6 +137,11 @@ void FCFS(){
   for(i=0;i<processesCount;i++){
     int productivity=0;
     for(k=0;k<3;k++){
+      while(XYZStatus[0]!=0&&XYZStatus[1]!=0&&XYZStatus[2]!=0){
+        XYZStatus[0]--;
+        XYZStatus[1]--;
+        XYZStatus[2]--;
+      }
       if (XYZStatus[k]==0){
         if(k==0){ //X工厂当前闲置，可"尝试"接单
           //X工厂产能=300
@@ -217,16 +222,18 @@ void FCFS(){
     // day[dayCount].Product=processes[i];
     // day[dayCount].producedQuantity=productivity;
     // dayCount++;
-    for(k=0;k<3;k++){//开工，生产剩余天数-1;
-      if(XYZStatus[k]!=0){
-        XYZStatus[k]-=1;
-      }
-    }
+    
+    // for(k=0;k<3;k++){//开工，生产剩余天数-1;
+    //   if(XYZStatus[k]!=0){
+    //     XYZStatus[k]-=1;
+    //   }
+    // }
 
 
   }
-
 }
+
+
 
 void priorityScheduling() {
   //查看传入订单的"种类"，共分为三类
