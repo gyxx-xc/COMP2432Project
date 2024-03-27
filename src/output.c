@@ -1,5 +1,6 @@
 #include "output.h"
 #include <unistd.h>
+#include <sys/wait.h>
 
 #define _DEBUG_ // to debug uncomment this line and run `gcc output.c`
 #ifdef _DEBUG_
@@ -59,12 +60,15 @@ void printREPORT(FILE *file, int alg)
   fprintf(file, "There are %d Orders ACCEPTED.", dayCount[0] + dayCount[1] + dayCount[2]);
   fprintf(file, " Details are as follows: \n");
   fprintf(file, "ORDER NUMBER   START        END         DAYS    QUANTITY    PLANT\n");
-  for(int i = 0 ;i < 3; i++){
-    memcpy(c,day[i][0].Product.orderNumber,sizeof(c));
+  for (int i = 0; i < 3; i++)
+  {
+    memcpy(c, day[i][0].Product.orderNumber, sizeof(c));
     startTime = 0;
-    for(int j = 0;j < dayCount[i];j++){
-      int check = memcmp(c,day[i][j].Product.orderNumber,sizeof(c));
-      if(check == 0){
+    for (int j = 0; j < dayCount[i]; j++)
+    {
+      int check = memcmp(c, day[i][j].Product.orderNumber, sizeof(c));
+      if (check == 0)
+      {
       }
       else
       {
@@ -72,18 +76,18 @@ void printREPORT(FILE *file, int alg)
         endTime = j - 1;
         int days = endTime - startTime + 1;
         fprintf(file, "%s %s %s %d %d %s\n",
-        day[i][j-1].Product.orderNumber, 
-        intToTime(startTime), intToTime(endTime),
-        days, day[i][j-1].producedQuantity, plant[i]);
+                day[i][j - 1].Product.orderNumber,
+                intToTime(startTime), intToTime(endTime),
+                days, day[i][j - 1].producedQuantity, plant[i]);
         startTime = j;
       }
     }
     endTime = dayCount[i] - 1;
     int days = endTime - startTime + 1;
     fprintf(file, "%s %s %s %d %d %s\n",
-        day[i][dayCount[i]-1].Product.orderNumber, 
-        intToTime(startTime), intToTime(endTime),
-        days, day[i][dayCount[i]-1].producedQuantity, plant[i]);
+            day[i][dayCount[i] - 1].Product.orderNumber,
+            intToTime(startTime), intToTime(endTime),
+            days, day[i][dayCount[i] - 1].producedQuantity, plant[i]);
   }
   fprintf(file, "- END -\n");
   fprintf(file, "There are %d Orders REJECTED.", rejectedCount);
@@ -100,23 +104,23 @@ void printREPORT(FILE *file, int alg)
   int parent_to_child[3][2];
   int child_to_parent[3][2];
   printf("%s\n", "***PERFORMANCE");
+  int parent_pid = getpid();
+  int prev_pid = parent_pid;
+
   for (int i = 0; i < 3; i++)
   {
-    pid_t pid = fork();
-    close(parent_to_child[i][1]); // Close write end of parent_to_child pipe
-    close(child_to_parent[i][0]); // Close read end of child_to_parent pipe
+    int pid = fork();
+
     if (pid < 0)
     {
-      printf("Fork failed\n");
+      fprintf(stderr, "Fork failed\n");
       exit(1);
     }
-    else if (pid == 0) // Child process
-    {
-      int start[1];
-      read(parent_to_child[i][0], start, sizeof(int));
-      char a[3] = {'X', 'Y', 'Z'};
-      fprintf(file, "Plant_%c:\n", a[i]);
+    else if (pid == 0)
+    { // child process
+      printf("f%d\n", i + 1);
       memcpy(c, day[i][0].Product.orderNumber, sizeof(c));
+      startTime = 0;
       for (int j = 0; j < dayCount[i]; j++)
       {
         int check = memcmp(c, day[i][j].Product.orderNumber, sizeof(c));
@@ -127,21 +131,27 @@ void printREPORT(FILE *file, int alg)
         {
           memcpy(c, day[i][j].Product.orderNumber, sizeof(c));
           endTime = j - 1;
-          int days = endTime - startTime;
-          fprintf(file, "%s %s %s %d %d %s\n", day[i][j].Product.orderNumber, intToTime(startTime), intToTime(endTime), days, day[i][j].producedQuantity, plant[i]);
+          int days = endTime - startTime + 1;
+          fprintf(file, "%s %s %s %d %d %s\n",
+                  day[i][j - 1].Product.orderNumber,
+                  intToTime(startTime), intToTime(endTime),
+                  days, day[i][j - 1].producedQuantity, plant[i]);
+          startTime = j;
         }
       }
-      write(child_to_parent[i][1], start, sizeof(int));
+      endTime = dayCount[i] - 1;
+      int days = endTime - startTime + 1;
+      fprintf(file, "%s %s %s %d %d %s\n",
+              day[i][dayCount[i] - 1].Product.orderNumber,
+              intToTime(startTime), intToTime(endTime),
+              days, day[i][dayCount[i] - 1].producedQuantity, plant[i]);
       exit(0);
     }
+    else
+    {
+      waitpid(pid, NULL, 0);
+    }
   }
-
-  for (int i = 0; i < 3; i++)
-  {
-    int start[1];
-    write(parent_to_child[i][1], start, sizeof(int));
-
-    int end[1];
-    read(child_to_parent[i][0], end, sizeof(int));
-  }
+  waitpid(prev_pid, NULL, 0);
+  return;
 }
