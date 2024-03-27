@@ -48,7 +48,7 @@ int main(){
   processes[processesCount ++] = (Process) {"P1000", 3, 1000, 0, 1}; //B (3)
   processes[processesCount ++] = (Process) {"P1001", 3, 700, 2, 1};
   processes[processesCount ++] = (Process) {"P1002", 3, 1200, 1, 2};
-  processes[processesCount ++] = (Process) {"P1003", 3, 1300, 2, 0};
+  processes[processesCount ++] = (Process) {"P1003", 6, 1300, 2, 0};
   processes[processesCount ++] = (Process) {"P1004", 3, 1400, 1, 2};
   processes[processesCount ++] = (Process) {"P1005", 3, 1500, 1, 0};
   processes[processesCount ++] = (Process) {"P1006", 4, 2000, 0, 1};
@@ -84,28 +84,28 @@ int main(){
   int m;
   printf("工厂x\n");
   for (m=0;m<dayCount[0];m++){
-     printf("订单号:%s 截止日期:%d 数量:%d 种类:%d 是否接受%d\n",
+     printf("订单号:%s 截止绝对日期:%d 当日产量:%d 种类:%d 是否接受%d\n",
      day[0][m].Product.orderNumber,
      day[0][m].Product.dueDate,
-     day[0][m].Product.quantity,
+     day[0][m].producedQuantity,
      day[0][m].Product.categorie,
      day[0][m].Product.accepted);
    }
    printf("工厂y\n");
    for (m=0;m<dayCount[1];m++){
-     printf("订单号:%s 截止日期:%d 数量:%d 种类:%d 是否接受%d\n",
+     printf("订单号:%s 截止绝对日期:%d 当日产量:%d 种类:%d 是否接受%d\n",
      day[1][m].Product.orderNumber,
      day[1][m].Product.dueDate,
-     day[1][m].Product.quantity,
+     day[1][m].producedQuantity,
      day[1][m].Product.categorie,
      day[1][m].Product.accepted);
    }
    printf("工厂z\n");
    for (m=0;m<dayCount[2];m++){
-     printf("订单号:%s 截止日期:%d 数量:%d 种类:%d 是否接受%d\n",
+     printf("订单号:%s 截止绝对日期:%d 当日产量:%d 种类:%d 是否接受%d\n",
      day[2][m].Product.orderNumber,
      day[2][m].Product.dueDate,
-     day[2][m].Product.quantity,
+     day[2][m].producedQuantity,
      day[2][m].Product.categorie,
      day[2][m].Product.accepted);
    }
@@ -133,6 +133,8 @@ void FCFS(){
   int XDays=endPeiod; //X工厂剩余可开工日期，产能300/天
   int YDays=endPeiod; //Y工厂剩余可开工日期，产能400/天
   int ZDays=endPeiod; //Z工厂剩余可开工日期，产能500/天
+  int currentDay=0;
+  
   int XYZStatus[3]={0,0,0}; // X(0) Y(1) Z(2) 三厂的状态，0表示可以接单，便把生产天数写到对应的状态上
   for(i=0;i<processesCount;i++){
     int productivity=0;
@@ -141,6 +143,7 @@ void FCFS(){
         XYZStatus[0]--;
         XYZStatus[1]--;
         XYZStatus[2]--;
+        currentDay++;
       }
       if (XYZStatus[k]==0){
         if(k==0){ //X工厂当前闲置，可"尝试"接单
@@ -151,16 +154,20 @@ void FCFS(){
           if(jugde!=0){
             needDays++;
           }
-          if(needDays>processes[i].dueDate){//实际天数>需求天数，不切实际
+          if(needDays>processes[i].dueDate-currentDay){//实际天数>需求天数，不切实际
             processes[i].accepted=0;
           }
-          else if(processes[i].dueDate>=needDays&&needDays<=XDays){
-            XYZStatus[k]=processes[i].dueDate;
+          else if(processes[i].dueDate-currentDay>=needDays&&needDays<=XDays){
+            XYZStatus[k]=processes[i].dueDate-currentDay;
             XDays-=needDays;
             processes[i].accepted=1;
             for(j=0;j<needDays;j++){
+              
             day[k][dayCount[k]].Product=processes[i];
-            day[k][dayCount[k]].producedQuantity=processes[i].quantity;
+            day[k][dayCount[k]].producedQuantity=productivity;
+            if(j==needDays-1){
+              day[k][dayCount[k]].producedQuantity=jugde;
+            }
             dayCount[k]++;
             }
 
@@ -178,16 +185,19 @@ void FCFS(){
           if(jugde!=0){
             needDays++;
           }          
-          if(needDays>processes[i].dueDate){
+          if(needDays>processes[i].dueDate-currentDay){
             processes[i].accepted=0;
           }
-          if(processes[i].dueDate>=needDays&&needDays<=YDays){
-            XYZStatus[k]=processes[i].dueDate;
+          if(processes[i].dueDate-currentDay>=needDays&&needDays<=YDays){
+            XYZStatus[k]=processes[i].dueDate-currentDay;
             YDays-=needDays;
             processes[i].accepted=1;
             for(j=0;j<needDays;j++){
             day[k][dayCount[k]].Product=processes[i];
-            day[k][dayCount[k]].producedQuantity=processes[i].quantity;
+            day[k][dayCount[k]].producedQuantity=productivity;
+            if(j==needDays-1){
+              day[k][dayCount[k]].producedQuantity=jugde;
+            }
             dayCount[k]++;
             }
             break;
@@ -204,16 +214,19 @@ void FCFS(){
           if(jugde!=0){
             needDays++;
           }  
-          if(needDays>processes[i].dueDate){
+          if(needDays>processes[i].dueDate-currentDay){
             processes[i].accepted=0;
           }
-          else if(processes[i].dueDate>=needDays&&needDays<=ZDays){
-            XYZStatus[k]=processes[i].dueDate;
+          else if(processes[i].dueDate-currentDay>=needDays&&needDays<=ZDays){
+            XYZStatus[k]=processes[i].dueDate-currentDay;
             ZDays-=needDays;
             processes[i].accepted=1;
             for(j=0;j<needDays;j++){
             day[k][dayCount[k]].Product=processes[i];
-            day[k][dayCount[k]].producedQuantity=processes[i].quantity;
+            day[k][dayCount[k]].producedQuantity=productivity;
+            if(j==needDays-1){
+              day[k][dayCount[k]].producedQuantity=jugde;
+            }
             dayCount[k]++;
             }
             break;
