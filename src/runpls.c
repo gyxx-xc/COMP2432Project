@@ -158,9 +158,12 @@ void FCFS(){
             XYZStatus[k]=processes[i].dueDate;
             XDays-=needDays;
             processes[i].accepted=1;
+            for(j=0;j<needDays;j++){
             day[k][dayCount[k]].Product=processes[i];
             day[k][dayCount[k]].producedQuantity=processes[i].quantity;
             dayCount[k]++;
+            }
+
             break;
 
           }else{
@@ -182,9 +185,11 @@ void FCFS(){
             XYZStatus[k]=processes[i].dueDate;
             YDays-=needDays;
             processes[i].accepted=1;
+            for(j=0;j<needDays;j++){
             day[k][dayCount[k]].Product=processes[i];
             day[k][dayCount[k]].producedQuantity=processes[i].quantity;
             dayCount[k]++;
+            }
             break;
 
           }else{
@@ -206,10 +211,12 @@ void FCFS(){
             XYZStatus[k]=processes[i].dueDate;
             ZDays-=needDays;
             processes[i].accepted=1;
+            for(j=0;j<needDays;j++){
             day[k][dayCount[k]].Product=processes[i];
             day[k][dayCount[k]].producedQuantity=processes[i].quantity;
             dayCount[k]++;
-              break;
+            }
+            break;
 
           }else{
             processes[i].accepted=0; //生产天数需求 大于 Z厂剩余可开工时间-->拒绝接单
