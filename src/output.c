@@ -18,14 +18,13 @@ int main()
   for (int i = 0; i < 10; i++)
   {
     day[i % 3][dayCount[i % 3]++] = (DayArrange){
-        (Process){"", i, 100 * i ^ 3, i % 9, 0, 1},
+        (Process){"", i, 100 * i ^ 3, i % 9, 0, 0},
         100};
     memcpy(day[i % 3][dayCount[i % 3] - 1].Product.orderNumber, a, sizeof(a));
     a[4]++;
   }
 
-  printf("%d\n", day[1][0].Product.products);
-
+  printf ("%d", day[1][0].Product.accepted);
   printREPORT(stdout, 0);
 }
 #endif

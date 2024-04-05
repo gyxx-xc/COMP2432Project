@@ -29,7 +29,7 @@ int endPeiod;
 
 //待解决问题: 如何获得当日的各种杂七杂八订单，以及对他们进行"in place"的排序，事后又该如何记录
 
-#define _DEBUG_ // to debug uncomment this line and run `gcc runpls.c`
+//#define _DEBUG_ // to debug uncomment this line and run `gcc runpls.c`
 #ifdef _DEBUG_
 Process processes[10000];
 int processesCount;

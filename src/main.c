@@ -8,8 +8,8 @@
 
 Process processes[10000];
 int processesCount;
-DayArrange day[10000];
-int dayCount;
+DayArrange day[3][10000];
+int dayCount[3];
 int endPeiod;
 
 // do not use this varible
