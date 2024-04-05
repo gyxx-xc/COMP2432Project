@@ -24,14 +24,6 @@ int main()
     a[4]++;
   }
 
-  for (int i = 0; i < 3; i++)
-  {
-    for (int j = 0; j < dayCount[i % 3]; j++)
-    {
-      printf("%s ", day[i][j].Product.orderNumber);
-    }
-    printf("\n");
-  }
   printREPORT(stdout, 0);
 }
 #endif
@@ -56,7 +48,7 @@ void readFromPipe(int pipe_fd, int *usingdays, int ToTalproducedQuantity[])
 void printREPORT(FILE *file, int alg)
 {
   fprintf(file, "***PLS Schedule Analysis Report***\n");
-  printf("\n");
+  fprintf(file, "\n");
   Process rejectedProcesses[10000];
   char Algorithm[2][10] = {"FCFS", "PR"};
   int rejectedCount = 0;
@@ -138,7 +130,7 @@ void printREPORT(FILE *file, int alg)
       fprintf(file, "%s\t\t%c\t%s\t%d\n", rejectedProcesses[i].orderNumber, 'A' + rejectedProcesses[i].products, intToTime(rejectedProcesses[i].dueDate), rejectedProcesses[i].quantity);
     }
     fprintf(file, "\t- END -\n");
-    printf("\n");
+    fprintf(file, "\n");
 
     // here for parent to analyse.
     // here for parent to analyse.
@@ -157,8 +149,8 @@ void printREPORT(FILE *file, int alg)
       else if (child_pid[i] == 0)
       { // child process
         char b[3] = "XYZ";
-        printf("Plant_%c\n", b[i]);
-        printf("Date\t\tProduct Name\tOrder Number\tQuantity(Produced)\tDueDate\n");
+        fprintf(file, "Plant_%c\n", b[i]);
+        fprintf(file, "Date\t\tProduct Name\tOrder Number\tQuantity(Produced)\tDueDate\n");
         for (int j = 0; j < dayCount[i]; j++)
         {
           if (day[i][j].producedQuantity == 0)
@@ -191,25 +183,25 @@ void printREPORT(FILE *file, int alg)
 
     // Read usingdays and ToTalproducedQuantity from each child process
 
-    printf("%s\n", "***PERFORMANCE");
+    fprintf(file, "%s\n", "***PERFORMANCE");
     int ALLToTalproducedQuantity = 0;
     int AllTotal = 0;
 
     for (int i = 0; i < 3; i++)
     {
 
-      printf("Plant %c:\n", 'X' + i);
+      fprintf(file, "Plant %c:\n", 'X' + i);
       readFromPipe(pipe_fd[0], usingdays, ToTalproducedQuantity);
-      printf("Using days: %d\n", usingdays[i]);
-      printf("Total produced quantity: %d\n", ToTalproducedQuantity[i]);
+      fprintf(file, "Using days: %d\n", usingdays[i]);
+      fprintf(file, "Total produced quantity: %d\n", ToTalproducedQuantity[i]);
       int total = dayCount[i] * (300 + 100 * i);
       float Utilization = ToTalproducedQuantity[i] * 100 / total;
-      printf("Utilization of the plant: %.1f\%\n", Utilization);
+      fprintf(file, "Utilization of the plant: %.1f\%\n", Utilization);
       ALLToTalproducedQuantity = ALLToTalproducedQuantity + ToTalproducedQuantity[i];
       AllTotal += total;
     }
     float Utilization = ALLToTalproducedQuantity * 100 / AllTotal;
-    printf("Utilization of All: %.1f\%\n", Utilization);
+    fprintf(file, "Utilization of All: %.1f\%\n", Utilization);
     return;
   }
 }
