@@ -6,3 +6,5 @@ auto
 .emacs.*
 a.out
 /report/
+/build/PLS
+/build/Objects
