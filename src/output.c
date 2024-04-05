@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-#define _DEBUG_ // to debug uncomment this line and run `gcc output.c`
+//#define _DEBUG_ // to debug uncomment this line and run `gcc output.c`
 #ifdef _DEBUG_
 Process processes[10000];
 int processesCount;
@@ -18,14 +18,13 @@ int main()
   for (int i = 0; i < 10; i++)
   {
     day[i % 3][dayCount[i % 3]++] = (DayArrange){
-        (Process){"", i, 100 * i ^ 3, i % 9, 0, 1},
+        (Process){"", i, 100 * i ^ 3, i % 9, 0, 0},
         100};
     memcpy(day[i % 3][dayCount[i % 3] - 1].Product.orderNumber, a, sizeof(a));
     a[4]++;
   }
 
-  printf("%d\n", day[1][0].Product.products);
-
+  printf ("%d", day[1][0].Product.accepted);
   printREPORT(stdout, 0);
 }
 #endif
@@ -119,7 +118,7 @@ void printREPORT(FILE *file, int alg)
       fprintf(file, "%s\t\t%s\t%s\t%d\t%d\t\t%s\n",
               day[i][dayCount[i] - 1].Product.orderNumber,
               intToTime(startTime), intToTime(endTime),
-              days, day[i][dayCount[i] - 1].producedQuantity, plant[i]);
+              days, quantity + day[i][dayCount[i] - 1].producedQuantity, plant[i]);
     }
     fprintf(file, "\t- END -\n");
     fprintf(file, "\n");
