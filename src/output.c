@@ -40,7 +40,8 @@ int main()
 // read the `day` from pipe here
 // the function intToTime in `tools.h` may useful
 void printREPORT(FILE *file, int alg)
-{
+{ fprintf(file, "***PLS Schedule Analysis Report***\n");
+  printf("\n");
   Process rejectedProcesses[10000];
   char Algorithm[2][10] = {"FCFS", "PR"};
   int rejectedCount = 0;
@@ -58,9 +59,11 @@ void printREPORT(FILE *file, int alg)
   }
 
   fprintf(file, "Algorithm used: %s\n", Algorithm[alg]);
+  printf("\n");
   fprintf(file, "There are %d Orders ACCEPTED.", dayCount[0] + dayCount[1] + dayCount[2]);
   fprintf(file, " Details are as follows: \n");
-  fprintf(file, "ORDER NUMBER   START        END         DAYS    QUANTITY    PLANT\n");
+  printf("\n");
+  fprintf(file, "ORDER NUMBER\tSTART\tEND\tDAYS\tQUANTITY\tPLANT\n");
   for(int i = 0 ;i < 3; i++){
     memcpy(c,day[i][0].Product.orderNumber,sizeof(c));
     startTime = 0;
@@ -77,7 +80,7 @@ void printREPORT(FILE *file, int alg)
         memcpy(c, day[i][j].Product.orderNumber, sizeof(c));
         endTime = j - 1;
         int days = endTime - startTime + 1;
-        fprintf(file, "%s %s %s %d %d %s\n",
+        fprintf(file, "%s\t%s\t%s\t%d\t%d\t%s\n",
         day[i][j-1].Product.orderNumber, 
         intToTime(startTime), intToTime(endTime),
         days, quantity, plant[i]);
@@ -87,20 +90,23 @@ void printREPORT(FILE *file, int alg)
     }
     endTime = dayCount[i] - 1;
     int days = endTime - startTime + 1;
-    fprintf(file, "%s %s %s %d %d %s\n",
+    fprintf(file, "%s\t%s\t%s\t%d\t%d\t%s\n",
         day[i][dayCount[i]-1].Product.orderNumber, 
         intToTime(startTime), intToTime(endTime),
         days, day[i][dayCount[i]-1].producedQuantity, plant[i]);
   }
-  fprintf(file, "- END -\n");
+  fprintf(file, "\t- END -\n");
+  printf("\n");
   fprintf(file, "There are %d Orders REJECTED.", rejectedCount);
   fprintf(file, " Details are as follows: ");
-  fprintf(file, "ORDER NUMBER   PRODUCT NAME Due Date QUANTITY\n");
+  printf("\n");
+  fprintf(file, "ORDER NUMBER\tPRODUCT\tNAME\tDue\tDate\tQUANTITY\n");
   for (int i = 0; i < rejectedCount; i++)
   {
-    fprintf(file, "%s %c %s %d\n", rejectedProcesses[i].orderNumber, 'A' + rejectedProcesses[i].products, intToTime(rejectedProcesses[i].dueDate), rejectedProcesses[i].quantity);
+    fprintf(file, "%s\t%c\t%s\t%d\n", rejectedProcesses[i].orderNumber, 'A' + rejectedProcesses[i].products, intToTime(rejectedProcesses[i].dueDate), rejectedProcesses[i].quantity);
   }
-  fprintf(file, "- END -\n");
+  fprintf(file, "\t- END -\n");
+  printf("\n");
 
   // here for parent to analyse.
   // here for parent to analyse.
