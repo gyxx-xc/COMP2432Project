@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-//#define _DEBUG_ // to debug uncomment this line and run `gcc output.c`
+#define _DEBUG_ // to debug uncomment this line and run `gcc output.c`
 #ifdef _DEBUG_
 Process processes[10000];
 int processesCount;
@@ -24,7 +24,7 @@ int main()
     a[4]++;
   }
 
-  printf ("%d", day[1][0].Product.accepted);
+  printf("%d", day[1][0].Product.accepted);
   printREPORT(stdout, 0);
 }
 #endif
@@ -139,7 +139,6 @@ void printREPORT(FILE *file, int alg)
     fprintf(file, "\n");
     fprintf(file, "=================================================================================\n");
 
-
     // here for parent to analyse.
     // here for parent to analyse.
     int parent_pid = getpid();
@@ -190,8 +189,10 @@ void printREPORT(FILE *file, int alg)
     waitpid(prev_pid, NULL, 0);
 
     // Read usingdays and ToTalproducedQuantity from each child process
+    fprintf(file, "\n                  - End -                                                        \n\n");
+    fprintf(file, "=================================================================================\n");
 
-    fprintf(file, "%s\n", "***PERFORMANCE");
+    fprintf(file, "\n%s\n\n", "***PERFORMANCE");
     int ALLToTalproducedQuantity = 0;
     int AllTotal = 0;
 
@@ -200,16 +201,16 @@ void printREPORT(FILE *file, int alg)
 
       fprintf(file, "Plant %c:\n", 'X' + i);
       readFromPipe(pipe_fd[0], usingdays, ToTalproducedQuantity);
-      fprintf(file, "Using days: %d\n", usingdays[i]);
-      fprintf(file, "Total produced quantity: %d\n", ToTalproducedQuantity[i]);
+      fprintf(file, "\tNumber of days in use:\t\t\t %d days\n", usingdays[i]);
+      fprintf(file, "\tNumber of products produced:\t\t %d (in total)\n", ToTalproducedQuantity[i]);
       int total = endPeiod * (300 + 100 * i);
       float Utilization = ToTalproducedQuantity[i] * 100 / total;
-      fprintf(file, "Utilization of the plant: %.1f\%\n", Utilization);
+      fprintf(file, "\tUtilization of the plant: \t\t %.1f \%\n\n", Utilization);
       ALLToTalproducedQuantity = ALLToTalproducedQuantity + ToTalproducedQuantity[i];
       AllTotal += total;
     }
     float Utilization = ALLToTalproducedQuantity * 100 / AllTotal;
-    fprintf(file, "Utilization of All: %.1f\%\n", Utilization);
+    fprintf(file, "Overall of utilization:  \t\t\t %.1f \%\n", Utilization);
     return;
   }
 }
