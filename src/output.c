@@ -75,6 +75,7 @@ void printREPORT(FILE *file, int alg)
     if (processes[i].accepted == 0)
     {
       rejectedProcesses[i] = processes[i];
+      rejectedCount++;
     }
   }
 
@@ -83,6 +84,7 @@ void printREPORT(FILE *file, int alg)
   fprintf(file, "There are %d Orders ACCEPTED.", dayCount[0] + dayCount[1] + dayCount[2]);
   fprintf(file, " Details are as follows: \n");
   fprintf(file, "ORDER NUMBER\tSTART\t\tEND\t\tDAYS\tQUANTITY\tPLANT\n");
+  fprintf(file, "=================================================================================\n");
   for (int i = 0; i < 3; i++)
   {
     memcpy(c, day[i][0].Product.orderNumber, sizeof(c));
@@ -123,16 +125,20 @@ void printREPORT(FILE *file, int alg)
     }
     fprintf(file, "\t- END -\n");
     fprintf(file, "\n");
+    fprintf(file, "=================================================================================\n");
     fprintf(file, "There are %d Orders REJECTED.", rejectedCount);
     fprintf(file, " Details are as follows: ");
     fprintf(file, "\n");
     fprintf(file, "ORDER NUMBER\tPRODUCT\tNAME\tDue Date\tQUANTITY\n");
+    fprintf(file, "=================================================================================\n");
+    fprintf(file, "\n");
     for (int i = 0; i < rejectedCount; i++)
     {
       fprintf(file, "%s\t\tProduct_%c\t%s\t%d\n", rejectedProcesses[i].orderNumber, 'A' + rejectedProcesses[i].products, intToTime(rejectedProcesses[i].dueDate), rejectedProcesses[i].quantity);
     }
     fprintf(file, "\t- END -\n");
     fprintf(file, "\n");
+    fprintf(file, "=================================================================================\n");
 
     // here for parent to analyse.
     // here for parent to analyse.
