@@ -8,7 +8,7 @@ Process processes[10000];
 int processesCount;
 DayArrange day[3][10000];
 int dayCount[3];
-int endPeiod;
+int endPeiod = 30;
 time_t startPeiod;
 
 int main()
@@ -196,7 +196,7 @@ void printREPORT(FILE *file, int alg)
       readFromPipe(pipe_fd[0], usingdays, ToTalproducedQuantity);
       fprintf(file, "Using days: %d\n", usingdays[i]);
       fprintf(file, "Total produced quantity: %d\n", ToTalproducedQuantity[i]);
-      int total = dayCount[i] * (300 + 100 * i);
+      int total = endPeiod * (300 + 100 * i);
       float Utilization = ToTalproducedQuantity[i] * 100 / total;
       fprintf(file, "Utilization of the plant: %.1f\%\n", Utilization);
       ALLToTalproducedQuantity = ALLToTalproducedQuantity + ToTalproducedQuantity[i];
