@@ -139,6 +139,7 @@ void printREPORT(FILE *file, int alg)
     fprintf(file, "\n");
     fprintf(file, "=================================================================================\n");
 
+
     // here for parent to analyse.
     // here for parent to analyse.
     int parent_pid = getpid();
