@@ -286,8 +286,6 @@ void priorityScheduling() {
   }
  }
 
- int day1row=0,day2row=0,day3row=0;
-
  // 存入二维数组
   // the above is good, the rest is wrong,
   // don't need to change, there's a simple way
@@ -296,9 +294,6 @@ void priorityScheduling() {
  dayCount[0] = 0;
  dayCount[1] = 0;
  dayCount[2] = 0;
- int acc = 1;
- int request;
- int dtime;
  for (i=0;i<dayCounting;i++){
   if ((rawDay[i].quantity) > 300*rawDay[i].dueDate){
     if ((rawDay[i].quantity) > 400*rawDay[i].dueDate){
