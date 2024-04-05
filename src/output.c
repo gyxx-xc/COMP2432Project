@@ -105,7 +105,7 @@ void printREPORT(FILE *file, int alg)
         int check = memcmp(c, day[i][j].Product.orderNumber, sizeof(c));
         if (check == 0)
         {
-          quantity = quantity + day[i][j].producedQuantity;
+          quantity = quantity + day[i][j-1].producedQuantity;
         }
         else
         {
@@ -115,7 +115,7 @@ void printREPORT(FILE *file, int alg)
           fprintf(file, "%s\t\t%s\t%s\t%d\t%d\t\t%s\n",
                   day[i][j - 1].Product.orderNumber,
                   intToTime(startTime), intToTime(endTime),
-                  days, quantity, plant[i]);
+                  days, quantity + day[i][j-1].producedQuantity, plant[i]);
           startTime = j;
           quantity = 0;
         }
