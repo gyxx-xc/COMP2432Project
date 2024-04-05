@@ -2,13 +2,13 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-#define _DEBUG_ // to debug uncomment this line and run `gcc output.c`
+//#define _DEBUG_ // to debug uncomment this line and run `gcc output.c`
 #ifdef _DEBUG_
 Process processes[10000];
 int processesCount;
 DayArrange day[3][10000];
 int dayCount[3];
-int endPeiod;
+int endPeiod = 30;
 time_t startPeiod;
 
 int main()
@@ -18,14 +18,13 @@ int main()
   for (int i = 0; i < 10; i++)
   {
     day[i % 3][dayCount[i % 3]++] = (DayArrange){
-        (Process){"", i, 100 * i ^ 3, i % 9, 0, 1},
+        (Process){"", i, 100 * i ^ 3, i % 9, 0, 0},
         100};
     memcpy(day[i % 3][dayCount[i % 3] - 1].Product.orderNumber, a, sizeof(a));
     a[4]++;
   }
 
-  printf("%d\n", day[1][0].Product.products);
-
+  printf ("%d", day[1][0].Product.accepted);
   printREPORT(stdout, 0);
 }
 #endif
@@ -202,7 +201,7 @@ void printREPORT(FILE *file, int alg)
       readFromPipe(pipe_fd[0], usingdays, ToTalproducedQuantity);
       fprintf(file, "Using days: %d\n", usingdays[i]);
       fprintf(file, "Total produced quantity: %d\n", ToTalproducedQuantity[i]);
-      int total = dayCount[i] * (300 + 100 * i);
+      int total = endPeiod * (300 + 100 * i);
       float Utilization = ToTalproducedQuantity[i] * 100 / total;
       fprintf(file, "Utilization of the plant: %.1f\%\n", Utilization);
       ALLToTalproducedQuantity = ALLToTalproducedQuantity + ToTalproducedQuantity[i];

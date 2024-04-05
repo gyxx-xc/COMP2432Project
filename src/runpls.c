@@ -29,7 +29,7 @@ int endPeiod;
 
 //待解决问题: 如何获得当日的各种杂七杂八订单，以及对他们进行"in place"的排序，事后又该如何记录
 
-#define _DEBUG_ // to debug uncomment this line and run `gcc runpls.c`
+//#define _DEBUG_ // to debug uncomment this line and run `gcc runpls.c`
 #ifdef _DEBUG_
 Process processes[10000];
 int processesCount;
@@ -286,8 +286,6 @@ void priorityScheduling() {
   }
  }
 
- int day1row=0,day2row=0,day3row=0;
-
  // 存入二维数组
   // the above is good, the rest is wrong,
   // don't need to change, there's a simple way
@@ -296,9 +294,6 @@ void priorityScheduling() {
  dayCount[0] = 0;
  dayCount[1] = 0;
  dayCount[2] = 0;
- int acc = 1;
- int request;
- int dtime;
  for (i=0;i<dayCounting;i++){
   if ((rawDay[i].quantity) > 300*rawDay[i].dueDate){
     if ((rawDay[i].quantity) > 400*rawDay[i].dueDate){
