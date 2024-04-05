@@ -18,11 +18,13 @@ int main()
   for (int i = 0; i < 10; i++)
   {
     day[i % 3][dayCount[i % 3]++] = (DayArrange){
-        (Process){0, i, 100 * i ^ 3, i % 9, 0, 1},
+        (Process){"", i, 100 * i ^ 3, i % 9, 0, 1},
         100};
     memcpy(day[i % 3][dayCount[i % 3] - 1].Product.orderNumber, a, sizeof(a));
     a[4]++;
   }
+
+  printf("%d\n", day[1][0].Product.products);
 
   printREPORT(stdout, 0);
 }
@@ -97,7 +99,7 @@ void printREPORT(FILE *file, int alg)
         int check = memcmp(c, day[i][j].Product.orderNumber, sizeof(c));
         if (check == 0)
         {
-          quantity = quantity + day[i][j-1].producedQuantity;
+          quantity = quantity + day[i][j - 1].producedQuantity;
         }
         else
         {
@@ -107,7 +109,7 @@ void printREPORT(FILE *file, int alg)
           fprintf(file, "%s\t\t%s\t%s\t%d\t%d\t\t%s\n",
                   day[i][j - 1].Product.orderNumber,
                   intToTime(startTime), intToTime(endTime),
-                  days, quantity + day[i][j-1].producedQuantity, plant[i]);
+                  days, quantity + day[i][j - 1].producedQuantity, plant[i]);
           startTime = j;
           quantity = 0;
         }
@@ -160,9 +162,9 @@ void printREPORT(FILE *file, int alg)
           }
           else
           {
-            fprintf(file, "%s\t%s\t\t%s\t\t%d\t\t\t%s\n",
+            fprintf(file, "%s\t%c\t\t%s\t\t%d\t\t\t%s\n",
                     intToTime(j),
-                    day[i][j].Product.products,
+                    'A' + day[i][j].Product.products,
                     day[i][j].Product.orderNumber,
                     day[i][j].producedQuantity, intToTime(day[i][j].Product.dueDate));
             usingdays[i]++;
