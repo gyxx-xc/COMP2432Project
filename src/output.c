@@ -36,6 +36,20 @@ int main()
 }
 #endif
 
+// Function to write `usingdays` and `ToTalproducedQuantity` to the pipe
+void writeToPipe(int pipe_fd, int *usingdays, int ToTalproducedQuantity[])
+{
+  write(pipe_fd, usingdays, sizeof(int) * 3);
+  write(pipe_fd, ToTalproducedQuantity, sizeof(int) * 3);
+}
+
+// Function to read `usingdays` and `ToTalproducedQuantity` from the pipe
+void readFromPipe(int pipe_fd, int *usingdays, int ToTalproducedQuantity[])
+{
+  read(pipe_fd, usingdays, sizeof(int) * 3);
+  read(pipe_fd, ToTalproducedQuantity, sizeof(int) * 3);
+}
+
 // child process
 // read the `day` from pipe here
 // the function intToTime in `tools.h` may useful
@@ -49,6 +63,17 @@ void printREPORT(FILE *file, int alg)
   int endTime;
   char plant[3][10] = {"PLANT_X", "PLANT_Y", "PLANT_Z"};
   int quantity = 0;
+  int usingdays[3] = {0};             // Initialize usingdays
+  int ToTalproducedQuantity[3] = {0}; // Initialize ToTalproducedQuantity
+  int pipe_fd[2];                     // Pipe file descriptors
+
+  // Create pipe
+  if (pipe(pipe_fd) == -1)
+  {
+    perror("Pipe failed");
+    exit(1);
+  }
+
   for (int i = 0; i < processesCount; i++)
   {
     if (processes[i].accepted == 0)
@@ -61,15 +86,19 @@ void printREPORT(FILE *file, int alg)
   fprintf(file, "There are %d Orders ACCEPTED.", dayCount[0] + dayCount[1] + dayCount[2]);
   fprintf(file, " Details are as follows: \n");
   fprintf(file, "ORDER NUMBER   START        END         DAYS    QUANTITY    PLANT\n");
-  for(int i = 0 ;i < 3; i++){
-    memcpy(c,day[i][0].Product.orderNumber,sizeof(c));
+  for (int i = 0; i < 3; i++)
+  {
+    memcpy(c, day[i][0].Product.orderNumber, sizeof(c));
     startTime = 0;
-    if(dayCount[i] == 0){
+    if (dayCount[i] == 0)
+    {
       continue;
     }
-    for(int j = 0;j < dayCount[i];j++){
-      int check = memcmp(c,day[i][j].Product.orderNumber,sizeof(c));
-      if(check == 0){
+    for (int j = 0; j < dayCount[i]; j++)
+    {
+      int check = memcmp(c, day[i][j].Product.orderNumber, sizeof(c));
+      if (check == 0)
+      {
         quantity = quantity + day[i][j].producedQuantity;
       }
       else
@@ -78,9 +107,9 @@ void printREPORT(FILE *file, int alg)
         endTime = j - 1;
         int days = endTime - startTime + 1;
         fprintf(file, "%s %s %s %d %d %s\n",
-        day[i][j-1].Product.orderNumber, 
-        intToTime(startTime), intToTime(endTime),
-        days, quantity, plant[i]);
+                day[i][j - 1].Product.orderNumber,
+                intToTime(startTime), intToTime(endTime),
+                days, quantity, plant[i]);
         startTime = j;
         quantity = 0;
       }
@@ -88,9 +117,9 @@ void printREPORT(FILE *file, int alg)
     endTime = dayCount[i] - 1;
     int days = endTime - startTime + 1;
     fprintf(file, "%s %s %s %d %d %s\n",
-        day[i][dayCount[i]-1].Product.orderNumber, 
-        intToTime(startTime), intToTime(endTime),
-        days, day[i][dayCount[i]-1].producedQuantity, plant[i]);
+            day[i][dayCount[i] - 1].Product.orderNumber,
+            intToTime(startTime), intToTime(endTime),
+            days, day[i][dayCount[i] - 1].producedQuantity, plant[i]);
   }
   fprintf(file, "- END -\n");
   fprintf(file, "There are %d Orders REJECTED.", rejectedCount);
@@ -104,52 +133,73 @@ void printREPORT(FILE *file, int alg)
 
   // here for parent to analyse.
   // here for parent to analyse.
-  int parent_to_child[3][2];
-  int child_to_parent[3][2];
   int parent_pid = getpid();
   int prev_pid = parent_pid;
-  int usingdays[3];
+  int child_pid[3];
   for (int i = 0; i < 3; i++)
   {
-    int pid = fork();
-    
-    if (pid < 0)
+    child_pid[i] = fork();
+
+    if (child_pid[i] < 0)
     {
       fprintf(stderr, "Fork failed\n");
       exit(1);
     }
-    else if (pid == 0)
+    else if (child_pid[i] == 0)
     { // child process
-    char b[3] = "XYZ";
+      char b[3] = "XYZ";
       printf("Plant_%c\n", b[i]);
-      printf("Date | Product Name | Order Number | Quantity(Produced) | DueDate\n");
+      printf("Date\t\tProduct Name\tOrder Number\tQuantity(Produced)\tDueDate\n");
       for (int j = 0; j < dayCount[i]; j++)
       {
         if (day[i][j].producedQuantity == 0)
         {
-fprintf(file, "%s NA  \n",
+          fprintf(file, "%s NA  \n",
                   intToTime(j));
         }
         else
         {
-          fprintf(file, "%s %s %s %d %s\n",
+          fprintf(file, "%s\t%s\t\t%s\t\t%d\t\t\t%s\n",
                   intToTime(j),
                   day[i][j].Product.products,
                   day[i][j].Product.orderNumber,
                   day[i][j].producedQuantity, intToTime(day[i][j].Product.dueDate));
-usingdays[i]++;
+          usingdays[i]++;
+          ToTalproducedQuantity[i] += day[i][j].producedQuantity; // Increment ToTalproducedQuantity
         }
       }
+      writeToPipe(pipe_fd[1], usingdays, ToTalproducedQuantity); // Write usingdays and ToTalproducedQuantity to the pipe
       exit(0);
     }
-  else
+    else
     {
-      waitpid(pid, NULL, 0);
+      waitpid(child_pid[i], NULL, 0);
     }
   }
+
+  // Parent process
   waitpid(prev_pid, NULL, 0);
 
-  printf("%d\n", usingdays[1]);
+  // Read usingdays and ToTalproducedQuantity from each child process
+
   printf("%s\n", "***PERFORMANCE");
+  int ALLToTalproducedQuantity = 0;
+  int AllTotal = 0;
+
+  for (int i = 0; i < 3; i++)
+  {
+
+    printf("Plant %c:\n", 'X' + i);
+    readFromPipe(pipe_fd[0], usingdays, ToTalproducedQuantity);
+    printf("Using days: %d\n", usingdays[i]);
+    printf("Total produced quantity: %d\n", ToTalproducedQuantity[i]);
+    int total = dayCount[i] * (300 + 100 * i);
+    float Utilization = ToTalproducedQuantity[i] * 100 / total;
+    printf("Utilization of the plant: %.1f\%\n", Utilization);
+    ALLToTalproducedQuantity = ALLToTalproducedQuantity + ToTalproducedQuantity[i];
+    AllTotal += total;
+  }
+  float Utilization = ALLToTalproducedQuantity * 100 / AllTotal;
+  printf("Utilization of All: %.1f\%\n", Utilization);
   return;
 }
