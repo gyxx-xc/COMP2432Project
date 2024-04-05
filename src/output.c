@@ -222,3 +222,4 @@ void printREPORT(FILE *file, int alg)
     printf("Utilization of All: %.1f\%\n", Utilization);
     return;
   }
+}
