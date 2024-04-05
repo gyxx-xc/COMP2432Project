@@ -117,7 +117,7 @@ void printREPORT(FILE *file, int alg)
       fprintf(file, "%s\t\t%s\t%s\t%d\t%d\t\t%s\n",
               day[i][dayCount[i] - 1].Product.orderNumber,
               intToTime(startTime), intToTime(endTime),
-              days, day[i][dayCount[i] - 1].producedQuantity, plant[i]);
+              days, quantity + day[i][dayCount[i] - 1].producedQuantity, plant[i]);
     }
     fprintf(file, "\t- END -\n");
     fprintf(file, "\n");
