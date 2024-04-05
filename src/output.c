@@ -103,10 +103,9 @@ void printREPORT(FILE *file, int alg)
   // here for parent to analyse.
   int parent_to_child[3][2];
   int child_to_parent[3][2];
-  printf("%s\n", "***PERFORMANCE");
   int parent_pid = getpid();
   int prev_pid = parent_pid;
-
+  int usingdays[3];
   for (int i = 0; i < 3; i++)
   {
     int pid = fork();
@@ -118,33 +117,26 @@ void printREPORT(FILE *file, int alg)
     }
     else if (pid == 0)
     { // child process
-      printf("f%d\n", i + 1);
-      memcpy(c, day[i][0].Product.orderNumber, sizeof(c));
-      startTime = 0;
+      char b[3] = "XYZ";
+      printf("Plant_%c\n", b[i]);
+      printf("Date | Product Name | Order Number | Quantity(Produced) | DueDate\n");
       for (int j = 0; j < dayCount[i]; j++)
       {
-        int check = memcmp(c, day[i][j].Product.orderNumber, sizeof(c));
-        if (check == 0)
+        if (day[i][j].producedQuantity == 0)
         {
+          fprintf(file, "%s NA  \n",
+                  intToTime(j));
         }
         else
         {
-          memcpy(c, day[i][j].Product.orderNumber, sizeof(c));
-          endTime = j - 1;
-          int days = endTime - startTime + 1;
-          fprintf(file, "%s %s %s %d %d %s\n",
-                  day[i][j - 1].Product.orderNumber,
-                  intToTime(startTime), intToTime(endTime),
-                  days, day[i][j - 1].producedQuantity, plant[i]);
-          startTime = j;
+          fprintf(file, "%s %s %s %d %s\n",
+                  intToTime(j),
+                  day[i][j].Product.products,
+                  day[i][j].Product.orderNumber,
+                  day[i][j].producedQuantity, intToTime(day[i][j].Product.dueDate));
+          usingdays[i]++;
         }
       }
-      endTime = dayCount[i] - 1;
-      int days = endTime - startTime + 1;
-      fprintf(file, "%s %s %s %d %d %s\n",
-              day[i][dayCount[i] - 1].Product.orderNumber,
-              intToTime(startTime), intToTime(endTime),
-              days, day[i][dayCount[i] - 1].producedQuantity, plant[i]);
       exit(0);
     }
     else
@@ -153,5 +145,8 @@ void printREPORT(FILE *file, int alg)
     }
   }
   waitpid(prev_pid, NULL, 0);
+
+  printf("%d\n", usingdays[1]);
+  printf("%s\n", "***PERFORMANCE");
   return;
 }
