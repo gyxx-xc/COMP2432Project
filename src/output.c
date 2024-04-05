@@ -129,7 +129,7 @@ void printREPORT(FILE *file, int alg)
     fprintf(file, "ORDER NUMBER\tPRODUCT\tNAME\tDue Date\tQUANTITY\n");
     for (int i = 0; i < rejectedCount; i++)
     {
-      fprintf(file, "%s\t\tProduct_%c\t%s\t%d\n", rejectedProcesses[i].orderNumber,'A' + rejectedProcesses[i].products, intToTime(rejectedProcesses[i].dueDate), rejectedProcesses[i].quantity);
+      fprintf(file, "%s\t\tProduct_%c\t%s\t%d\n", rejectedProcesses[i].orderNumber, 'A' + rejectedProcesses[i].products, intToTime(rejectedProcesses[i].dueDate), rejectedProcesses[i].quantity);
     }
     fprintf(file, "\t- END -\n");
     fprintf(file, "\n");
@@ -162,7 +162,7 @@ void printREPORT(FILE *file, int alg)
           }
           else
           {
-            fprintf(file, "%s\t%c\t\t%s\t\t%d\t\t\t%s\n",
+            fprintf(file, "%s\tProduct_%c\t\t%s\t\t%d\t\t\t%s\n",
                     intToTime(j),
                     'A' + day[i][j].Product.products,
                     day[i][j].Product.orderNumber,
