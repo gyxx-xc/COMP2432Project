@@ -48,6 +48,7 @@ void printREPORT(FILE *file, int alg)
   int startTime = 0;
   int endTime;
   char plant[3][10] = {"PLANT_X", "PLANT_Y", "PLANT_Z"};
+  int quantity = 0;
   for (int i = 0; i < processesCount; i++)
   {
     if (processes[i].accepted == 0)
@@ -60,15 +61,16 @@ void printREPORT(FILE *file, int alg)
   fprintf(file, "There are %d Orders ACCEPTED.", dayCount[0] + dayCount[1] + dayCount[2]);
   fprintf(file, " Details are as follows: \n");
   fprintf(file, "ORDER NUMBER   START        END         DAYS    QUANTITY    PLANT\n");
-  for (int i = 0; i < 3; i++)
-  {
-    memcpy(c, day[i][0].Product.orderNumber, sizeof(c));
+  for(int i = 0 ;i < 3; i++){
+    memcpy(c,day[i][0].Product.orderNumber,sizeof(c));
     startTime = 0;
-    for (int j = 0; j < dayCount[i]; j++)
-    {
-      int check = memcmp(c, day[i][j].Product.orderNumber, sizeof(c));
-      if (check == 0)
-      {
+    if(dayCount[i] == 0){
+      continue;
+    }
+    for(int j = 0;j < dayCount[i];j++){
+      int check = memcmp(c,day[i][j].Product.orderNumber,sizeof(c));
+      if(check == 0){
+        quantity = quantity + day[i][j].producedQuantity;
       }
       else
       {
@@ -76,18 +78,19 @@ void printREPORT(FILE *file, int alg)
         endTime = j - 1;
         int days = endTime - startTime + 1;
         fprintf(file, "%s %s %s %d %d %s\n",
-                day[i][j - 1].Product.orderNumber,
-                intToTime(startTime), intToTime(endTime),
-                days, day[i][j - 1].producedQuantity, plant[i]);
+        day[i][j-1].Product.orderNumber, 
+        intToTime(startTime), intToTime(endTime),
+        days, quantity, plant[i]);
         startTime = j;
+        quantity = 0;
       }
     }
     endTime = dayCount[i] - 1;
     int days = endTime - startTime + 1;
     fprintf(file, "%s %s %s %d %d %s\n",
-            day[i][dayCount[i] - 1].Product.orderNumber,
-            intToTime(startTime), intToTime(endTime),
-            days, day[i][dayCount[i] - 1].producedQuantity, plant[i]);
+        day[i][dayCount[i]-1].Product.orderNumber, 
+        intToTime(startTime), intToTime(endTime),
+        days, day[i][dayCount[i]-1].producedQuantity, plant[i]);
   }
   fprintf(file, "- END -\n");
   fprintf(file, "There are %d Orders REJECTED.", rejectedCount);
@@ -109,7 +112,7 @@ void printREPORT(FILE *file, int alg)
   for (int i = 0; i < 3; i++)
   {
     int pid = fork();
-
+    
     if (pid < 0)
     {
       fprintf(stderr, "Fork failed\n");
@@ -117,14 +120,14 @@ void printREPORT(FILE *file, int alg)
     }
     else if (pid == 0)
     { // child process
-      char b[3] = "XYZ";
+    char b[3] = "XYZ";
       printf("Plant_%c\n", b[i]);
       printf("Date | Product Name | Order Number | Quantity(Produced) | DueDate\n");
       for (int j = 0; j < dayCount[i]; j++)
       {
         if (day[i][j].producedQuantity == 0)
         {
-          fprintf(file, "%s NA  \n",
+fprintf(file, "%s NA  \n",
                   intToTime(j));
         }
         else
@@ -134,12 +137,12 @@ void printREPORT(FILE *file, int alg)
                   day[i][j].Product.products,
                   day[i][j].Product.orderNumber,
                   day[i][j].producedQuantity, intToTime(day[i][j].Product.dueDate));
-          usingdays[i]++;
+usingdays[i]++;
         }
       }
       exit(0);
     }
-    else
+  else
     {
       waitpid(pid, NULL, 0);
     }
