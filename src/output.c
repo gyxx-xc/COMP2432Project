@@ -80,7 +80,7 @@ void printREPORT(FILE *file, int alg)
 
   fprintf(file, "Algorithm used: %s\n", Algorithm[alg]);
   fprintf(file, "\n");
-  fprintf(file, "There are %d Orders ACCEPTED.", dayCount[0] + dayCount[1] + dayCount[2]);
+  fprintf(file, "There are %d Orders ACCEPTED.", processesCount-rejectedCount);
   fprintf(file, " Details are as follows: \n");
   fprintf(file, "ORDER NUMBER\tSTART\t\tEND\t\tDAYS\tQUANTITY\tPLANT\n");
   fprintf(file, "=================================================================================\n");
