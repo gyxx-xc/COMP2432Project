@@ -63,7 +63,7 @@ void printREPORT(FILE *file, int alg)
   fprintf(file, "There are %d Orders ACCEPTED.", dayCount[0] + dayCount[1] + dayCount[2]);
   fprintf(file, " Details are as follows: \n");
   printf("\n");
-  fprintf(file, "ORDER NUMBER\tSTART\tEND\tDAYS\tQUANTITY\tPLANT\n");
+  fprintf(file, "ORDER NUMBER\tSTART\t\tEND\t\tDAYS\tQUANTITY\tPLANT\n");
   for(int i = 0 ;i < 3; i++){
     memcpy(c,day[i][0].Product.orderNumber,sizeof(c));
     startTime = 0;
@@ -80,7 +80,7 @@ void printREPORT(FILE *file, int alg)
         memcpy(c, day[i][j].Product.orderNumber, sizeof(c));
         endTime = j - 1;
         int days = endTime - startTime + 1;
-        fprintf(file, "%s\t%s\t%s\t%d\t%d\t%s\n",
+        fprintf(file, "%s\t\t%s\t%s\t%d\t%d\t\t%s\n",
         day[i][j-1].Product.orderNumber, 
         intToTime(startTime), intToTime(endTime),
         days, quantity, plant[i]);
@@ -90,7 +90,7 @@ void printREPORT(FILE *file, int alg)
     }
     endTime = dayCount[i] - 1;
     int days = endTime - startTime + 1;
-    fprintf(file, "%s\t%s\t%s\t%d\t%d\t%s\n",
+    fprintf(file, "%s\t\t%s\t%s\t%d\t%d\t\t%s\n",
         day[i][dayCount[i]-1].Product.orderNumber, 
         intToTime(startTime), intToTime(endTime),
         days, day[i][dayCount[i]-1].producedQuantity, plant[i]);
@@ -100,10 +100,10 @@ void printREPORT(FILE *file, int alg)
   fprintf(file, "There are %d Orders REJECTED.", rejectedCount);
   fprintf(file, " Details are as follows: ");
   printf("\n");
-  fprintf(file, "ORDER NUMBER\tPRODUCT\tNAME\tDue\tDate\tQUANTITY\n");
+  fprintf(file, "ORDER NUMBER\tPRODUCT\tNAME\tDue Date\tQUANTITY\n");
   for (int i = 0; i < rejectedCount; i++)
   {
-    fprintf(file, "%s\t%c\t%s\t%d\n", rejectedProcesses[i].orderNumber, 'A' + rejectedProcesses[i].products, intToTime(rejectedProcesses[i].dueDate), rejectedProcesses[i].quantity);
+    fprintf(file, "%s\t\t%c\t%s\t%d\n", rejectedProcesses[i].orderNumber, 'A' + rejectedProcesses[i].products, intToTime(rejectedProcesses[i].dueDate), rejectedProcesses[i].quantity);
   }
   fprintf(file, "\t- END -\n");
   printf("\n");
