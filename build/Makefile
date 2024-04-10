@@ -5,12 +5,12 @@ default_target: PLS
 SHELL = /bin/sh
 
 # The command to remove a file.
-RM = rm -f
+RM = rm -rf
 
 # Escaping for special characters.
 EQUALS = =
 
-CFLAGS = -I.
+CFLAGS = -std=c99 -I.
 DEBUGFLAG = -g
 CC = gcc
 
@@ -50,5 +50,5 @@ help:
 
 # The main clean target
 clean:
-	$(RM) PLS $(OBJ_DIR)/*
+	$(RM) PLS $(OBJ_DIR)
 .PHONY : clean
