@@ -1,12 +1,6 @@
 default_target: PLS
 .PHONY : default_target
 
-# Command-line flag to silence nested $(MAKE).
-$(VERBOSE)MAKESILENT = -s
-
-#Suppress display of executed commands.
-$(VERBOSE).SILENT:
-
 # The shell in which to execute make rules.
 SHELL = /bin/sh
 

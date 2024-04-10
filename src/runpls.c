@@ -165,7 +165,7 @@ void FCFS(){
 
               day[k][dayCount[k]].Product=processes[i];
               day[k][dayCount[k]].producedQuantity=productivity;
-              if(j==needDays-1){
+              if(jugde && j==needDays-1){
                 day[k][dayCount[k]].producedQuantity=jugde;
               }
               dayCount[k]++;
@@ -195,7 +195,7 @@ void FCFS(){
             for(j=0;j<needDays;j++){
               day[k][dayCount[k]].Product=processes[i];
               day[k][dayCount[k]].producedQuantity=productivity;
-              if(j==needDays-1){
+              if(jugde && j==needDays-1){
                 day[k][dayCount[k]].producedQuantity=jugde;
               }
               dayCount[k]++;
@@ -224,7 +224,7 @@ void FCFS(){
             for(j=0;j<needDays;j++){
               day[k][dayCount[k]].Product=processes[i];
               day[k][dayCount[k]].producedQuantity=productivity;
-              if(j==needDays-1){
+              if(jugde && j==needDays-1){
                 day[k][dayCount[k]].producedQuantity=jugde;
               }
               dayCount[k]++;
@@ -332,7 +332,7 @@ void priorityScheduling() {
 
               day[k][dayCount[k]].Product=rawDay[i];
               day[k][dayCount[k]].producedQuantity=productivity;
-              if(j==needDays-1){
+              if(jugde && j==needDays-1){
                 day[k][dayCount[k]].producedQuantity=jugde;
               }
               dayCount[k]++;
@@ -362,7 +362,7 @@ void priorityScheduling() {
             for(j=0;j<needDays;j++){
               day[k][dayCount[k]].Product=rawDay[i];
               day[k][dayCount[k]].producedQuantity=productivity;
-              if(j==needDays-1){
+              if(jugde && j==needDays-1){
                 day[k][dayCount[k]].producedQuantity=jugde;
               }
               dayCount[k]++;
@@ -391,7 +391,7 @@ void priorityScheduling() {
             for(j=0;j<needDays;j++){
               day[k][dayCount[k]].Product=rawDay[i];
               day[k][dayCount[k]].producedQuantity=productivity;
-              if(j==needDays-1){
+              if(jugde && j==needDays-1){
                 day[k][dayCount[k]].producedQuantity=jugde;
               }
               dayCount[k]++;
@@ -467,7 +467,7 @@ void CDF() {
 
               day[k][dayCount[k]].Product=rawDay[i];
               day[k][dayCount[k]].producedQuantity=productivity;
-              if(j==needDays-1){
+              if(jugde && j==needDays-1){
                 day[k][dayCount[k]].producedQuantity=jugde;
               }
               dayCount[k]++;
@@ -497,7 +497,7 @@ void CDF() {
             for(j=0;j<needDays;j++){
               day[k][dayCount[k]].Product=rawDay[i];
               day[k][dayCount[k]].producedQuantity=productivity;
-              if(j==needDays-1){
+              if(jugde && j==needDays-1){
                 day[k][dayCount[k]].producedQuantity=jugde;
               }
               dayCount[k]++;
@@ -526,7 +526,7 @@ void CDF() {
             for(j=0;j<needDays;j++){
               day[k][dayCount[k]].Product=rawDay[i];
               day[k][dayCount[k]].producedQuantity=productivity;
-              if(j==needDays-1){
+              if(jugde && j==needDays-1){
                 day[k][dayCount[k]].producedQuantity=jugde;
               }
               dayCount[k]++;
