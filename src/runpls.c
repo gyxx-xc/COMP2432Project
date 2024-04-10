@@ -6,25 +6,25 @@
 // and write the result into `day`(globle) day[]这个数组就会用来存取我们的“排好序的”订单数据，processesCount 和 dayCount分别表示两个数组的大小
 
 /*以下为"订单 (Process)"的结构体参考
-typedef struct proc {
+  typedef struct proc {
   char orderNumber[100]; //订单号
   int dueDate; //持续时间
   int quantity; //生产数量
   int categorie; //(0,1,2) -->第三优先 ; (3,4,5)-->第二优先 ; (6,7,8)-->第三优先
   int accepted; // modify by runpls
   //0表示拒绝，1表示接受
-} Process;
+  } Process;
 
-注意以"天"为单位，每天的订单都会被记录在day[]中
-typedef struct dayArrange {
+  注意以"天"为单位，每天的订单都会被记录在day[]中
+  typedef struct dayArrange {
   Process Product;
   int producedQuantity;
-} DayArrange;
+  } DayArrange;
 
-global varible
-Process processes[10000];
-DayArrange day[10000];
-int endPeiod;
+  global varible
+  Process processes[10000];
+  DayArrange day[10000];
+  int endPeiod;
 */
 
 //待解决问题: 如何获得当日的各种杂七杂八订单，以及对他们进行"in place"的排序，事后又该如何记录
@@ -84,31 +84,31 @@ int main(){
   int m;
   printf("工厂x\n");
   for (m=0;m<dayCount[0];m++){
-     printf("订单号:%s 截止绝对日期:%d 当日产量:%d 种类:%d 是否接受%d\n",
-     day[0][m].Product.orderNumber,
-     day[0][m].Product.dueDate,
-     day[0][m].producedQuantity,
-     day[0][m].Product.categorie,
-     day[0][m].Product.accepted);
-   }
-   printf("工厂y\n");
-   for (m=0;m<dayCount[1];m++){
-     printf("订单号:%s 截止绝对日期:%d 当日产量:%d 种类:%d 是否接受%d\n",
-     day[1][m].Product.orderNumber,
-     day[1][m].Product.dueDate,
-     day[1][m].producedQuantity,
-     day[1][m].Product.categorie,
-     day[1][m].Product.accepted);
-   }
-   printf("工厂z\n");
-   for (m=0;m<dayCount[2];m++){
-     printf("订单号:%s 截止绝对日期:%d 当日产量:%d 种类:%d 是否接受%d\n",
-     day[2][m].Product.orderNumber,
-     day[2][m].Product.dueDate,
-     day[2][m].producedQuantity,
-     day[2][m].Product.categorie,
-     day[2][m].Product.accepted);
-   }
+    printf("订单号:%s 截止绝对日期:%d 当日产量:%d 种类:%d 是否接受%d\n",
+           day[0][m].Product.orderNumber,
+           day[0][m].Product.dueDate,
+           day[0][m].producedQuantity,
+           day[0][m].Product.categorie,
+           day[0][m].Product.accepted);
+  }
+  printf("工厂y\n");
+  for (m=0;m<dayCount[1];m++){
+    printf("订单号:%s 截止绝对日期:%d 当日产量:%d 种类:%d 是否接受%d\n",
+           day[1][m].Product.orderNumber,
+           day[1][m].Product.dueDate,
+           day[1][m].producedQuantity,
+           day[1][m].Product.categorie,
+           day[1][m].Product.accepted);
+  }
+  printf("工厂z\n");
+  for (m=0;m<dayCount[2];m++){
+    printf("订单号:%s 截止绝对日期:%d 当日产量:%d 种类:%d 是否接受%d\n",
+           day[2][m].Product.orderNumber,
+           day[2][m].Product.dueDate,
+           day[2][m].producedQuantity,
+           day[2][m].Product.categorie,
+           day[2][m].Product.accepted);
+  }
 
   // for(i=0;i<3;i++){
   //   for(j=0;j<dayCount[i];j++){
@@ -121,7 +121,7 @@ int main(){
   //   }
 
   // }
-} 
+}
 #endif
 
 
@@ -134,7 +134,7 @@ void FCFS(){
   int YDays=endPeiod; //Y工厂剩余可开工日期，产能400/天
   int ZDays=endPeiod; //Z工厂剩余可开工日期，产能500/天
   int currentDay=0;
-  
+
   int XYZStatus[3]={0,0,0}; // X(0) Y(1) Z(2) 三厂的状态，0表示可以接单，便把生产天数写到对应的状态上
   for(i=0;i<processesCount;i++){
     int productivity=0;
@@ -162,13 +162,13 @@ void FCFS(){
             XDays-=needDays;
             processes[i].accepted=1;
             for(j=0;j<needDays;j++){
-              
-            day[k][dayCount[k]].Product=processes[i];
-            day[k][dayCount[k]].producedQuantity=productivity;
-            if(j==needDays-1){
-              day[k][dayCount[k]].producedQuantity=jugde;
-            }
-            dayCount[k]++;
+
+              day[k][dayCount[k]].Product=processes[i];
+              day[k][dayCount[k]].producedQuantity=productivity;
+              if(j==needDays-1){
+                day[k][dayCount[k]].producedQuantity=jugde;
+              }
+              dayCount[k]++;
             }
 
             break;
@@ -184,7 +184,7 @@ void FCFS(){
           int jugde=processes[i].quantity%productivity;
           if(jugde!=0){
             needDays++;
-          }          
+          }
           if(needDays>processes[i].dueDate-currentDay){
             processes[i].accepted=0;
           }
@@ -193,12 +193,12 @@ void FCFS(){
             YDays-=needDays;
             processes[i].accepted=1;
             for(j=0;j<needDays;j++){
-            day[k][dayCount[k]].Product=processes[i];
-            day[k][dayCount[k]].producedQuantity=productivity;
-            if(j==needDays-1){
-              day[k][dayCount[k]].producedQuantity=jugde;
-            }
-            dayCount[k]++;
+              day[k][dayCount[k]].Product=processes[i];
+              day[k][dayCount[k]].producedQuantity=productivity;
+              if(j==needDays-1){
+                day[k][dayCount[k]].producedQuantity=jugde;
+              }
+              dayCount[k]++;
             }
             break;
 
@@ -213,7 +213,7 @@ void FCFS(){
           int jugde=processes[i].quantity%productivity;
           if(jugde!=0){
             needDays++;
-          }  
+          }
           if(needDays>processes[i].dueDate-currentDay){
             processes[i].accepted=0;
           }
@@ -222,12 +222,12 @@ void FCFS(){
             ZDays-=needDays;
             processes[i].accepted=1;
             for(j=0;j<needDays;j++){
-            day[k][dayCount[k]].Product=processes[i];
-            day[k][dayCount[k]].producedQuantity=productivity;
-            if(j==needDays-1){
-              day[k][dayCount[k]].producedQuantity=jugde;
-            }
-            dayCount[k]++;
+              day[k][dayCount[k]].Product=processes[i];
+              day[k][dayCount[k]].producedQuantity=productivity;
+              if(j==needDays-1){
+                day[k][dayCount[k]].producedQuantity=jugde;
+              }
+              dayCount[k]++;
             }
             break;
 
@@ -237,12 +237,12 @@ void FCFS(){
 
         }
       }
-      
+
     }
     // day[dayCount].Product=processes[i];
     // day[dayCount].producedQuantity=productivity;
     // dayCount++;
-    
+
     // for(k=0;k<3;k++){//开工，生产剩余天数-1;
     //   if(XYZStatus[k]!=0){
     //     XYZStatus[k]-=1;
@@ -258,59 +258,291 @@ void FCFS(){
 void priorityScheduling() {
   //查看传入订单的"种类"，共分为三类
   /*
-  Product_A, B and C 属于 Category_1
-  Product_D, E and F 属于 Category_2
-  Product_G, H and I 属于 Category_3
-  其中，优先级Category_1 > Category_2 > Category_3
+    Product_A, B and C 属于 Category_1
+    Product_D, E and F 属于 Category_2
+    Product_G, H and I 属于 Category_3
+    其中，优先级Category_1 > Category_2 > Category_3
   */
   int dayCounting = 0;
-  Process rawDay[10000];
+  Process* rawDay = (Process*)malloc(sizeof(Process)*processesCount);
+  int* acceptedIndex = (int*)malloc(sizeof(int)*processesCount);
   int i;
 
   for(i=0;i<processesCount;i++){
-   if (processes[i].categorie == 0){
-     rawDay[dayCounting++] = processes[i];
+    if (processes[i].categorie == 0){
+      acceptedIndex[dayCounting] = i;
+      rawDay[dayCounting++] = processes[i];
 
-   }
+    }
   }
 
   for(i=0;i<processesCount;i++){ //400
-   if (processes[i].categorie == 1){
-     rawDay[dayCounting++] = processes[i];
-   }
+    if (processes[i].categorie == 1){
+      acceptedIndex[dayCounting] = i;
+      rawDay[dayCounting++] = processes[i];
+    }
   }
-  
- for(i=0;i<processesCount;i++){
-  if (processes[i].categorie == 2){
-    rawDay[dayCounting++] = processes[i];
-  }
- }
 
- // 存入二维数组
+  for(i=0;i<processesCount;i++){
+    if (processes[i].categorie == 2){
+      acceptedIndex[dayCounting] = i;
+      rawDay[dayCounting++] = processes[i];
+    }
+  }
+
+  // 存入二维数组
   // the above is good, the rest is wrong,
   // don't need to change, there's a simple way
   // do the FCFS toghter and copy it
   // it is the same for the rest
- dayCount[0] = 0;
- dayCount[1] = 0;
- dayCount[2] = 0;
- for (i=0;i<dayCounting;i++){
-  if ((rawDay[i].quantity) > 300*rawDay[i].dueDate){
-    if ((rawDay[i].quantity) > 400*rawDay[i].dueDate){
-      if ((rawDay[i].quantity) > 500*rawDay[i].dueDate){
-        printf("订单号%s不被需要了\n", rawDay[i].orderNumber);
-      } else {
-        day[2][dayCount[2]++].Product = rawDay[i];
-      }
-    } else {
-      day[1][dayCount[1]++].Product = rawDay[i];
-    }
-  } else {
-    day[0][dayCount[0]++].Product = rawDay[i];
-  }
- }
+  int j,k;
+  int avaliableDays=endPeiod;
+  int XDays=endPeiod; //X工厂剩余可开工日期，产能300/天
+  int YDays=endPeiod; //Y工厂剩余可开工日期，产能400/天
+  int ZDays=endPeiod; //Z工厂剩余可开工日期，产能500/天
+  int currentDay=0;
 
+  int XYZStatus[3]={0,0,0}; // X(0) Y(1) Z(2) 三厂的状态，0表示可以接单，便把生产天数写到对应的状态上
+  for(i=0;i<processesCount;i++){
+    int productivity=0;
+    for(k=0;k<3;k++){
+      while(XYZStatus[0]!=0&&XYZStatus[1]!=0&&XYZStatus[2]!=0){
+        XYZStatus[0]--;
+        XYZStatus[1]--;
+        XYZStatus[2]--;
+        currentDay++;
+      }
+      if (XYZStatus[k]==0){
+        if(k==0){ //X工厂当前闲置，可"尝试"接单
+          //X工厂产能=300
+          productivity=300;
+          int needDays=rawDay[i].quantity/productivity;
+          int jugde=rawDay[i].quantity%productivity;
+          if(jugde!=0){
+            needDays++;
+          }
+          if(needDays>rawDay[i].dueDate-currentDay){//实际天数>需求天数，不切实际
+            processes[acceptedIndex[i]].accepted=0;
+          }
+          else if(rawDay[i].dueDate-currentDay>=needDays&&needDays<=XDays){
+            XYZStatus[k]=rawDay[i].dueDate-currentDay;
+            XDays-=needDays;
+            processes[acceptedIndex[i]].accepted=1;
+            for(j=0;j<needDays;j++){
+
+              day[k][dayCount[k]].Product=rawDay[i];
+              day[k][dayCount[k]].producedQuantity=productivity;
+              if(j==needDays-1){
+                day[k][dayCount[k]].producedQuantity=jugde;
+              }
+              dayCount[k]++;
+            }
+
+            break;
+
+          }else{
+            processes[acceptedIndex[i]].accepted=0; //生产天数需求 大于 X厂剩余可开工时间-->拒绝接单
+          }
+
+        }else if(k==1){ //Y工厂当前闲置，可"尝试"接单
+          //Y工厂产能=400
+          productivity=400;
+          int needDays=rawDay[i].quantity/productivity;
+          int jugde=rawDay[i].quantity%productivity;
+          if(jugde!=0){
+            needDays++;
+          }
+          if(needDays>rawDay[i].dueDate-currentDay){
+            processes[acceptedIndex[i]].accepted=0;
+          }
+          if(rawDay[i].dueDate-currentDay>=needDays&&needDays<=YDays){
+            XYZStatus[k]=rawDay[i].dueDate-currentDay;
+            YDays-=needDays;
+            processes[acceptedIndex[i]].accepted=1;
+            for(j=0;j<needDays;j++){
+              day[k][dayCount[k]].Product=rawDay[i];
+              day[k][dayCount[k]].producedQuantity=productivity;
+              if(j==needDays-1){
+                day[k][dayCount[k]].producedQuantity=jugde;
+              }
+              dayCount[k]++;
+            }
+            break;
+
+          }else{
+            processes[acceptedIndex[i]].accepted=0;  //生产天数需求 大于 Y厂剩余可开工时间-->拒绝接单
+          }
+
+        }else if(k==2){ //Z工厂当前闲置，可"尝试"接单
+          //Z工厂产能=500
+          productivity=500;
+          int needDays=rawDay[i].quantity/productivity;
+          int jugde=rawDay[i].quantity%productivity;
+          if(jugde!=0){
+            needDays++;
+          }
+          if(needDays>rawDay[i].dueDate-currentDay){
+            processes[acceptedIndex[i]].accepted=0;
+          }
+          else if(rawDay[i].dueDate-currentDay>=needDays&&needDays<=ZDays){
+            XYZStatus[k]=rawDay[i].dueDate-currentDay;
+            ZDays-=needDays;
+            processes[acceptedIndex[i]].accepted=1;
+            for(j=0;j<needDays;j++){
+              day[k][dayCount[k]].Product=rawDay[i];
+              day[k][dayCount[k]].producedQuantity=productivity;
+              if(j==needDays-1){
+                day[k][dayCount[k]].producedQuantity=jugde;
+              }
+              dayCount[k]++;
+            }
+            break;
+
+          }else{
+            processes[acceptedIndex[i]].accepted=0; //生产天数需求 大于 Z厂剩余可开工时间-->拒绝接单
+          }
+
+        }
+      }
+    }
+  }
 }
+
+// closest due-date first
+void CDF() {
+  int* mark = (int*)malloc(sizeof(int)*processesCount);
+  int dayCounting = 0;
+  Process* rawDay = (Process*)malloc(sizeof(Process)*processesCount);
+  int* acceptedIndex = (int*)malloc(sizeof(int)*processesCount);
+  int i;
+  memset(mark, 0, sizeof(int)*processesCount);
+  for (i = 0; i < processesCount; i++) {
+    int min = 0x7fffffff;
+    int minIndex = -1;
+    for (int j = 0; j < processesCount; j++) {
+      if (mark[j] == 0 && processes[j].dueDate < min) {
+        min = processes[j].dueDate;
+        minIndex = j;
+      }
+    }
+    mark[minIndex] = 1;
+    acceptedIndex[dayCounting] = minIndex;
+    rawDay[dayCounting++] = processes[minIndex];
+  }
+
+  int j,k;
+  int avaliableDays=endPeiod;
+  int XDays=endPeiod; //X工厂剩余可开工日期，产能300/天
+  int YDays=endPeiod; //Y工厂剩余可开工日期，产能400/天
+  int ZDays=endPeiod; //Z工厂剩余可开工日期，产能500/天
+  int currentDay=0;
+
+  int XYZStatus[3]={0,0,0}; // X(0) Y(1) Z(2) 三厂的状态，0表示可以接单，便把生产天数写到对应的状态上
+  for(i=0;i<processesCount;i++){
+    int productivity=0;
+    for(k=0;k<3;k++){
+      while(XYZStatus[0]!=0&&XYZStatus[1]!=0&&XYZStatus[2]!=0){
+        XYZStatus[0]--;
+        XYZStatus[1]--;
+        XYZStatus[2]--;
+        currentDay++;
+      }
+      if (XYZStatus[k]==0){
+        if(k==0){ //X工厂当前闲置，可"尝试"接单
+          //X工厂产能=300
+          productivity=300;
+          int needDays=rawDay[i].quantity/productivity;
+          int jugde=rawDay[i].quantity%productivity;
+          if(jugde!=0){
+            needDays++;
+          }
+          if(needDays>rawDay[i].dueDate-currentDay){//实际天数>需求天数，不切实际
+            processes[acceptedIndex[i]].accepted=0;
+          }
+          else if(rawDay[i].dueDate-currentDay>=needDays&&needDays<=XDays){
+            XYZStatus[k]=rawDay[i].dueDate-currentDay;
+            XDays-=needDays;
+            processes[acceptedIndex[i]].accepted=1;
+            for(j=0;j<needDays;j++){
+
+              day[k][dayCount[k]].Product=rawDay[i];
+              day[k][dayCount[k]].producedQuantity=productivity;
+              if(j==needDays-1){
+                day[k][dayCount[k]].producedQuantity=jugde;
+              }
+              dayCount[k]++;
+            }
+
+            break;
+
+          }else{
+            processes[acceptedIndex[i]].accepted=0; //生产天数需求 大于 X厂剩余可开工时间-->拒绝接单
+          }
+
+        }else if(k==1){ //Y工厂当前闲置，可"尝试"接单
+          //Y工厂产能=400
+          productivity=400;
+          int needDays=rawDay[i].quantity/productivity;
+          int jugde=rawDay[i].quantity%productivity;
+          if(jugde!=0){
+            needDays++;
+          }
+          if(needDays>rawDay[i].dueDate-currentDay){
+            processes[acceptedIndex[i]].accepted=0;
+          }
+          if(rawDay[i].dueDate-currentDay>=needDays&&needDays<=YDays){
+            XYZStatus[k]=rawDay[i].dueDate-currentDay;
+            YDays-=needDays;
+            processes[acceptedIndex[i]].accepted=1;
+            for(j=0;j<needDays;j++){
+              day[k][dayCount[k]].Product=rawDay[i];
+              day[k][dayCount[k]].producedQuantity=productivity;
+              if(j==needDays-1){
+                day[k][dayCount[k]].producedQuantity=jugde;
+              }
+              dayCount[k]++;
+            }
+            break;
+
+          }else{
+            processes[acceptedIndex[i]].accepted=0;  //生产天数需求 大于 Y厂剩余可开工时间-->拒绝接单
+          }
+
+        }else if(k==2){ //Z工厂当前闲置，可"尝试"接单
+          //Z工厂产能=500
+          productivity=500;
+          int needDays=rawDay[i].quantity/productivity;
+          int jugde=rawDay[i].quantity%productivity;
+          if(jugde!=0){
+            needDays++;
+          }
+          if(needDays>rawDay[i].dueDate-currentDay){
+            processes[acceptedIndex[i]].accepted=0;
+          }
+          else if(rawDay[i].dueDate-currentDay>=needDays&&needDays<=ZDays){
+            XYZStatus[k]=rawDay[i].dueDate-currentDay;
+            ZDays-=needDays;
+            processes[acceptedIndex[i]].accepted=1;
+            for(j=0;j<needDays;j++){
+              day[k][dayCount[k]].Product=rawDay[i];
+              day[k][dayCount[k]].producedQuantity=productivity;
+              if(j==needDays-1){
+                day[k][dayCount[k]].producedQuantity=jugde;
+              }
+              dayCount[k]++;
+            }
+            break;
+
+          }else{
+            processes[acceptedIndex[i]].accepted=0; //生产天数需求 大于 Z厂剩余可开工时间-->拒绝接单
+          }
+
+        }
+      }
+    }
+  }
+}
+
 void runPLS(int alg) {
   switch (alg) {
     //注: int alg 已经在上游被处理好了，我们这里只需要指定 int 和 不同算法实现的函数() 进行映射即可
@@ -320,6 +552,9 @@ void runPLS(int alg) {
     break;
   case 1:
     priorityScheduling();
+    break;
+  case 2:
+    CDF();
     break;
   }
 }
