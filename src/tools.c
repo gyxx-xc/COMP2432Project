@@ -51,6 +51,8 @@ int commandAlg(char* alg) {
     return 0;
   if (streq(alg, "PR"))
     return 1;
+  if (streq(alg, "CDF"))
+    return 2;
   return -1;
 }
 

@@ -27,8 +27,8 @@ OBJ_DIR = objects
 PLS: $(OBJ:%=$(OBJ_DIR)/%)
 	$(CC) -o PLS $(CFLAGS) $^
 
-debug:
-	$(CC) -o PLS $(CFLAGS) $(DEBUGFLAG) $(OBJ)
+debug: $(OBJ:%=$(OBJ_DIR)/%)
+	$(CC) -o PLS $(CFLAGS) $(DEBUGFLAG) $^
 .PHONY : debug
 
 $(OBJ_DIR)/%.o : %.c $(OBJ_DIR)
