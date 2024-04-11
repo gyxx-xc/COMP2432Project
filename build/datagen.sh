@@ -1,4 +1,6 @@
-#!emacs --script
+:;exec emacs -batch -l   "$0" "$@" --no-site-file -q  # -*- Emacs-Lisp -*-
+;     @emacs -batch -l "%~f0"  %*  --no-site-file -q  & goto :EOF
+
 ;; this is NOT a bash shell script
 
 (random t)
@@ -12,3 +14,5 @@
              (+ (random 100) 1)
              (+ 65 (random 9))))
     (setq x (+ x 1))))
+
+;:EOF
