@@ -22,7 +22,9 @@ int main() {
   while (1) {
     printMenu();
     char str[100];
-    fgets(str, 100, stdin);
+    char* result = fgets(str, 100, stdin);
+    if (result == NULL)
+      return 0;
     int commandLen;
     char **command = genCommand(str, &commandLen);
     if (commandLen == 0)
