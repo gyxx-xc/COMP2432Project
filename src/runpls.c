@@ -138,6 +138,7 @@ void FCFS(){
   int XYZStatus[3]={0,0,0}; // X(0) Y(1) Z(2) 三厂的状态，0表示可以接单，便把生产天数写到对应的状态上
   for(i=0;i<processesCount;i++){
     int productivity=0;
+    loop:
     for(k=0;k<3;k++){
       while(XYZStatus[0]!=0&&XYZStatus[1]!=0&&XYZStatus[2]!=0){
         XYZStatus[0]--;
@@ -151,14 +152,15 @@ void FCFS(){
           productivity=300;
           int needDays=processes[i].quantity/productivity;
           int jugde=processes[i].quantity%productivity;
-          if(jugde!=0){
+          if(jugde!=0){ //有余数，不够整产，实际需要天数+1
             needDays++;
           }
           if(needDays>processes[i].dueDate-currentDay){//实际天数>需求天数，不切实际
             processes[i].accepted=0;
-          }
-          else if(processes[i].dueDate-currentDay>=needDays&&needDays<=XDays){
-            XYZStatus[k]=processes[i].dueDate-currentDay;
+            continue;
+          } //  要完成时间 < 当前剩余可计划天数 && 要完成时间 < 该厂的剩余可开工时间
+          else if(needDays<=processes[i].dueDate-currentDay&&needDays<=XDays){
+            XYZStatus[k]=needDays;
             XDays-=needDays;
             processes[i].accepted=1;
             for(j=0;j<needDays;j++){
@@ -187,9 +189,10 @@ void FCFS(){
           }
           if(needDays>processes[i].dueDate-currentDay){
             processes[i].accepted=0;
+            continue;
           }
-          if(processes[i].dueDate-currentDay>=needDays&&needDays<=YDays){
-            XYZStatus[k]=processes[i].dueDate-currentDay;
+          if(needDays<=processes[i].dueDate-currentDay&&needDays<=YDays){
+            XYZStatus[k]=needDays;
             YDays-=needDays;
             processes[i].accepted=1;
             for(j=0;j<needDays;j++){
@@ -216,9 +219,10 @@ void FCFS(){
           }
           if(needDays>processes[i].dueDate-currentDay){
             processes[i].accepted=0;
+            continue;
           }
-          else if(processes[i].dueDate-currentDay>=needDays&&needDays<=ZDays){
-            XYZStatus[k]=processes[i].dueDate-currentDay;
+          else if(needDays<=processes[i].dueDate-currentDay&&needDays<=ZDays){
+            XYZStatus[k]=needDays;
             ZDays-=needDays;
             processes[i].accepted=1;
             for(j=0;j<needDays;j++){
@@ -248,7 +252,6 @@ void FCFS(){
     //     XYZStatus[k]-=1;
     //   }
     // }
-
 
   }
 }
@@ -325,7 +328,7 @@ void priorityScheduling() {
             processes[acceptedIndex[i]].accepted=0;
           }
           else if(rawDay[i].dueDate-currentDay>=needDays&&needDays<=XDays){
-            XYZStatus[k]=rawDay[i].dueDate-currentDay;
+            XYZStatus[k]=needDays;
             XDays-=needDays;
             processes[acceptedIndex[i]].accepted=1;
             for(j=0;j<needDays;j++){
@@ -356,7 +359,7 @@ void priorityScheduling() {
             processes[acceptedIndex[i]].accepted=0;
           }
           if(rawDay[i].dueDate-currentDay>=needDays&&needDays<=YDays){
-            XYZStatus[k]=rawDay[i].dueDate-currentDay;
+            XYZStatus[k]=needDays;
             YDays-=needDays;
             processes[acceptedIndex[i]].accepted=1;
             for(j=0;j<needDays;j++){
@@ -385,7 +388,7 @@ void priorityScheduling() {
             processes[acceptedIndex[i]].accepted=0;
           }
           else if(rawDay[i].dueDate-currentDay>=needDays&&needDays<=ZDays){
-            XYZStatus[k]=rawDay[i].dueDate-currentDay;
+            XYZStatus[k]=needDays;
             ZDays-=needDays;
             processes[acceptedIndex[i]].accepted=1;
             for(j=0;j<needDays;j++){
@@ -460,7 +463,7 @@ void CDF() {
             processes[acceptedIndex[i]].accepted=0;
           }
           else if(rawDay[i].dueDate-currentDay>=needDays&&needDays<=XDays){
-            XYZStatus[k]=rawDay[i].dueDate-currentDay;
+            XYZStatus[k]=needDays;
             XDays-=needDays;
             processes[acceptedIndex[i]].accepted=1;
             for(j=0;j<needDays;j++){
@@ -491,7 +494,7 @@ void CDF() {
             processes[acceptedIndex[i]].accepted=0;
           }
           if(rawDay[i].dueDate-currentDay>=needDays&&needDays<=YDays){
-            XYZStatus[k]=rawDay[i].dueDate-currentDay;
+            XYZStatus[k]=needDays;
             YDays-=needDays;
             processes[acceptedIndex[i]].accepted=1;
             for(j=0;j<needDays;j++){
@@ -520,7 +523,7 @@ void CDF() {
             processes[acceptedIndex[i]].accepted=0;
           }
           else if(rawDay[i].dueDate-currentDay>=needDays&&needDays<=ZDays){
-            XYZStatus[k]=rawDay[i].dueDate-currentDay;
+            XYZStatus[k]=needDays;
             ZDays-=needDays;
             processes[acceptedIndex[i]].accepted=1;
             for(j=0;j<needDays;j++){
