@@ -43,6 +43,8 @@ int checkCommand(char* str) {
     return 3;
   if (streq(str, "exitPLS"))
     return 4;
+  if (streq(str, "addPERIOD"))
+    return 0;
   return -1;
 }
 
