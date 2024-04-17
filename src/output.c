@@ -51,7 +51,7 @@ void printREPORT(FILE *file, int alg)
   fprintf(file, "***PLS Schedule Analysis Report***\n");
   fprintf(file, "\n");
   Process rejectedProcesses[10000];
-  char Algorithm[2][10] = {"FCFS", "PR"};
+  char Algorithm[3][10] = {"FCFS", "PR", "CDF"};
   int rejectedCount = 0;
   char c[100];
   int startTime = 0;
@@ -150,7 +150,7 @@ void printREPORT(FILE *file, int alg)
           if (child_pid[i] < 0)
             {
               fprintf(stderr, "Fork failed\n");
-              exit(1);
+              return;
             }
           else if (child_pid[i] == 0)
             { // child process
