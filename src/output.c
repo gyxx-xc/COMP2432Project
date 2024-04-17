@@ -137,7 +137,7 @@ void printREPORT(FILE *file, int alg)
       fprintf(file, "\t- END -\n");
       fprintf(file, "\n");
       fprintf(file, "=================================================================================\n");
-
+      fflush(file);
       // here for parent to analyse.
       // here for parent to analyse.
       int parent_pid = getpid();
