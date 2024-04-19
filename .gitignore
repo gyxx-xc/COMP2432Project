@@ -5,6 +5,5 @@ auto
 *.log
 .emacs.*
 a.out
-/report/
 /build/PLS
 /build/Objects
