@@ -176,6 +176,7 @@ void printREPORT(FILE *file, int alg)
                     }
                 }
               writeToPipe(pipe_fd[1], usingdays, ToTalproducedQuantity); // Write usingdays and ToTalproducedQuantity to the pipe
+              fflush(file);
               exit(0);
             }
           else
@@ -210,6 +211,7 @@ void printREPORT(FILE *file, int alg)
         }
       float Utilization = ALLToTalproducedQuantity * 100 / AllTotal;
       fprintf(file, "Overall of utilization:  \t\t\t %.1f \%\n", Utilization);
+      fflush(file);
       return;
     }
 }

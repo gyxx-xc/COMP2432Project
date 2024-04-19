@@ -1,0 +1,6 @@
+addPEIOD 2024-06-01 2024-06-30
+addBATCH inputBatch.dat
+runPLS PR | printREPORT > report_PR.txt
+runPLS FCFS | printREPORT > report_FCFS.txt
+runPLS CDF | printREPORT > report_CDF.txt
+exitPLS
