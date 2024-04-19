@@ -10,7 +10,9 @@
      (format "addORDER P%04d %s %d00 Product_%c\n"
              (+ x 1)
              (format-time-string
-              "%Y-%m-%d" `(,(+ 1717171200 (random (* 120 86400))) . 1))
+              "%Y-%m-%d" (time-add
+                          (date-to-time "2024-06-01")
+                          (days-to-time (random 30))))
              (+ (random 50) 1)
              (+ 65 (random 9))))
     (setq x (+ x 1))))
